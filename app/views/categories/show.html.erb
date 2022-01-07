@@ -5,6 +5,15 @@
       <div id="category-btn_<%= @category.id %>">
         <%= render "categories/category-btn", category: @category %>
       </div>
+      <div>
+        <%= render "category_images/images", category_images: @category_images %>
+      </div>
+      <% if @category.category_user?(current_user)%>
+        <%= form_with model:[@category, @category_image], local:true do |f| %>
+          <%= f.attachment_field :image, class: "form-control" %>
+          <%= f.submit "追加" %>
+        <% end %>
+      <% end %>
     </div>
     <div class="col-md-6">
       <div class="card">

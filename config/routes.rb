@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resource :bookmarks, only: [:create, :destroy]
   end
   resources :categories, except: [:destroy] do
+    resources :category_images, only: [:create]
     get 'join' => 'categories#join'
     delete 'leave' => 'categories#leave'
   end

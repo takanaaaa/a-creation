@@ -1,0 +1,3 @@
+<% category_images.each do |category_image| %>
+  <%= attachment_image_tag category_image, :image, fallback: "nophoto_thumbnail.png", size: "100x100" %>
+<% end %>
