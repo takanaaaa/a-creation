@@ -11,7 +11,10 @@ Rails.application.routes.draw do
     resources :post_comments, only: [:create, :destroy]
     resource :bookmarks, only: [:create, :destroy]
   end
-  resources :categories, except: [:destroy]
+  resources :categories, except: [:destroy] do
+    get 'join' => 'categories#join'
+    delete 'leave' => 'categories#leave'
+  end
   post 'follow/:id' => 'relationships#create', as: 'follow'
   post 'unfollow/:id' => 'relationships#destroy', as: 'unfollow'
 end
