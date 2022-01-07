@@ -1,0 +1,17 @@
+<ul class="navbar">
+  <Li class="nav-item">
+    Mypage
+  </Li>
+  <Li class="nav-item">
+    Users
+  </Li>
+  <Li class="nav-item">
+    Posts
+  </Li>
+  <Li class="nav-item">
+    Category
+  </Li>
+  <Li class="nav-item">
+    <%= link_to "Logout", destroy_user_session_path, method: :delete, :data => {:hover => "Logout"} %>
+  </Li>
+</ul>
