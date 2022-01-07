@@ -15,6 +15,8 @@ class CategoriesController < ApplicationController
   end
 
   def show
+    @category_image = CategoryImage.new
+    @category_images = CategoryImage.all
   end
 
   def index
