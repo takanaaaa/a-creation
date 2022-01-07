@@ -10,7 +10,7 @@
       <%= link_to "Posts", posts_path, :data => {:hover => "Posts"} %>
     </Li>
     <Li class="nav-item">
-      Category
+      <%= link_to "Category", categories_path, :data => {:hover => "Category"} %>
     </Li>
     <Li class="nav-item">
       <%= link_to "Logout", destroy_user_session_path, method: :delete, :data => {:hover => "Logout"} %>

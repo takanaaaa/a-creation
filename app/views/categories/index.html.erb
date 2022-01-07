@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table">
+        <tbody>
+          <%= render "categories/index", categories: @categories %>
+        </tbody>
+      </table>
+      <%= link_to "追加", new_category_path %>
+    </div>
+  </div>
+</div>
