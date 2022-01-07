@@ -12,7 +12,22 @@
       </div>
     </div>
     <div class="col-6">
-
+      <div class="overflow-auto p-3 bg-light" style="width: 100%; height:400px;">
+        <table class="table">
+          <tbody id="post-comment_<%= @post.id%>">
+            <%= render "post_comments/comment", post_comments: @post_comments, post: @post %>
+          </tbody>
+        </table>
+      </div>
+        <%= form_with model:[@post, @post_comment], remote:true do |f| %>
+          <div class="form-group">
+            <%= f.text_area :comment, rows: '3', placeholder: "コメントをここに", class: "form-control" %>
+          </div>
+          <div class="form-group text-right">
+            <%= f.submit "送信" %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
