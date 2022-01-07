@@ -4,14 +4,14 @@
   <%= attachment_image_tag @user, :profile_image, fallback: "no-image.jpg", class: "profile_image" %>
   <% if @user == current_user %>
     <div class="mypage-nav-icons">
-      <!--< link_to followings_path(user_id: @user.id), class: "mypage-nav-icon" do %>-->
+      <%= link_to followings_path(user_id: @user.id), class: "mypage-nav-icon" do %>
         <i class="far fa-user"></i>
         <p>Following</p>
-      <!--< end >-->
-      <!--< link_to followers_path(user_id: @user.id), class: "mypage-nav-icon" do %>-->
+      <% end %>
+      <%= link_to followers_path(user_id: @user.id), class: "mypage-nav-icon" do %>
         <i class="fas fa-user"></i>
         <p>Follower</p>
-      <!--< end %>-->
+      <% end %>
       <!--< link_to user_bookmarks_path(@user.id), class: "mypage-nav-icon" do %>-->
         <i class="far fa-bookmark"></i>
         <p>Bookmark</p>
@@ -27,5 +27,8 @@
     </div>
   <% else %>
     <div class="user-nav-icons">
+      <div id="favorite-btn_<%= @user.id %>">
+        <%= render "relationships/follow-btn", user: @user %>
+      </div>
     </div>
   <% end %>
