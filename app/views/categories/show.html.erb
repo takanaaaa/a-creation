@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <%= @category.name %>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <%= simple_format @category.introduction %>
+      </div>
+      <%= link_to "編集", edit_category_path(@category.id) %>
+    </div>
+  </div>
+</div>

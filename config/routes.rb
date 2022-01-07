@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :post_comments, only: [:create, :destroy]
     resource :bookmarks, only: [:create, :destroy]
   end
+  resources :categories, except: [:destroy]
   post 'follow/:id' => 'relationships#create', as: 'follow'
   post 'unfollow/:id' => 'relationships#destroy', as: 'unfollow'
 end
