@@ -17,6 +17,14 @@
 @import "bootstrap";
 @import "variables";
 
+* {
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+
+ body {
+   background: $mainColor;
+ }
+
 .navbar {
   font-weight: 500;
   box-sizing: border-box;
@@ -70,4 +78,12 @@
       transform: translateX(100%);
     }
   }
+}
+
+.profile_image_sm {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border: 1px solid $lightGray;
+  border-radius: 50%;
 }

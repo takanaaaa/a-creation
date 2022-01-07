@@ -1,0 +1,99 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "variables";
+
+.main-container {
+  width: 100%;
+  height: 500px;
+  position: relative;
+
+  & > .main-visual {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: .7;
+  }
+
+  & > h1 {
+    position: absolute;
+    top: 25px;
+    left: 50px;
+    color: $gray;
+  }
+
+  & > h2 {
+    position: absolute;
+    bottom: 0;
+    left: 150px;
+  }
+
+  & > .profile_image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid $lightGray;
+    border-radius: 50%;
+    position: absolute;
+    top: 77%;
+    left: 25px;
+  }
+
+  & > .other_profile_image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid $lightGray;
+    border-radius: 50%;
+    position: absolute;
+    top: 78%;
+    left: 30px;
+  }
+}
+
+.mypage-nav-icons {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 70px;
+
+  & > .mypage-nav-icon {
+    color: $gray;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+    background: $mainColor;
+    text-decoration: none;
+    box-shadow: $button-shadow_outline;
+
+    &:hover {
+      box-shadow: $button-shadow_inline;
+    }
+  }
+}
+.user-nav-icons {
+  margin: 20px;
+  text-align: end;
+}
+
+.user-nav-icon {
+  color: $gray;
+  font-size: 20px;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  width: 90px;
+  height: 90px;
+  background: #f8f8f8;
+  box-shadow: $button-shadow_outline;
+
+  &:hover {
+    box-shadow: $button-shadow_inline;
+    text-decoration: none;
+    color: $gray;
+  }
+}
