@@ -17,6 +17,8 @@ class PostsController < ApplicationController
   end
 
   def show
+    @post_comments = @post.post_comments.all.order(created_at: :desc)
+    @post_comment = PostComment.new
   end
 
   def index
@@ -43,5 +45,4 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:body, :image)
   end
-
 end
