@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
     @user = User.find(params[:id])
   end
 
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
   def ensure_current_user
     post = Post.find(params[:id])
     unless post.user == current_user
