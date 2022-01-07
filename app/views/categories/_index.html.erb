@@ -6,5 +6,8 @@
     <td>
       <p><%= category.introduction %></p>
     </td>
+    <td id="category-btn_<%= category.id %>">
+      <%= render "categories/category-btn", category: category %>
+    </td>
   </tr>
 <% end %>

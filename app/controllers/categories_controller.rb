@@ -32,6 +32,18 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def join
+    @category = Category.find(params[:category_id])
+    unless @category.users.include?(current_user)
+      @category.users << current_user
+    end
+  end
+
+  def leave
+    @category = Category.find(params[:category_id])
+    @category.users.delete(current_user)
+  end
+
   private
   def category_params
     params.require(:category).permit(:name, :introduction)
