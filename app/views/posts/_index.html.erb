@@ -5,6 +5,9 @@
         <%= attachment_image_tag post, :image, fallback: "nophoto_thumbnail.png",  class: "card-img-top" %>
       <% end %>
       <div class="card-body">
+        <div id="bookmark-btn_<%= post.id %>">
+          <%= render "bookmarks/bookmark-btn", post: post %>
+        </div>
         <p class="card-text", id="text-hidden"><%= post.body %></p>
         <div class="pt-3">
           <%= link_to user_path(post.user), class: "text-dark" do %>
