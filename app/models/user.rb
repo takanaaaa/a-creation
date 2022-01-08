@@ -14,6 +14,8 @@ class User < ApplicationRecord
   has_many :category_users
   has_many :category, through: :category_users
   has_many :favorites, dependent: :destroy
+  has_many :group_users
+  has_many :groups, through: :group_users
 
   attachment :profile_image
   attachment :home_image
