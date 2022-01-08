@@ -5,7 +5,7 @@
       <div id="category-btn_<%= @category.id %>">
         <%= render "categories/category-btn", category: @category %>
       </div>
-      <div>
+      <div id="category-images">
         <%= render "category_images/images", category_images: @category_images %>
       </div>
       <% if @category.category_user?(current_user)%>
