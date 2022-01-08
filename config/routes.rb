@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     delete 'leave' => 'categories#leave'
   end
   resources :groups, only: [:show] do
+    resources :messages, only: [:create, :index]
     get 'join' => 'groups#join'
     delete 'leave' => 'groups#leave'
   end

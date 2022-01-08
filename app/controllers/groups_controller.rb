@@ -35,6 +35,7 @@ class GroupsController < ApplicationController
   end
 
   def join
+    @group = Group.find(params[:group_id])
     unless @group.users.include?(current_user)
       @group.users << current_user
       redirect_to group_path(@group)
