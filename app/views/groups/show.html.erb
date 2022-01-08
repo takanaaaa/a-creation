@@ -9,6 +9,7 @@
       <% end %>
       <div>
         <% if @group.group_member?(current_user)%>
+          <%= link_to "チャット", group_messages_path(@group), class: "btn" %>
         　<%= link_to "退出", group_leave_path(@group.id), method: :delete, class: "btn" %>
         <% else %>
           <%= link_to "参加", group_join_path(@group.id), class: "btn" %>

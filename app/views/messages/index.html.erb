@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-7">
+      <% if @messages.present? %>
+        <div class="table" id="message">
+          <%= render "messages/messages", messages: @messages %>
+        </div>
+      <% else %>
+        <p>メッセージがありません。</p>
+      <% end %>
+    </div>
+    <div class="col-md-5">
+      <div class="message_input form_group">
+        <%=form_with model:[@group, @message], local:true do |f| %>
+          <%= f.text_area :content, class: "form_contol", rows: "5", cols: "50" %>
+          <%= f.submit "送信" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<% messages.each do |message| %>
+  <% if message.user_id == current_user.id %>
+  <div class="message_field my-message">
+    <%= attachment_image_tag message.user, :profile_image, fallback: "no-image.jpg", class: "profile_image_sm" %>
+    <div class="message_text my-message">
+      <%= message.user.name %>
+      <p id="user-message<%= message.id %>" class="message-right"><%= simple_format message.content %></p>
+    </div>
+    <p class="message_date my-message"><%= message.created_at.strftime("%Y/%m/%d/%H:%M") %></p>
+  </div>
+  <% else %>
+    <div class="message_field">
+      <%= attachment_image_tag message.user, :profile_image, fallback: "no-image.jpg", class: "profile_image_sm" %>
+      <div class="message_text">
+        <%= message.user.name %>
+        <p id="user-message<%= message.id %>" class="message-left"><%= simple_format message.content %></p>
+      </div>
+      <p class="message_date"><%= message.created_at.strftime("%Y/%m/%d/%H:%M") %></p>
+    </div>
+  <% end %>
+<% end %>
