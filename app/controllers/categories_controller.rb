@@ -16,9 +16,11 @@ class CategoriesController < ApplicationController
 
   def show
     @category_image = CategoryImage.new
+    @groups = Group.where(category_id: @category.id)
     @category_images = CategoryImage.includes(:image_favorited_users).where(category_id: @category.id).sort{|a,b|
       b.image_favorited_users.size <=> a.image_favorited_users.size
     }
+
   end
 
   def index

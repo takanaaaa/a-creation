@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_08_021959) do
+ActiveRecord::Schema.define(version: 2022_01_08_044754) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id"
@@ -52,6 +52,25 @@ ActiveRecord::Schema.define(version: 2022_01_08_021959) do
     t.datetime "updated_at", null: false
     t.index ["category_image_id"], name: "index_favorites_on_category_image_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "group_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_group_users_on_group_id"
+    t.index ["user_id"], name: "index_group_users_on_user_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.integer "category_id"
+    t.string "name"
+    t.text "introduction"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "owner_id"
+    t.index ["category_id"], name: "index_groups_on_category_id"
   end
 
   create_table "post_comments", force: :cascade do |t|

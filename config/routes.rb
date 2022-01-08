@@ -13,8 +13,13 @@ Rails.application.routes.draw do
   end
   resources :categories, except: [:destroy] do
     resources :category_images, only: [:create]
+    resources :groups, except: [:show, :index]
     get 'join' => 'categories#join'
     delete 'leave' => 'categories#leave'
+  end
+  resources :groups, only: [:show] do
+    get 'join' => 'groups#join'
+    delete 'leave' => 'groups#leave'
   end
   post 'follow/:id' => 'relationships#create', as: 'follow'
   post 'unfollow/:id' => 'relationships#destroy', as: 'unfollow'
