@@ -16,10 +16,13 @@
         <i class="far fa-bookmark"></i>
         <p>Bookmark</p>
       <% end %>
-      <dix class="mypage-nav-icon">
+      <%= link_to notifications_path, class: "mypage-nav-icon" do %>
         <i class="far fa-clone"></i>
-        <p>Post</p>
-      </dix>
+        <% if unchecked_notifications.any? %>
+          <i class="fa fa-circle" style="color: gold;"></i>
+        <% end %>
+        <p>Notice</p>
+      <% end %>
       <%= link_to edit_user_path(@user), class: "mypage-nav-icon" do %>
         <i class="fas fa-cogs"></i>
         <p>Setting</p>

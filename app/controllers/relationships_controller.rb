@@ -3,6 +3,7 @@ class RelationshipsController < ApplicationController
 
   def create
     current_user.follow(@user.id)
+    @user.create_notification_follow!(current_user)
   end
 
   def destroy

@@ -2,7 +2,7 @@
   <div class="col-lg-3 col-md-4 col-sm-5 d-flex justify-content-center">
     <div class="card mb-3" style="width: 15rem;">
       <%= link_to post_path(post) do %>
-        <%= attachment_image_tag post, :image, fallback: "nophoto_thumbnail.png",  class: "card-img-top" %>
+        <%= attachment_image_tag post, :image, fallback: "no-image.jpg",  class: "card-img-top" %>
       <% end %>
       <div class="card-body">
         <div id="bookmark-btn_<%= post.id %>">
@@ -11,7 +11,7 @@
         <p class="card-text", id="text-hidden"><%= post.body %></p>
         <div class="pt-3">
           <%= link_to user_path(post.user), class: "text-dark" do %>
-            <%= attachment_image_tag post.user, :profile_image, fallback: "nophoto_thumbnail.png", class: "profile_image_sm" %>
+            <%= attachment_image_tag post.user, :profile_image, fallback: "no-image.jpg", class: "profile_image_sm" %>
             <%= post.user.name %>
             <small class="date"><%= post.created_at.strftime("%Y-%m-%d %H:%M") %></small>
           <% end %>

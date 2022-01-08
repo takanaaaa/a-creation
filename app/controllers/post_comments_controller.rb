@@ -6,6 +6,7 @@ class PostCommentsController < ApplicationController
     comment.post_id = @post.id
     comment.save
     @post_comments = @post.post_comments.all.order(created_at: :desc)
+    @post.create_notification_comment!(current_user, comment.id)
   end
 
   def destroy
@@ -15,8 +16,8 @@ class PostCommentsController < ApplicationController
   end
 
   private
-    def post_comment_params
-      params.require(:post_comment).permit(:comment)
+  def post_comment_params
+    params.require(:post_comment).permit(:comment)
   end
 
 end
