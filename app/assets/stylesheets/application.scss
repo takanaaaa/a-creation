@@ -25,60 +25,66 @@
    background: $mainColor;
  }
 
-.navbar {
-  font-weight: 500;
-  box-sizing: border-box;
-  -webkit-transition: all 0.35s ease;
-  transition: all 0.35s ease;
-  justify-content: end;
+ header {
+  .navbar {
+    box-sizing: border-box;
+    -webkit-transition: all 0.35s ease;
+    transition: all 0.35s ease;
+    justify-content: end;
 
-  & > .nav-item {
-    display: inline-block;
-    list-style: outside none none;
-    margin: 0 1.2em;
-    overflow: hidden;
-
-    & > a {
-      padding: 0 0.5em 0 0.2em;
-      color: $lightGray;
-      position: relative;
+    & > .nav-item {
       display: inline-block;
-      letter-spacing: 1px;
-      margin: 0;
-      text-decoration: none;
-      transition: all 0.35s ease;
+      list-style: outside none none;
+      margin: 0 1.2em;
+      overflow: hidden;
 
-      &:before,
-      &:after {
-        position: absolute;
-        -webkit-transition: all 0.35s ease;
-      }
-
-      &:before {
-        right: 100%;
-        display: block;
-        width: 3px;
-        height: 100%;
-        content: "";
-        background-color: $blue;
-      }
-
-      &:after {
+      & > a {
         padding: 0 0.5em 0 0.2em;
-        position: absolute;
-        right: 100%;
-        top: 0;
-        content: attr(data-hover);
-        color: $gray;
-        white-space: nowrap;
-      }
-    }
+        color: $lightGray;
+        position: relative;
+        display: inline-block;
+        letter-spacing: 1px;
+        margin: 0;
+        text-decoration: none;
+        transition: all 0.35s ease;
 
-    &:hover > a{
-      transform: translateX(100%);
+        &:before,
+        &:after {
+          position: absolute;
+          -webkit-transition: all 0.35s ease;
+        }
+
+        &:before {
+          right: 100%;
+          display: block;
+          width: 3px;
+          height: 100%;
+          content: "";
+          background-color: $blue;
+        }
+
+        &:after {
+          padding: 0 0.5em 0 0.2em;
+          position: absolute;
+          right: 100%;
+          top: 0;
+          content: attr(data-hover);
+          color: $gray;
+          white-space: nowrap;
+        }
+      }
+
+      &:hover > a{
+        transform: translateX(100%);
+      }
     }
   }
-}
+ }
+
+ footer {
+  height: 100px;
+ }
+
 
 .profile_image_sm {
   width: 45px;

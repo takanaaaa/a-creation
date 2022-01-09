@@ -1,12 +1,17 @@
-<h1>A-Creation</h1>
-<%= link_to 'SIGN UP', new_user_registration_path %>
-<%= link_to 'SIGN IN', new_user_session_path %>
-
+<h1 class="title">A-Creation</h1>
+<div class="devise-navbar">
+  <% unless user_signed_in? %>
+    <%= link_to 'SIGN UP', new_user_registration_path, class: "nav-item" %>
+    <%= link_to 'SIGN IN', new_user_session_path, class: "nav-item" %>
+  <% end %>
+</div>
 <div class="swiper">
   <div class="swiper-wrapper">
-    <div class="swiper-slide">Slide 1</div>
-    <div class="swiper-slide">Slide 2</div>
-    <div class="swiper-slide">Slide 3</div>
+    <% @top_images.each do |image|%>
+      <div class="swiper-slide">
+        <%= attachment_image_tag image, :image, fallback: "no-image.jpg" %>
+      </div>
+    <% end %>
   </div>
   <div class="swiper-pagination"></div>
 </div>
