@@ -1,0 +1,8 @@
+"<%= @word %>"検索結果
+<% if @range == 'user' %>
+  <%= render "users/index", users: @users %>
+<% elsif @range == 'post' %>
+  <%= render "posts/index", posts: @posts %>
+<% else %>
+  <%= render "categories/index", categories: @categories %>
+<% end %>
