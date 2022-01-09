@@ -20,12 +20,12 @@
   top: 30px;
 
   & > .nav-item {
-    color: $gray;
     padding: 10px 50px;
     border-radius: 30px;
     background: $mainColor;
     text-decoration: none;
     box-shadow: $button-shadow_outline;
+    color: $gray;
 
     &:nth-child(2) {
       background: $lightGray+a1;
