@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_08_124814) do
+ActiveRecord::Schema.define(version: 2022_01_09_010326) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id"
@@ -124,6 +124,21 @@ ActiveRecord::Schema.define(version: 2022_01_08_124814) do
     t.datetime "updated_at", null: false
     t.index ["followed_id"], name: "index_reletionships_on_followed_id"
     t.index ["follower_id"], name: "index_reletionships_on_follower_id"
+  end
+
+  create_table "tag_maps", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_tag_maps_on_post_id"
+    t.index ["tag_id"], name: "index_tag_maps_on_tag_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
