@@ -1,7 +1,15 @@
 <div class="main-container">
-  <%= attachment_image_tag @user, :home_image, fallback: "no-image.jpg", class: "main-visual" %>
-  <h1><%= @user.name %>のマイページ</h1>
-  <%= attachment_image_tag @user, :profile_image, fallback: "no-image.jpg", class: "profile_image" %>
+  <%= attachment_image_tag @user, :home_image, fallback: "no-image.jpg", class: "main-visual image" %>
+  <div class="main-visual"></div>
+  <div class="info">
+    <%= attachment_image_tag @user, :profile_image, fallback: "no-image.jpg", class: "profile_image" %>
+    <div class="profile">
+      <p>
+        <span><%= @user.name %>ページ</span><br>
+        <%= simple_format @user.profile %>
+      </p>
+    </div>
+  </div>
   <% if @user == current_user %>
     <div class="mypage-nav-icons">
       <%= link_to user_followings_path(user_id: @user.id), class: "mypage-nav-icon" do %>
@@ -35,3 +43,9 @@
       </div>
     </div>
   <% end %>
+</div>
+<div class="container-fluid my-posts">
+  <div class="row", style="margin: 0 auto;">
+    <%= render "posts/index", posts: @posts %>
+  </div>
+</div>

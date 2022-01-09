@@ -5,9 +5,9 @@
     </td>
     <td>
       <p><%= link_to user.name, user_path(user), class: "text-dark" %></p>
-      <p  id ="profile-text-hidden"><%= user.profile %></p>
+      <p id ="text-hidden"><%= user.profile %></p>
     </td>
-    <td id="favorite-btn_<%= user.id %>">
+    <td id="follow-btn_<%= user.id %>" class="follow-btn">
       <%= render "relationships/follow-btn", user: user %>
     </td>
   </tr>

@@ -10,3 +10,33 @@ $white: #fff;
 $button-shadow_outline: -8px -4px 6px #fff, 6px 4px 8px #dfe4ea;
 $button-shadow_inline: 2px 2px 2px #dfe4ea inset, -2px -2px 2px 0px #fff inset;
 
+.userpage-icons {
+    width: 100%;
+    position: fixed;
+    background: $mainColor;
+    z-index: 1;
+    bottom: 0;
+}
+.userpage-icon{
+    width: 90px;
+    height: 90px;
+    padding: 10px;
+    background: $mainColor;
+    font-size: 20px;
+    text-align: center;
+    box-shadow: $button-shadow_outline;
+}
+
+.btn-style {
+    border-radius: 20px;
+    color: $white;
+    background: $gray;
+    border: none;
+}
+
+#text-hidden {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}

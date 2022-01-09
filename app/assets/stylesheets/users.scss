@@ -4,96 +4,142 @@
 
 @import "variables";
 
+// ユーザ詳細画面レイアウト
 .main-container {
   width: 100%;
-  height: 500px;
+  height: 100vh;
   position: relative;
 
-  & > .main-visual {
+  .main-visual {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    opacity: .7;
+
+    &.image {
+      position: fixed;
+      object-fit: cover;
+      opacity: .7;
+      z-index: -1;
+      top: 0;
+    }
   }
 
-  & > h1 {
+  .info {
     position: absolute;
-    top: 25px;
-    left: 50px;
-    color: $gray;
-  }
-
-  & > h2 {
-    position: absolute;
-    bottom: 0;
-    left: 150px;
-  }
-
-  & > .profile_image {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border: 1px solid $lightGray;
-    border-radius: 50%;
-    position: absolute;
-    top: 77%;
-    left: 25px;
-  }
-
-  & > .other_profile_image {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border: 1px solid $lightGray;
-    border-radius: 50%;
-    position: absolute;
-    top: 78%;
+    top: 20px;
     left: 30px;
+    align-items: center;
+
+    .profile_image {
+      width: 100px;
+      height: 100px;
+      display: inline-block;
+      object-fit: cover;
+      border: 1px solid $lightGray;
+      border-radius: 50%;
+      vertical-align: top;
+    }
+
+    .profile {
+      display: inline-block;
+      margin-left: 20px;
+
+      span {
+        font-size: 25px;
+      }
+    }
   }
-}
 
-.mypage-nav-icons {
-  margin-top: 25px;
-  display: flex;
-  justify-content: center;
-  gap: 70px;
+  .mypage-nav-icons {
+    @extend .userpage-icons;
+    display: flex;
+    justify-content: center;
+    gap: 70px;
+    padding: 15px;
 
-  & > .mypage-nav-icon {
-    color: $gray;
-    font-size: 20px;
-    text-align: center;
-    padding: 10px;
-    border-radius: 50%;
-    width: 90px;
-    height: 90px;
-    background: $mainColor;
-    text-decoration: none;
-    box-shadow: $button-shadow_outline;
+    .mypage-nav-icon {
+      @extend .userpage-icon;
+      text-decoration: none;
+      border-radius: 50%;
 
-    &:hover {
-      box-shadow: $button-shadow_inline;
+      &:hover {
+        text-decoration: none;
+        box-shadow: $button-shadow_inline;
+      }
+    }
+  }
+  .user-nav-icons {
+    @extend .userpage-icons;
+    text-align: end;
+    padding: 25px;
+
+    div {
+      .user-nav-icon {
+        @extend .userpage-icon;
+        border-radius: 5px;
+
+        &:hover {
+          text-decoration: none;
+          box-shadow: $button-shadow_inline;
+        }
+      }
     }
   }
 }
-.user-nav-icons {
-  margin: 20px;
-  text-align: end;
+
+// ユーザーの投稿一覧
+.container-fluid.my-posts {
+  padding-bottom: 100px;
 }
 
-.user-nav-icon {
-  color: $gray;
-  font-size: 20px;
-  text-align: center;
-  padding: 10px;
-  border-radius: 5px;
-  width: 90px;
-  height: 90px;
-  background: #f8f8f8;
-  box-shadow: $button-shadow_outline;
+.users.container {
+  margin: 80px auto;
 
-  &:hover {
-    box-shadow: $button-shadow_inline;
-    text-decoration: none;
-    color: $gray;
+  .row {
+    .col-md-6 {
+      .search-field {
+        input {
+          width: 250px;
+          border: 1px solid #949494;
+          border-radius: 20px;
+        }
+
+        .btn {
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+
+.follow-btn {
+  .user-nav-icon {
+    @extend .btn-style;
+    padding: 0 10px;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.user-edit.form-group {
+  &:last-child{
+    text-align: center;
+
+    input {
+      @extend .btn-style;
+      padding: 5px 50px;
+    }
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .search-field {
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
   }
 }
