@@ -9,7 +9,9 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    tag_list = porams[:post][:name].split(nil)
     if @post.save
+      @book.save_tag(tag_list)
       redirect_to post_path(@post)
     else
       render :new
@@ -26,10 +28,13 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @tag_list = @post.tags.pluck(:name).join(" ")
   end
 
   def update
+    tag_list = params[:post][:name].split(nil)
     if @post.update(post_params)
+      @post.save_tag(tag_list)
       redirect_to post_path(@post)
     else
       render :new

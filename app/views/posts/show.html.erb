@@ -8,10 +8,12 @@
             <%= render "bookmarks/bookmark-btn", post: @post %>
           </div>
           <p class="card-text">
+            <%= render "posts/tag", post: @post %>
             <%= simple_format @post.body %>
           </p>
         </div>
         <% if @post.user_id == current_user.id %>
+          <%= link_to "編集", edit_post_path(@post) %>
           <%= link_to "削除", post_path(@post), method: :delete %>
         <% end %>
       </div>
