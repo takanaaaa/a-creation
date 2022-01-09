@@ -1,4 +1,11 @@
 <div class="container-fluid">
+  <% if user_signed_in? %>
+  　<%= form_tag search_path, method: :get do %>
+  　　<%= text_field_tag (:word) %>
+  　　<%= hidden_field_tag 'range', 'post' %>
+  　　<%= submit_tag "検索" %>
+  　<% end %>
+  <% end %>
   <div class="row", style="margin: 0 auto;">
     <%= render "posts/index", posts: @posts %>
   </div>
