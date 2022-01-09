@@ -26,6 +26,7 @@
    background: $mainColor;
  }
 
+// navbarレイアウト
  header {
   display: flex;
 
@@ -186,19 +187,6 @@
   }
 }
 
- footer {
-  height: 100px;
- }
-
-
-.profile_image_sm {
-  width: 45px;
-  height: 45px;
-  object-fit: cover;
-  border: 1px solid $lightGray;
-  border-radius: 50%;
-}
-
 @media screen and (min-width: 720px) {
   header {
     .pc-menu {
@@ -210,3 +198,70 @@
     }
   }
 }
+
+ footer {
+  height: 100px;
+ }
+
+// プロフィール画像 小さいver
+.profile_image_sm {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border: 1px solid $lightGray;
+  border-radius: 50%;
+}
+
+// ログイン・サインアップ画面
+.devise.container {
+  margin-top: 50px;
+
+  h2 {
+    text-align: center;
+    color: $gray;
+    margin-bottom: 50px;
+  }
+
+  .form-group {
+    .field {
+      margin-bottom: 45px;
+      border-bottom: 1px solid $lightGray;
+      background: $mainColor;
+
+      .form-control {
+        border: none;
+        text-align: center;
+        background: $mainColor;
+      }
+    }
+
+    .action {
+      text-align: center;
+
+      .devise-btn {
+        box-shadow: $button-shadow_outline;
+        border: none;
+        padding: 5px 70px;
+        border-radius: 30px;
+        margin: 20px 0 10px 0;
+        background: $lightGray+a1;
+        color: $white;
+
+        &:hover {
+          box-shadow: $button-shadow_inline;
+          text-decoration: none;
+          color: $gray;
+        }
+      }
+    }
+  }
+
+  .link {
+    text-align: center;
+
+    a {
+      color: $gray;
+    }
+  }
+}
+
