@@ -1,19 +1,47 @@
 <% if user_signed_in? %>
-  <ul class="navbar">
-    <Li class="nav-item">
-      <%= link_to "Mypage", user_path(current_user), :data => {:hover => "Mypage"} %>
-    </Li>
-    <Li class="nav-item">
-      <%= link_to "Users", users_path, :data => {:hover => "Users"} %>
-    </Li>
-    <Li class="nav-item">
-      <%= link_to "Posts", posts_path, :data => {:hover => "Posts"} %>
-    </Li>
-    <Li class="nav-item">
-      <%= link_to "Category", categories_path, :data => {:hover => "Category"} %>
-    </Li>
-    <Li class="nav-item">
-      <%= link_to "Logout", destroy_user_session_path, method: :delete, :data => {:hover => "Logout"} %>
-    </Li>
-  </ul>
+  <div class="logo">
+    <h1>A-Creation</h1> 
+  </div>
+  <div class="pc-menu">
+    <ul class="navbar">
+      <Li class="nav-item">
+        <%= link_to "Mypage", user_path(current_user), :data => {:hover => "Mypage"} %>
+      </Li>
+      <Li class="nav-item">
+        <%= link_to "Users", users_path, :data => {:hover => "Users"} %>
+      </Li>
+      <Li class="nav-item">
+        <%= link_to "Posts", posts_path, :data => {:hover => "Posts"} %>
+      </Li>
+      <Li class="nav-item">
+        <%= link_to "Category", categories_path, :data => {:hover => "Category"} %>
+      </Li>
+      <Li class="nav-item">
+        <%= link_to "Logout", destroy_user_session_path, method: :delete, :data => {:hover => "Logout"} %>
+      </Li>
+    </ul>
+  </div>
+  <div class="phone-menu">
+    <i class="fas fa-bars" id ="open"></i>
+  </div>
+  <div class="overlay">
+    <i class="fas fa-times" id="close"></i>
+    <ul class="navbar">
+      <Li class="nav-item">
+        <%= link_to "Mypage", user_path(current_user), :data => {:hover => "Mypage"} %>
+      </Li>
+      <Li class="nav-item">
+        <%= link_to "Users", users_path, :data => {:hover => "Users"} %>
+      </Li>
+      <Li class="nav-item">
+        <%= link_to "Posts", posts_path, :data => {:hover => "Posts"} %>
+      </Li>
+      <Li class="nav-item">
+        <%= link_to "Category", categories_path, :data => {:hover => "Category"} %>
+      </Li>
+      <Li class="nav-item">
+        <%= link_to "Logout", destroy_user_session_path, method: :delete, :data => {:hover => "Logout"} %>
+      </Li>
+    </ul>
+  </div>
 <% end %>

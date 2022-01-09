@@ -8,7 +8,6 @@ const swiper = new Swiper('.swiper', {
   effect: 'coverflow',
 	slidesPerView: 1,
 	slidesPerGroup: 1,
-	spaceBetween: 0,
 
   pagination: {
     el: '.swiper-pagination',
@@ -22,7 +21,6 @@ const swiper = new Swiper('.swiper', {
   breakpoints: {
 		800: {
     	slidesPerView: 3.5,
-      spaceBetween: 10,
       slidesPerGroup: 1,
 		},
   }
