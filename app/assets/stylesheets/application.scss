@@ -19,6 +19,7 @@
 
 * {
   font-family: 'Open Sans Condensed', sans-serif;
+  box-sizing: border-box;
 }
 
  body {
@@ -26,60 +27,164 @@
  }
 
  header {
-  .navbar {
-    box-sizing: border-box;
-    -webkit-transition: all 0.35s ease;
-    transition: all 0.35s ease;
-    justify-content: end;
+  display: flex;
 
-    & > .nav-item {
-      display: inline-block;
-      list-style: outside none none;
-      margin: 0 1.2em;
-      overflow: hidden;
+  .logo {
+    width: 200px;
+    padding: 0 20px;
 
-      & > a {
-        padding: 0 0.5em 0 0.2em;
-        color: $lightGray;
-        position: relative;
+    h1 {
+      font-size: 2em;
+      color: $gray;
+      line-height: 56px;
+      margin: 0;
+    }
+  }
+
+  .pc-menu {
+    display: none;
+    width: 100%;
+
+    .navbar {
+      transition: all 0.35s ease;
+      margin: auto 0 auto auto;
+
+       .nav-item {
         display: inline-block;
-        letter-spacing: 1px;
-        margin: 0;
-        text-decoration: none;
-        transition: all 0.35s ease;
+        list-style: outside none none;
+        margin: 0 1.2em;
+        overflow: hidden;
 
-        &:before,
-        &:after {
-          position: absolute;
-          -webkit-transition: all 0.35s ease;
+        a {
+          padding: 0 .5em;
+          color: $lightGray;
+          position: relative;
+          display: inline-block;
+          letter-spacing: 1px;
+          text-decoration: none;
+          transition: all 0.35s ease;
+
+          &:before,
+          &:after {
+            position: absolute;
+          }
+
+          &:before {
+            right: 100%;
+            display: block;
+            width: 3px;
+            height: 100%;
+            content: "";
+            background-color: $blue;
+          }
+
+          &:after {
+            padding: 0 .5em;
+            position: absolute;
+            right: 100%;
+            top: 0;
+            content: attr(data-hover);
+            color: $gray;
+            white-space: nowrap;
+          }
         }
 
-        &:before {
-          right: 100%;
-          display: block;
-          width: 3px;
-          height: 100%;
-          content: "";
-          background-color: $blue;
+        &:hover > a {
+          transform: translateX(100%);
         }
-
-        &:after {
-          padding: 0 0.5em 0 0.2em;
-          position: absolute;
-          right: 100%;
-          top: 0;
-          content: attr(data-hover);
-          color: $gray;
-          white-space: nowrap;
-        }
-      }
-
-      &:hover > a{
-        transform: translateX(100%);
       }
     }
   }
- }
+
+  .phone-menu {
+    margin-left: auto;
+
+    #open {
+      cursor: pointer;
+      font-size: 30px;
+      padding: 10px;
+      color: $gray;
+
+      &.hide {
+        display: none;
+      }
+    }
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(255, 255, 255, .98);
+    text-align: end;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 2;
+    transition: opacity .6s;
+
+    &.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #close {
+      cursor: pointer;
+      font-size: 30px;
+      padding: 10px 50px;
+      color: $gray;
+    }
+
+    .navbar {
+      flex-flow: column;
+      justify-content: space-between;
+      height: 300px;
+      letter-spacing: 5px;
+
+      .nav-item {
+        list-style: outside none none;
+        overflow: hidden;
+
+        a {
+          padding: 0 0.5em;
+          color: $lightGray;
+          display: inline-block;
+          text-decoration: none;
+          transition: all 0.35s ease;
+
+          &:before,
+          &:after {
+            position: absolute;
+          }
+
+          &:before {
+            right: 100%;
+            display: block;
+            width: 3px;
+            height: 100%;
+            content: "";
+            background-color: $blue;
+          }
+
+          &:after {
+            padding: 0 0.5em;
+            position: absolute;
+            right: 100%;
+            top: 0;
+            content: attr(data-hover);
+            color: $gray;
+            white-space: nowrap;
+          }
+        }
+
+        &:hover > a {
+          transform: translateX(100%);
+        }
+      }
+    }
+  }
+}
 
  footer {
   height: 100px;
@@ -92,4 +197,16 @@
   object-fit: cover;
   border: 1px solid $lightGray;
   border-radius: 50%;
+}
+
+@media screen and (min-width: 720px) {
+  header {
+    .pc-menu {
+      display: flex;
+    }
+
+    .phone-menu {
+      display: none;
+    }
+  }
 }
