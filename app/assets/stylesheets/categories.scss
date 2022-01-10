@@ -26,8 +26,8 @@
     }
 
     .ctegory-setting a {
-      @extend .btn-style;
-      padding: 5px 20px;
+      color: $gray;
+      font-size: 20px;
 
       &:hover {
         text-decoration: none;
@@ -40,8 +40,8 @@
     }
 
   .group-field a {
-    @extend .btn-style;
-    padding: 5px 20px;
+    color: $gray;
+    font-size: 20px;
 
     &:hover {
       text-decoration: none;
