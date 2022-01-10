@@ -30,12 +30,8 @@
     align-items: center;
 
     .profile_image {
-      width: 100px;
-      height: 100px;
+      @extend .profile-style;
       display: inline-block;
-      object-fit: cover;
-      border: 1px solid $lightGray;
-      border-radius: 50%;
       vertical-align: top;
     }
 
