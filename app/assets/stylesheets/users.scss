@@ -17,7 +17,7 @@
     &.image {
       position: fixed;
       object-fit: cover;
-      opacity: .7;
+      opacity: .5;
       z-index: -1;
       top: 0;
     }
@@ -76,6 +76,7 @@
       .user-nav-icon {
         @extend .userpage-icon;
         border-radius: 5px;
+        color: $gray;
 
         &:hover {
           text-decoration: none;
@@ -98,9 +99,7 @@
     .col-md-6 {
       .search-field {
         input {
-          width: 250px;
-          border: 1px solid #949494;
-          border-radius: 20px;
+          @extend .search-style;
         }
 
         .btn {

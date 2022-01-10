@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   resources :notifications, only: [:index]
   resources :tags
   get 'search' => 'searches#search'
+  get 'tags/:tag_id/posts' => 'posts#search', as: 'tag_post'
   delete 'notifications/destroy_all' => 'notifications#destroy_all', as: 'notification'
   post 'follow/:id' => 'relationships#create', as: 'follow'
   post 'unfollow/:id' => 'relationships#destroy', as: 'unfollow'

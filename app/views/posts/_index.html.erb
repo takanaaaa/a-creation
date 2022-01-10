@@ -7,17 +7,19 @@
       <div class="card-body">
         <div id="bookmark-btn_<%= post.id %>">
           <%= render "bookmarks/bookmark-btn", post: post %>
+        </div>
+        <div class="tags" id="text-hidden-1">
           <%= render "posts/tag", post: post %>
         </div>
-        <p class="card-text", id="text-hidden">
+        <p class="card-text", id="text-hidden-2">
           <%= post.body %>
         </p>
         <div class="pt-3">
           <%= link_to user_path(post.user), class: "text-dark" do %>
             <%= attachment_image_tag post.user, :profile_image, fallback: "no-image.jpg", class: "profile_image_sm" %>
             <%= post.user.name %>
-            <small class="date"><%= post.created_at.strftime("%Y-%m-%d %H:%M") %></small>
           <% end %>
+          <small class="date"><%= post.created_at.strftime("%Y-%m-%d %H:%M") %></small>
         </div>
       </div>
     </div>

@@ -4,6 +4,7 @@ $mainColor: #f5f6f7;
 $lightGray: #949494;
 $gray: #555555;
 $blue: #298689;
+$red: #cf626c;
 $white: #fff;
 
 // button-shadow
@@ -34,7 +35,20 @@ $button-shadow_inline: 2px 2px 2px #dfe4ea inset, -2px -2px 2px 0px #fff inset;
     border: none;
 }
 
-#text-hidden {
+.search-style {
+    width: 250px;
+    border: 1px solid $lightGray;
+    border-radius: 20px;
+}
+
+#text-hidden-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+#text-hidden-2 {
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;

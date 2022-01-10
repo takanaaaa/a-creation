@@ -81,12 +81,12 @@
 
           &:after {
             padding: 0 .5em;
+            color: $gray;
             position: absolute;
             right: 100%;
             top: 0;
             content: attr(data-hover);
             white-space: nowrap;
-            color: $gray;
           }
         }
 
@@ -168,6 +168,7 @@
 
           &:after {
             padding: 0 0.5em;
+            color: $gray;
             position: absolute;
             right: 100%;
             top: 0;

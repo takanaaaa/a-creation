@@ -1,3 +1,129 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "variables";
+
+// posts/show 投稿詳細画面
+.post.container {
+  margin-top: 80px;
+
+  .row {
+    .post-field {
+      .card {
+        width: 20rem;
+
+        .post-setting {
+          a {
+            display: block;
+            text-align: center;
+            background: $gray;
+            color: $white;
+
+            &:nth-of-type(2) {
+              background: $red;
+            }
+
+            &:hover {
+              text-decoration: none;
+            }
+          }
+
+        }
+      }
+    }
+
+    .comment-field {
+      .overflow-auto {
+        width: 100%;
+        height: 450px;
+        padding: 30px;
+        margin-bottom: 20px;
+        background: $white;
+      }
+
+      .form-group {
+        input {
+          @extend .btn-style;
+          width: 100px;
+          margin: 0 0 0 auto;
+        }
+      }
+    }
+  }
+
+  // posts/edit 編集画面
+  .form-group {
+    &:nth-of-type(4) {
+      text-align: center;
+
+      .btn{
+        @extend .btn-style;
+        padding: 5px 50px;
+      }
+    }
+  }
+}
+
+// posts/index 投稿一覧画面
+.posts.container-fluid {
+  .search-field {
+    text-align: end;
+    z-index: 1;
+
+    input {
+      @extend .search-style;
+    }
+  }
+
+  .new-post {
+    a > i {
+      font-size: 30px;
+    }
+  }
+
+  .row {
+    margin: 0 auto;
+
+    div {
+      .card {
+        width: 15rem;
+
+        .card-img-top {
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .card-body {
+          div {
+            .date {
+              position: absolute;
+              right: 5px;
+              bottom: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+// posts/_tag タグ
+.tags {
+
+  a {
+    padding: 0 5px;
+    margin-right: 10px;
+    font-size: 12px;
+    color: $gray;
+    background: $mainColor;
+
+    &:hover {
+      text-decoration: none;
+      color: #949494;
+    }
+  }
+}
+
+
