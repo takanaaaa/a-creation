@@ -1,10 +1,14 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update]
   before_action :ensure_correct_user, only: [:edit, :update]
+  before_action :ensure_category_member, only: [:show, :edit]
 
   def new
     @group = Group.new
-     @category = Category.find(params[:category_id])
+    @category = Category.find(params[:category_id])
+    unless @category.users.include?(current_user)
+      redirect_to group_path(@category)
+    end
   end
 
   def create
@@ -44,7 +48,7 @@ class GroupsController < ApplicationController
 
   def leave
     @group = Group.find(params[:group_id])
-    @group.users.delete(current_user)
+    GroupUser.find_by(user_id: current_user.id, group_id: @group.id).destroy
     redirect_to category_path(@group.category.id)
   end
 
@@ -55,12 +59,19 @@ class GroupsController < ApplicationController
 
   def ensure_correct_user
     @group = Group.find(params[:id])
-    unless @group.owner_id == currect_user.id
-      redirect_to posts_path
+    unless @group.owner_id == current_user.id
+      redirect_to category_path(@group.category)
     end
   end
 
   def set_group
     @group = Group.find(params[:id])
+  end
+
+  def ensure_category_member
+    group = Group.find(params[:id])
+    unless group.category.users.include?(current_user)
+      redirect_to category_path(group.category)
+    end
   end
 end
