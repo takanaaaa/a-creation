@@ -67,7 +67,10 @@
 
 // posts/index 投稿一覧画面
 .posts.container-fluid {
+  margin-top: 50px;
+
   .search-field {
+    margin-bottom: 15px;
     text-align: end;
     z-index: 1;
 
@@ -77,31 +80,28 @@
   }
 
   .new-post {
-    a > i {
+    i {
       font-size: 30px;
+      margin-left: 50px;
     }
   }
 
   .row {
     margin: 0 auto;
 
-    div {
-      .card {
-        width: 15rem;
+    .card {
+      width: 15rem;
 
-        .card-img-top {
-            height: 220px;
-            object-fit: cover;
-        }
+      .card-img-top {
+          height: 220px;
+          object-fit: cover;
+      }
 
-        .card-body {
-          div {
-            .date {
-              position: absolute;
-              right: 5px;
-              bottom: 5px;
-            }
-          }
+      .card-body {
+        .date {
+          position: absolute;
+          right: 5px;
+          bottom: 5px;
         }
       }
     }
