@@ -1,40 +1,43 @@
-<div class="container">
+<div class="post container">
   <div class="row">
-    <div class="col-6">
-      <div class="card" style="width: 20rem;">
+    <div class="post-field col-6">
+      <div class="card">
         <%= attachment_image_tag @post, :image, fallback: "no-image.jpg", class: "card-img-top" %>
         <div class="card-body">
           <div id="bookmark-btn_<%= @post.id %>">
             <%= render "bookmarks/bookmark-btn", post: @post %>
           </div>
-          <p class="card-text">
+          <div class="tags">
             <%= render "posts/tag", post: @post %>
+          </div>
+          <p class="card-text">
             <%= simple_format @post.body %>
           </p>
         </div>
-        <% if @post.user_id == current_user.id %>
-          <%= link_to "編集", edit_post_path(@post) %>
-          <%= link_to "削除", post_path(@post), method: :delete %>
-        <% end %>
+        <div class="post-setting">
+          <% if @post.user_id == current_user.id %>
+            <%= link_to "編集", edit_post_path(@post) %>
+            <%= link_to "削除", post_path(@post), method: :delete %>
+          <% end %>
+        </div>
       </div>
     </div>
-    <div class="col-6">
-      <div class="overflow-auto p-3 bg-light" style="width: 100%; height:400px;">
+    <div class="comment-field col-6">
+      <div class="overflow-auto">
         <table class="table">
-          <tbody id="post-comment_<%= @post.id%>">
+          <tbody id="post-comment_<%= @post.id%>" class="comments">
             <%= render "post_comments/comment", post_comments: @post_comments, post: @post %>
           </tbody>
         </table>
       </div>
-        <%= form_with model:[@post, @post_comment], remote:true do |f| %>
-          <div class="form-group">
-            <%= f.text_area :comment, rows: '3', placeholder: "コメントをここに", class: "form-control" %>
-          </div>
-          <div class="form-group text-right">
-            <%= f.submit "送信" %>
-          </div>
-        <% end %>
-      </div>
+      <%= form_with model:[@post, @post_comment], remote:true do |f| %>
+        <div class="form-group">
+          <%= f.text_area :comment, rows: '3', placeholder: "コメントをここに", class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.submit "送信", class: "form-control" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

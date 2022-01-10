@@ -1,12 +1,21 @@
-<div class="container-fluid">
-  <% if user_signed_in? %>
-  　<%= form_tag search_path, method: :get do %>
-  　　<%= text_field_tag (:word) %>
-  　　<%= hidden_field_tag 'range', 'post' %>
-  　　<%= submit_tag "検索" %>
-  　<% end %>
-  <% end %>
-  <div class="row", style="margin: 0 auto;">
+<div class="posts container-fluid">
+  <div class="search-field">
+    <% if user_signed_in? %>
+    　<%= form_tag search_path, method: :get do %>
+    　　<%= text_field_tag (:word) %>
+    　　<%= hidden_field_tag 'range', 'post' %>
+    　　<%= button_tag type: 'submit', class: 'btn btn-default' do%>
+          <i class="fas fa-search"></i>
+    　　<% end %>
+    　<% end %>
+    <% end %>
+  </div>
+  <div class="new-post">
+    <%= link_to new_post_path do %>
+      <i class="fas fa-plus"></i>
+    <% end %>
+  </div>
+  <div class="row">
     <%= render "posts/index", posts: @posts %>
   </div>
 </div>

@@ -5,7 +5,7 @@
     </td>
     <td>
       <p><%= link_to user.name, user_path(user), class: "text-dark" %></p>
-      <p id ="text-hidden"><%= user.profile %></p>
+      <p id ="text-hidden-2"><%= user.profile %></p>
     </td>
     <td id="follow-btn_<%= user.id %>" class="follow-btn">
       <%= render "relationships/follow-btn", user: user %>

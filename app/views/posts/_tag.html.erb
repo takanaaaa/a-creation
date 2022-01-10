@@ -1,7 +1,8 @@
 <% if post.tags.present? %>
   <% post.tags.each do |tag| %>
-    <i class="fas fa-tag" >
-      <%= tag.name %>
-    </i>
+    <%= link_to tag_post_path(tag) do %>
+    <i class="fas fa-tag"></i>
+    <%= tag.name %>
+    <% end %>
   <% end %>
 <% end %>

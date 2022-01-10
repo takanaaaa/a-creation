@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, except: [:new, :create, :index]
+  before_action :set_post, except: [:new, :create, :index, :search]
   before_action :ensure_current_user, only: [:edit, :update, :destroy]
 
   def new
@@ -9,9 +9,9 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    tag_list = porams[:post][:name].split(nil)
+    tag_list = params[:post][:name].split(nil)
     if @post.save
-      @book.save_tag(tag_list)
+      @post.save_tag(tag_list)
       redirect_to post_path(@post)
     else
       render :new
@@ -44,6 +44,11 @@ class PostsController < ApplicationController
   def destroy
     Post.find_by(id: @post.id).destroy
     redirect_to posts_path
+  end
+
+  def search
+    @tag = Tag.find(params[:tag_id])
+    @posts = @tag.posts.all
   end
 
   private
