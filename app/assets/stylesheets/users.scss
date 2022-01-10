@@ -96,17 +96,13 @@
 .users.container {
   margin: 80px auto;
 
-  .row {
-    .col-md-6 {
-      .search-field {
-        input {
-          @extend .search-style;
-        }
+  .search-field {
+    input {
+      @extend .search-style;
+    }
 
-        .btn {
-          padding: 0;
-        }
-      }
+    .btn {
+      padding: 0;
     }
   }
 }
