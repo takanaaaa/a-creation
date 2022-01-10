@@ -1,36 +1,49 @@
-<div class="container">
+<div class="category container">
   <div class="row">
     <div class="col-md-6">
-      <%= @category.name %>
-      <div id="category-btn_<%= @category.id %>">
+      <h3><%= @category.name %></h3>
+      <div id="category-btn_<%= @category.id %>" class="category-btn">
         <%= render "categories/category-btn", category: @category %>
       </div>
-      <div id="category-images">
-        <%= render "category_images/images", category_images: @category_images %>
-      </div>
-      <% if @category.category_user?(current_user)%>
-        <%= form_with model:[@category, @category_image], local:true do |f| %>
-          <%= f.attachment_field :image, class: "form-control" %>
-          <%= f.submit "追加" %>
+      <div class="ctegory-setting">
+        <% if @category.category_user?(current_user)%>
+          <%= link_to "編集", edit_category_path(@category.id) %>
         <% end %>
-      <% end %>
-    </div>
-    <div class="col-md-6">
+      </div>
       <div class="card">
         <%= simple_format @category.introduction %>
       </div>
-      <%= link_to "編集", edit_category_path(@category.id) %>
-      <table class="table">
-        <tbody>
-          <% @groups.each do |group| %>
-            <tr onclick='window.location="<%= '../groups/' + group.id.to_s %>"' role="link" class="pointer">
-              <td><%= group.name %></td>
-              <td><%= group.introduction %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-      <%= link_to "グループ作成", new_category_group_path(@category.id) %>
     </div>
+    <div class="group-field col-md-6">
+      <p>グループ一覧</p>
+      <% if @category.category_user?(current_user)%>
+        <%= link_to "作成", new_category_group_path(@category.id) %>
+      <% end %>
+      <div class="overflow-auto">
+        <table class="table">
+          <tbody>
+            <% @groups.each do |group| %>
+              <tr onclick='window.location="<%= '../groups/' + group.id.to_s %>"' role="link" class="pointer">
+                <td><%= group.name %></td>
+                <td><%= group.introduction %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="images-field">
+    <div id="category-images" class="category-images">
+      <%= render "category_images/images", category_images: @category_images %>
+    </div>
+    <% if @category.category_user?(current_user)%>
+      <%= form_with model:[@category, @category_image], local:true do |f| %>
+        <div class="form-group">
+          <%= f.attachment_field :image, class: "form-control" %>
+          <%= f.submit "追加", class: "form-control" %>
+        </div>
+      <% end %>
+    <% end %>
   </div>
 </div>

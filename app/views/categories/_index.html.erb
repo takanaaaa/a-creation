@@ -1,12 +1,12 @@
 <% categories.each do |category| %>
   <tr>
-    <td>
-      <p><%= link_to category.name, category_path(category) %></p>
+    <td onclick='window.location="<%= '../categories/' + category.id.to_s %>"' role="link" class="pointer">
+      <p class="category-text">
+        <span><%= category.name %></span>
+        <%= category.introduction %>
+      </p>
     </td>
-    <td>
-      <p><%= category.introduction %></p>
-    </td>
-    <td id="category-btn_<%= category.id %>">
+    <td id="category-btn_<%= category.id %>" class="category-btn">
       <%= render "categories/category-btn", category: category %>
     </td>
   </tr>

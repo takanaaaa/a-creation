@@ -52,16 +52,12 @@
     }
   }
 
-  // posts/edit 編集画面
-  .form-group {
-    &:nth-of-type(4) {
-      text-align: center;
-
-      .btn{
-        @extend .btn-style;
-        padding: 5px 50px;
-      }
-    }
+  // posts/new,edit ボタン
+  .form-group .btn {
+    @extend .btn-style;
+    display: block;
+    width: 250px;
+    margin: 0 auto;
   }
 }
 
@@ -79,11 +75,9 @@
     }
   }
 
-  .new-post {
-    i {
-      font-size: 30px;
-      margin-left: 50px;
-    }
+  .new-post i {
+    font-size: 30px;
+    margin-left: 50px;
   }
 
   .row {
