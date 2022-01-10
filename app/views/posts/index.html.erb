@@ -1,4 +1,9 @@
 <div class="posts container-fluid">
+  <div class="new-post">
+    <%= link_to new_post_path do %>
+      <i class="fas fa-plus"></i>
+    <% end %>
+  </div>
   <div class="search-field">
     <% if user_signed_in? %>
     　<%= form_tag search_path, method: :get do %>
@@ -8,11 +13,6 @@
           <i class="fas fa-search"></i>
     　　<% end %>
     　<% end %>
-    <% end %>
-  </div>
-  <div class="new-post">
-    <%= link_to new_post_path do %>
-      <i class="fas fa-plus"></i>
     <% end %>
   </div>
   <div class="row">
