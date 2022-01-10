@@ -67,6 +67,7 @@
       }
     }
   }
+
   .user-nav-icons {
     @extend .userpage-icons;
     text-align: end;
@@ -113,7 +114,7 @@
 .follow-btn {
   .user-nav-icon {
     @extend .btn-style;
-    padding: 0 10px;
+    padding: 5px 15px;
 
     &:hover {
       text-decoration: none;
