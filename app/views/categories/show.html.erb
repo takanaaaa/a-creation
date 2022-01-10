@@ -7,7 +7,9 @@
       </div>
       <div class="ctegory-setting">
         <% if @category.category_user?(current_user)%>
-          <%= link_to "編集", edit_category_path(@category.id) %>
+          <%= link_to edit_category_path(@category.id) do %>
+            <i class="far fa-edit"></i>
+          <% end %>
         <% end %>
       </div>
       <div class="card">
@@ -17,7 +19,9 @@
     <div class="group-field col-md-6">
       <p>グループ一覧</p>
       <% if @category.category_user?(current_user)%>
-        <%= link_to "作成", new_category_group_path(@category.id) %>
+        <%= link_to new_category_group_path(@category.id) do %>
+          <i class="fas fa-plus"></i>
+        <% end %>
       <% end %>
       <div class="overflow-auto">
         <table class="table">
