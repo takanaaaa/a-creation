@@ -1,7 +1,17 @@
-<% notifications = @notifications.where.not(visiter_id: current_user.id) %>
-<%= link_to "全削除", notification_path, method: :delete %>
-<% if notifications.exists? %>
-  <%= render "notifications", notifications: @notifications %>
-<% else %>
-  通知はありません
-<% end %>
+<div class="notice container">
+  <div class="col-md-10 offset-md-1">
+    <% notifications = @notifications.where.not(visiter_id: current_user.id) %>
+    <% if notifications.exists? %>
+      <table class="table">
+        <div class="tbody">
+          <%= render "notifications", notifications: @notifications %>
+        </div>
+      </table>
+      <%= link_to notification_path, method: :delete, class: "btn", "data-confirm" => "通知を全て削除しますか？" do %>
+        <i class="fas fa-trash"></i>
+      <% end %>
+    <% else %>
+      通知はありません
+    <% end %>
+  </div>
+</div>
