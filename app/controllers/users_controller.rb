@@ -2,11 +2,11 @@ class UsersController < ApplicationController
   before_action :set_user, except: [:index]
 
   def show
-    @posts = @user.posts.all
+    @posts = @user.posts.page(params[:page]).per(12)
   end
 
   def index
-    @users = User.all
+    @users = User.page(params[:page]).per(10)
   end
 
   def edit
