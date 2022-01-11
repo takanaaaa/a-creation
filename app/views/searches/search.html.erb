@@ -1,8 +1,26 @@
-"<%= @word %>"検索結果
-<% if @range == 'user' %>
-  <%= render "users/index", users: @users %>
-<% elsif @range == 'post' %>
-  <%= render "posts/index", posts: @posts %>
-<% else %>
-  <%= render "categories/index", categories: @categories %>
-<% end %>
+<div class="search container">
+  <h5>"<%= @word %>"検索結果</h5>
+  <% if @range == 'user' %>
+    <div class="users container">
+      <table class="table">
+        <tbody>
+          <%= render "users/index", users: @users %>
+        </tbody>
+      </table>
+    </div>
+  <% elsif @range == 'post' %>
+    <div class="posts container-fluid">
+      <div class="row">
+        <%= render "posts/index", posts: @posts %>
+      </div>
+    </div>
+  <% else %>
+    <div class="categories container-fluid">
+      <table class="table">
+        <tbody>
+          <%= render "categories/index", categories: @categories %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>
