@@ -1,27 +1,30 @@
  /*global Swiper*/
-const swiper = new Swiper('.swiper', {
 
-  direction: 'horizontal',
-  speed: 1000,
-  loop: true,
-  centeredSlides: true,
-  effect: 'coverflow',
-	slidesPerView: 1,
-	slidesPerGroup: 1,
+ {
+  const swiper = new Swiper('.swiper', {
 
-  pagination: {
-    el: '.swiper-pagination',
-  },
+    direction: 'horizontal',
+    speed: 1000,
+    loop: true,
+    centeredSlides: true,
+    effect: 'coverflow',
+  	slidesPerView: 1,
+  	slidesPerGroup: 1,
 
-  autoplay: {
-    delay: 2500,
-    stopOnLast: false,
-  },
+    pagination: {
+      el: '.swiper-pagination',
+    },
 
-  breakpoints: {
-		800: {
-    	slidesPerView: 3.5,
-      slidesPerGroup: 1,
-		},
-  }
-});
+    autoplay: {
+      delay: 2500,
+      stopOnLast: false,
+    },
+
+    breakpoints: {
+  		800: {
+      	slidesPerView: 3.5,
+        slidesPerGroup: 1,
+  		},
+    }
+  });
+ }
