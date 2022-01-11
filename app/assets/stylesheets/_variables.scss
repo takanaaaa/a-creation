@@ -62,3 +62,9 @@ $button-shadow_inline: 2px 2px 2px #dfe4ea inset, -2px -2px 2px 0px #fff inset;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
 }
+
+.position-right-bottm {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+}

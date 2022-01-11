@@ -4,9 +4,7 @@ class MessagesController < ApplicationController
   def create
     @message = @group.messages.create(message_params)
     @messages = @group.messages.includes(:user)
-    if @message.save!
-      redirect_back(fallback_location: root_path)
-    else
+    unless @message.save
       render :index, notice: "メッセージを入力してください"
     end
   end

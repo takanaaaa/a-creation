@@ -93,9 +93,7 @@
 
       .card-body {
         .date {
-          position: absolute;
-          right: 5px;
-          bottom: 5px;
+          @extend .position-right-bottm;
         }
       }
     }
