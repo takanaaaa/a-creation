@@ -261,3 +261,27 @@
   }
 }
 
+// ページネーション
+.pagination {
+justify-content: center;
+
+  .page-item {
+
+    .page-link {
+      border: none;
+      background: $mainColor;
+      color: $gray;
+
+      &:focus {
+        border-radius: 50%;
+      }
+    }
+
+    &.active .page-link {
+    background: $white;
+    color: $gray;
+    border-radius: 50%;
+    }
+  }
+}
+
