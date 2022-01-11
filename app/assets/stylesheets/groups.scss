@@ -49,6 +49,30 @@
     }
   }
 
+  .group-field {
+    display: flex;
+    gap: 30px;
+    text-align: center;
+    flex-wrap: wrap;
+
+    .box {
+      transition: opacity .3s;
+
+      &:hover {
+        opacity: .5;
+      }
+
+      .profile_image {
+        @extend .profile-style;
+      }
+
+      a {
+        text-decoration: none;
+      }
+    }
+
+  }
+
   // groups/new,edit
   .form-control.btn {
     @extend .btn-style;

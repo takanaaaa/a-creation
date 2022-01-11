@@ -20,6 +20,7 @@
 //= require_tree .
 
 /*global $*/
+// ハンバーガーメニュー
 {
   const open = document.getElementById('open');
   const overlay = document.querySelector('.overlay');
@@ -35,3 +36,14 @@
     open.classList.remove('hide');
   });
 }
+
+// チャットメッセージ画面を一番下までスクロール
+window.onload = function() {
+  document.addEventListener("turbolinks:load", () => {
+      function scrollToEnd() {
+          const message = document.getElementById('message');
+          message.scrollTop = message.scrollHeight;
+      }
+      scrollToEnd()
+  });
+};
