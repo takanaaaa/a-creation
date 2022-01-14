@@ -91,6 +91,10 @@
           object-fit: cover;
       }
 
+      .profile-image-sm {
+        @extend .profile-img-sm-style;
+      }
+
       .card-body {
         .date {
           @extend .position-right-bottm;

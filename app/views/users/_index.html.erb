@@ -1,7 +1,7 @@
 <% users.each do |user| %>
   <tr>
     <td>
-      <%= attachment_image_tag user, :profile_image, fallback: "no-image.jpg", class: "profile_image_sm" %>
+      <%= attachment_image_tag user, :profile_image, fallback: "no-image.jpg", class: "profile-image-sm" %>
     </td>
     <td>
       <p><%= link_to user.name, user_path(user), class: "text-dark" %></p>

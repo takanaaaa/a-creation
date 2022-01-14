@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     get 'followings' => 'relationships#followings', as: 'followings'
     get 'followers' => 'relationships#followers', as: 'followers'
     get 'bookmarks' => 'bookmarks#index', as: 'bookmarks'
+    get 'groups' => 'groups#index', as: 'groups'
+    get 'notifications' => 'notifications#index', as: 'notifications'
   end
   resources :posts do
     resources :post_comments, only: [:create, :destroy]
@@ -22,7 +24,6 @@ Rails.application.routes.draw do
     get 'join' => 'groups#join'
     delete 'leave' => 'groups#leave'
   end
-  resources :notifications, only: [:index]
   resources :tags
   get 'search' => 'searches#search'
   get 'tags/:tag_id/posts' => 'posts#search', as: 'tag_post'

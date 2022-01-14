@@ -15,6 +15,7 @@
     height: 100%;
 
     &.image {
+      height: 85%;
       position: fixed;
       object-fit: cover;
       opacity: .5;
@@ -29,13 +30,34 @@
     left: 30px;
     align-items: center;
 
-    .profile_image {
-      @extend .profile-style;
+    .profile-img {
+      text-align: center;
       display: inline-block;
       vertical-align: top;
+
+      .profile-image {
+        @extend .profile-img-style;
+      }
+
+      .follow-btn {
+        margin-top: 20px;
+
+        .nav-icon {
+          padding: 5px 15px;
+          background: $mainColor;
+          text-align: center;
+          color: $gray;
+          border-radius: 10px;
+
+          &:hover {
+            text-decoration: none;
+            box-shadow: $button-shadow_inline;
+          }
+        }
+      }
     }
 
-    .profile {
+    .profile-text {
       display: inline-block;
       margin-left: 20px;
 
@@ -45,14 +67,18 @@
     }
   }
 
-  .mypage-nav-icons {
+}
+  .nav-icons {
+    width: 100%;
     @extend .userpage-icons;
     display: flex;
     justify-content: center;
     gap: 70px;
     padding: 15px;
+    right: 0;
+    left: 0;
 
-    .mypage-nav-icon {
+    .nav-icon {
       @extend .userpage-icon;
       text-decoration: none;
       border-radius: 50%;
@@ -63,26 +89,6 @@
       }
     }
   }
-
-  .user-nav-icons {
-    @extend .userpage-icons;
-    text-align: end;
-    padding: 25px;
-
-    div {
-      .user-nav-icon {
-        @extend .userpage-icon;
-        border-radius: 5px;
-        color: $gray;
-
-        &:hover {
-          text-decoration: none;
-          box-shadow: $button-shadow_inline;
-        }
-      }
-    }
-  }
-}
 
 // ユーザーの投稿一覧
 .container-fluid.my-posts {
@@ -102,15 +108,27 @@
       padding: 0;
     }
   }
-}
 
-.follow-btn {
-  .user-nav-icon {
-    @extend .btn-style;
-    padding: 5px 15px;
+  .profile-image-sm {
+    @extend .profile-img-sm-style;
+  }
 
-    &:hover {
-      text-decoration: none;
+  .follow-btn {
+    margin-top: 20px;
+
+    .nav-icon {
+      padding: 5px 15px;
+      background: $mainColor;
+      font-size: 18px;
+      text-align: center;
+      color: $gray;
+      box-shadow: $button-shadow_outline;
+      border-radius: 10px;
+
+      &:hover {
+        text-decoration: none;
+        box-shadow: $button-shadow_inline;
+      }
     }
   }
 }
