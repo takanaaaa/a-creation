@@ -1,5 +1,6 @@
 <div class="category container">
   <div class="col-md-8 offset-md-2">
+    <%= render "layouts/errors", obj: @category %>
     <%= form_with model:@category, local:true do |f| %>
       <div class="form-group">
         <%= f.label :カテゴリー名 %>
