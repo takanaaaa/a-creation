@@ -44,8 +44,8 @@
     </div>
   <% end %>
 </div>
-<div class="container-fluid my-posts">
-  <div class="row", style="margin: 0 auto;">
+<div class="posts container-fluid my-posts">
+  <div class="row">
     <%= render "posts/index", posts: @posts %>
   </div>
   <%= paginate @posts %>
