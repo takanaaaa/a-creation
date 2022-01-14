@@ -7,12 +7,14 @@
           <%= render "users/index", users: @users %>
         </tbody>
       </table>
+      <%= paginate @users %>
     </div>
   <% elsif @range == 'post' %>
     <div class="posts container-fluid">
       <div class="row">
         <%= render "posts/index", posts: @posts %>
       </div>
+      <%= paginate @posts %>
     </div>
   <% else %>
     <div class="categories container-fluid">
@@ -21,6 +23,7 @@
           <%= render "categories/index", categories: @categories %>
         </tbody>
       </table>
+      <%= paginate @categories %>
     </div>
   <% end %>
 </div>
