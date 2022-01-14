@@ -2,7 +2,7 @@
   <tr onclick='window.location="<%= '../../groups/' + group.id.to_s %>"' role="link" class="pointer">
     <td>
       <% if action_name == "index" %>
-      <span><%= group.category.name %></span><br>
+        <span><%= group.category.name %></span><br>
       <% end %>
       <%= group.name %>
     </td>
