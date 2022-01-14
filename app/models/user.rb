@@ -24,7 +24,7 @@ class User < ApplicationRecord
   attachment :profile_image
   attachment :home_image
 
-  validates :name, presence: true, length: { maximum: 30, allow_blank: true }
+  validates :name, presence: true, uniqueness: true, length: { in: 2..20, allow_blank: true }
 
   def follow(user_id)
     follower.create(followed_id: user_id)
@@ -37,7 +37,7 @@ class User < ApplicationRecord
   def following?(user)
     following_user.include?(user)
   end
-  
+
   def create_notification_follow!(current_user)
     temp = Notification.where(["visiter_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
     if temp.blank?
