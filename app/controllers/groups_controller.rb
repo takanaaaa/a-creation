@@ -3,6 +3,11 @@ class GroupsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update]
   before_action :ensure_category_member, only: [:show, :edit]
 
+  def index
+    @user = User.find(params[:user_id])
+    @groups =@user.groups.all
+  end
+
   def new
     @group = Group.new
     @category = Category.find(params[:category_id])

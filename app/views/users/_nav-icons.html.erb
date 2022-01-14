@@ -1,0 +1,42 @@
+<% if @user == current_user %>
+    <div class="nav-icons">
+      <%= link_to user_followings_path(user.id), class: "nav-icon" do %>
+        <i class="far fa-user"></i>
+        <p>Following</p>
+      <% end %>
+      <%= link_to user_followers_path(user.id), class: "nav-icon" do %>
+        <i class="fas fa-user"></i>
+        <p>Follower</p>
+      <% end %>
+      <%= link_to user_bookmarks_path(user.id), class: "nav-icon" do %>
+        <i class="far fa-bookmark"></i>
+        <p>Bookmark</p>
+      <% end %>
+      <%= link_to user_notifications_path(user.id), class: "nav-icon" do %>
+        <i class="far fa-clone"></i>
+        <% if unchecked_notifications.any? %>
+          <i class="fa fa-circle" style="color: gold;"></i>
+        <% end %>
+        <p>Notice</p>
+      <% end %>
+      <%= link_to edit_user_path(user), class: "nav-icon" do %>
+        <i class="fas fa-cogs"></i>
+        <p>Setting</p>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="nav-icons">
+      <%= link_to user_followings_path(user.id), class: "nav-icon" do %>
+        <i class="far fa-user"></i>
+        <p>Following</p>
+      <% end %>
+      <%= link_to user_followers_path(user.id), class: "nav-icon" do %>
+        <i class="fas fa-user"></i>
+        <p>Follower</p>
+      <% end %>
+      <%= link_to user_groups_path(user.id), class: "nav-icon" do %>
+        <i class="fas fa-users"></i>
+        <p>Groups</p>
+      <% end %>
+    </div>
+  <% end %>

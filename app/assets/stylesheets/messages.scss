@@ -21,6 +21,10 @@
 
       .message-user {
         text-align: center;
+
+        .profile-image-sm {
+          @extend .profile-img-sm-style;
+        }
       }
 
       .message-date {

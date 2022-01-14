@@ -4,6 +4,27 @@
 
 @import "variables";
 
+// groups/_index
+.group-field .table {
+  margin-top: 10px;
+
+  span {
+    text-align: start;
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+  .pointer {
+    cursor: pointer;
+    transition: opacity .3s;
+
+    &:hover {
+      opacity: .5;
+    }
+  }
+}
+
+
 // groups/show　グループ詳細
 .group.container {
   margin-top: 50px;
@@ -63,7 +84,7 @@
       }
 
       .profile_image {
-        @extend .profile-style;
+        @extend .profile-img-style;
       }
 
       a {
