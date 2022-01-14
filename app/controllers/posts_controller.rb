@@ -55,7 +55,7 @@ class PostsController < ApplicationController
 
   def search
     @tag = Tag.find(params[:tag_id])
-    @posts = @tag.posts.all
+    @posts = @tag.posts.page(params[:page]).per(12)
   end
 
   private
