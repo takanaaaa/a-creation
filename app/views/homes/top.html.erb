@@ -2,16 +2,20 @@
 <div class="devise-navbar">
   <% unless user_signed_in? %>
     <%= link_to 'SIGN UP', new_user_registration_path, class: "nav-item" %>
-    <%= link_to 'SIGN IN', new_user_session_path, class: "nav-item" %>
+    <%= link_to 'LOG IN', new_user_session_path, class: "nav-item" %>
   <% end %>
 </div>
 <div class="swiper">
   <div class="swiper-wrapper">
     <% @top_images.each do |image|%>
       <div class="swiper-slide">
+        <%= link_to user_path(image.user) do %>
         <%= attachment_image_tag image, :image, fallback: "no-image.jpg" %>
+        <% end %>
       </div>
     <% end %>
   </div>
   <div class="swiper-pagination"></div>
 </div>
+
+<%= javascript_include_tag 'swiper' %>

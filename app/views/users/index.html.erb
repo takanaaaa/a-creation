@@ -6,12 +6,13 @@
           <%= render "users/index", users: @users %>
         </tbody>
       </table>
+      <%= paginate @users %>
     </div>
     <div class="col-md-6">
       <div class="search-field">
         <% if user_signed_in? %>
         　<%= form_tag(search_path, method: :get) do %>
-        　　<%= text_field_tag (:word) %>
+        　　<%= text_field_tag (:word), '', placeholder: "user検索" %>
         　　<%= hidden_field_tag 'range', 'user' %>
         　　<%= button_tag type: 'submit', class: 'btn btn-default' do %>
               <i class="fas fa-search"></i>

@@ -201,14 +201,6 @@
   height: 100px;
  }
 
-// プロフィール画像 小さいver
-.profile_image_sm {
-  width: 45px;
-  height: 45px;
-  object-fit: cover;
-  border: 1px solid $lightGray;
-  border-radius: 50%;
-}
 
 // ログイン・サインアップ画面
 .devise.container {
@@ -257,6 +249,30 @@
 
     a {
       color: $gray;
+    }
+  }
+}
+
+// ページネーション
+.pagination {
+justify-content: center;
+
+  .page-item {
+
+    .page-link {
+      border: none;
+      background: $mainColor;
+      color: $gray;
+
+      &:focus {
+        border-radius: 50%;
+      }
+    }
+
+    &.active .page-link {
+    background: $white;
+    color: $gray;
+    border-radius: 50%;
     }
   }
 }

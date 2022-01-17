@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2022_01_17_150707) do
 
+
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id"
     t.integer "post_id"

@@ -24,7 +24,14 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    if params[:sort] == "popular"
+      @posts = Post.includes(:bookmarked_users).sort{|a,b|
+        b.bookmarked_users.size <=> a.bookmarked_users.size
+      }
+      @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(12)
+    else
+       @posts = Post.order(created_at: :desc).page(params[:page]).per(12)
+    end
   end
 
   def edit
@@ -48,7 +55,7 @@ class PostsController < ApplicationController
 
   def search
     @tag = Tag.find(params[:tag_id])
-    @posts = @tag.posts.all
+    @posts = @tag.posts.page(params[:page]).per(12)
   end
 
   private

@@ -1,0 +1,12 @@
+<div class="group container">
+  <div class="row">
+    <div class="group-field col-md-8 offset-md-2">
+      <table class="table">
+        <tbody>
+          <%= render "groups/index", groups: @groups %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <%= render "users/nav-icons", user: @user %>
+</div>

@@ -2,7 +2,7 @@
   <% if message.user_id == current_user.id %>
   <div class="message-field my-message">
     <div class="message-user">
-      <%= attachment_image_tag message.user, :profile_image, fallback: "no-image.jpg", class: "profile_image_sm" %>
+      <%= attachment_image_tag message.user, :profile_image, fallback: "no-image.jpg", class: "profile-image-sm" %>
       <p><%= message.user.name %></p>
     </div>
     <div class="message-text my-message">
@@ -13,7 +13,7 @@
   <% else %>
     <div class="message-field">
       <div class="message-user">
-        <%= attachment_image_tag message.user, :profile_image, fallback: "no-image.jpg", class: "profile_image_sm" %>
+        <%= attachment_image_tag message.user, :profile_image, fallback: "no-image.jpg", class: "profile-image-sm" %>
         <p><%= message.user.name %></p>
       </div>
       <div class="message-text">

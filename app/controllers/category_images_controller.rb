@@ -4,6 +4,7 @@ class CategoryImagesController < ApplicationController
     category_image = CategoryImage.new(category_image_params)
     category = Category.find(params[:category_id])
     category_image.category_id = category.id
+    category_image.user_id = current_user.id
     category_image.save
     redirect_back(fallback_location: root_path)
   end

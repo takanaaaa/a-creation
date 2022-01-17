@@ -7,6 +7,9 @@ class MessagesController < ApplicationController
     unless @message.save
       render :index, notice: "メッセージを入力してください"
     end
+    if @messages.count == 1
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def index

@@ -2,50 +2,26 @@
   <%= attachment_image_tag @user, :home_image, fallback: "no-image.jpg", class: "main-visual image" %>
   <div class="main-visual"></div>
   <div class="info">
-    <%= attachment_image_tag @user, :profile_image, fallback: "no-image.jpg", class: "profile_image" %>
-    <div class="profile">
+    <div class="profile-img">
+      <%= attachment_image_tag @user, :profile_image, fallback: "no-image.jpg", class: "profile-image" %>
+      <% if @user != current_user %>
+        <div id="follow-btn_<%= @user.id %>" class="follow-btn">
+          <%= render "relationships/follow-btn", user: @user %>
+        </div>
+      <% end %>
+    </div>
+    <div class="profile-text">
       <p>
         <span><%= @user.name %>ページ</span><br>
         <%= simple_format @user.profile %>
       </p>
     </div>
   </div>
-  <% if @user == current_user %>
-    <div class="mypage-nav-icons">
-      <%= link_to user_followings_path(user_id: @user.id), class: "mypage-nav-icon" do %>
-        <i class="far fa-user"></i>
-        <p>Following</p>
-      <% end %>
-      <%= link_to user_followers_path(user_id: @user.id), class: "mypage-nav-icon" do %>
-        <i class="fas fa-user"></i>
-        <p>Follower</p>
-      <% end %>
-      <%= link_to user_bookmarks_path(@user.id), class: "mypage-nav-icon" do %>
-        <i class="far fa-bookmark"></i>
-        <p>Bookmark</p>
-      <% end %>
-      <%= link_to notifications_path, class: "mypage-nav-icon" do %>
-        <i class="far fa-clone"></i>
-        <% if unchecked_notifications.any? %>
-          <i class="fa fa-circle" style="color: gold;"></i>
-        <% end %>
-        <p>Notice</p>
-      <% end %>
-      <%= link_to edit_user_path(@user), class: "mypage-nav-icon" do %>
-        <i class="fas fa-cogs"></i>
-        <p>Setting</p>
-      <% end %>
-    </div>
-  <% else %>
-    <div class="user-nav-icons">
-      <div id="follow-btn_<%= @user.id %>">
-        <%= render "relationships/follow-btn", user: @user %>
-      </div>
-    </div>
-  <% end %>
 </div>
-<div class="container-fluid my-posts">
-  <div class="row", style="margin: 0 auto;">
+<%= render "users/nav-icons", user: @user %>
+<div class="posts container-fluid my-posts">
+  <div class="row">
     <%= render "posts/index", posts: @posts %>
   </div>
+  <%= paginate @posts %>
 </div>

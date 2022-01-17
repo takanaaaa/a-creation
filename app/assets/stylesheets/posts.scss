@@ -65,19 +65,35 @@
 .posts.container-fluid {
   margin-top: 50px;
 
-  .search-field {
-    margin-bottom: 15px;
-    text-align: end;
-    z-index: 1;
-
-    input {
-      @extend .search-style;
-    }
-  }
-
   .new-post i {
     font-size: 30px;
     margin-left: 50px;
+  }
+
+  .sub-field {
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .sort-field {
+      margin-bottom: 10px;
+
+      a {
+        color: $gray;
+      }
+    }
+
+    .search-field {
+      margin-bottom: 15px;
+      text-align: end;
+      z-index: 1;
+
+      input {
+        @extend .search-style;
+      }
+    }
+
   }
 
   .row {
@@ -89,6 +105,10 @@
       .card-img-top {
           height: 220px;
           object-fit: cover;
+      }
+
+      .profile-image-sm {
+        @extend .profile-img-sm-style;
       }
 
       .card-body {
