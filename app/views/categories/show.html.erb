@@ -1,0 +1,49 @@
+<div class="category container">
+  <div class="row">
+    <div class="col-md-6">
+      <h3><%= @category.name %></h3>
+      <div id="category-btn_<%= @category.id %>" class="category-btn">
+        <%= render "categories/category-btn", category: @category %>
+      </div>
+      <div class="ctegory-setting">
+        <% if @category.category_user?(current_user)%>
+          <%= link_to edit_category_path(@category.id) do %>
+            <i class="far fa-edit"></i>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="card">
+        <%= simple_format @category.introduction %>
+      </div>
+    </div>
+    <div class="group-field col-md-6">
+      <p>グループ一覧</p>
+      <% if @category.category_user?(current_user)%>
+        <%= link_to new_category_group_path(@category.id) do %>
+          <i class="fas fa-plus"></i>
+        <% end %>
+      <% end %>
+      <div class="overflow-auto">
+        <table class="table">
+          <tbody>
+            <%= render "groups/index", groups: @groups %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="images-field">
+    <div id="category-images" class="category-images">
+      <%= render "category_images/images", category_images: @category_images %>
+    </div>
+    <% if @category.category_user?(current_user)%>
+      <%= form_with model:[@category, @category_image], local:true do |f| %>
+        <div class="form-group">
+          <%= f.attachment_field :image, class: "form-control" %>
+          <%= f.submit "追加", class: "form-control" %>
+        </div>
+      <% end %>
+    <% end %>
+    <%= paginate @category_images %>
+  </div>
+</div>

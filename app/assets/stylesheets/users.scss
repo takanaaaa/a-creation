@@ -1,0 +1,156 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "variables";
+
+// ユーザ詳細画面レイアウト
+.main-container {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+
+  .main-visual {
+    width: 100%;
+    height: 100%;
+
+    &.image {
+      height: 85%;
+      position: fixed;
+      object-fit: cover;
+      opacity: .5;
+      z-index: -1;
+      top: 0;
+    }
+  }
+
+  .info {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    align-items: center;
+
+    .profile-img {
+      text-align: center;
+      display: inline-block;
+      vertical-align: top;
+
+      .profile-image {
+        @extend .profile-img-style;
+      }
+
+      .follow-btn {
+        margin-top: 20px;
+
+        .nav-icon {
+          padding: 5px 15px;
+          background: $mainColor;
+          text-align: center;
+          color: $gray;
+          border-radius: 10px;
+
+          &:hover {
+            text-decoration: none;
+            box-shadow: $button-shadow_inline;
+          }
+        }
+      }
+    }
+
+    .profile-text {
+      display: inline-block;
+      margin-left: 20px;
+
+      span {
+        font-size: 25px;
+      }
+    }
+  }
+
+}
+  .nav-icons {
+    width: 100%;
+    @extend .userpage-icons;
+    display: flex;
+    justify-content: center;
+    gap: 70px;
+    padding: 15px;
+    right: 0;
+    left: 0;
+
+    .nav-icon {
+      @extend .userpage-icon;
+      text-decoration: none;
+      border-radius: 50%;
+
+      &:hover {
+        text-decoration: none;
+        box-shadow: $button-shadow_inline;
+      }
+    }
+  }
+
+// ユーザーの投稿一覧
+.container-fluid.my-posts {
+  padding-bottom: 100px;
+}
+
+// ユーザー一覧
+.users.container {
+  margin: 80px auto;
+
+  .search-field {
+    input {
+      @extend .search-style;
+    }
+
+    .btn {
+      padding: 0;
+    }
+  }
+
+  .profile-image-sm {
+    @extend .profile-img-sm-style;
+  }
+
+  .follow-btn {
+    margin-top: 20px;
+
+    .nav-icon {
+      padding: 5px 15px;
+      background: $mainColor;
+      font-size: 18px;
+      text-align: center;
+      color: $gray;
+      box-shadow: $button-shadow_outline;
+      border-radius: 10px;
+
+      &:hover {
+        text-decoration: none;
+        box-shadow: $button-shadow_inline;
+      }
+    }
+  }
+}
+
+.user-edit.form-group {
+  &:last-child{
+    text-align: center;
+
+    input {
+      @extend .btn-style;
+      padding: 5px 50px;
+    }
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .search-field {
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+}

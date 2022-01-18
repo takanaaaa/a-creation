@@ -1,0 +1,23 @@
+<div class="messages container">
+  <div class="row">
+    <div class="col-md-7">
+      <% if @messages.present? %>
+        <div id="message" class="overflow-auto">
+          <div class="table">
+            <%= render "messages/messages", messages: @messages %>
+          </div>
+        </div>
+      <% else %>
+        <p>メッセージがありません。</p>
+      <% end %>
+    </div>
+    <div class="col-md-5">
+      <div class="form-group">
+        <%=form_with model:[@group, @message], remote:true do |f| %>
+          <%= f.text_area :content, class: "form-control", rows: "5", cols: "50" %>
+          <%= f.submit "送信", class: "form-control btn" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

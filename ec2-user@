@@ -1,0 +1,4 @@
+DB_USERNAME="root"
+DB_PASSWORD="87kamui78"
+DB_HOST="rds-mysql-server.c0x12lnii3s4.ap-northeast-1.rds.amazonaws.com"
+DB_DATABASE="acreation"

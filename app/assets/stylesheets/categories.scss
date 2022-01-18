@@ -1,0 +1,121 @@
+// Place all the styles related to the categories controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "variables";
+
+// categories/show カテゴリー詳細
+.category.container {
+  margin-top: 50px;
+
+  .row {
+    margin-bottom: 20px;
+
+    h3 {
+      display: inline-block;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .category-btn {
+      display: inline-block;
+
+      a:hover {
+        text-decoration: none;
+      }
+    }
+
+    .ctegory-setting a {
+      color: $gray;
+      font-size: 20px;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    .card {
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+  .group-field a {
+    color: $gray;
+    font-size: 20px;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .overflow-auto {
+    width: 100%;
+    height: 350px;
+  }
+}
+
+  .images-field {
+    .category-images {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+
+      .image {
+        height: 220px;
+      }
+    }
+
+    .form-control:nth-child(3) {
+      @extend .btn-style;
+      width: 250px;
+      margin: 10px auto;
+    }
+  }
+
+  // categories./new,edit ボタン
+  .form-control.btn {
+    @extend .btn-style;
+    display: block;
+    width: 250px;
+    margin: 0 auto;
+  }
+}
+
+// categories/index カテゴリー一覧
+.categories.container-fluid {
+  margin: 80px auto;
+
+  .new-category i {
+    font-size: 30px;
+    margin-left: 50px;
+  }
+
+  td.pointer {
+    cursor: pointer;
+    transition: opacity .3s;
+
+    &:hover {
+      opacity: .5;
+    }
+
+    .category-text span {
+      display: block;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  }
+
+  td.category-btn a:hover {
+    text-decoration: none;
+  }
+
+  .search-field {
+    input {
+      @extend .search-style;
+    }
+
+    .btn {
+      padding: 0;
+    }
+  }
+}

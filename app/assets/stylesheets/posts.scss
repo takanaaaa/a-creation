@@ -1,0 +1,141 @@
+// Place all the styles related to the posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "variables";
+
+// posts/show 投稿詳細画面
+.post.container {
+  margin-top: 80px;
+
+  .row {
+    .post-field {
+      .card {
+        width: 20rem;
+
+        .post-setting {
+          a {
+            display: block;
+            text-align: center;
+            background: $gray;
+            color: $white;
+
+            &:nth-of-type(2) {
+              background: $red;
+            }
+
+            &:hover {
+              text-decoration: none;
+            }
+          }
+
+        }
+      }
+    }
+
+    .comment-field {
+      .overflow-auto {
+        width: 100%;
+        height: 450px;
+        padding: 30px;
+        margin-bottom: 20px;
+        background: $white;
+      }
+
+      .form-group {
+        input {
+          @extend .btn-style;
+          width: 100px;
+          margin: 0 0 0 auto;
+        }
+      }
+    }
+  }
+
+  // posts/new,edit ボタン
+  .form-group .btn {
+    @extend .btn-style;
+    display: block;
+    width: 250px;
+    margin: 0 auto;
+  }
+}
+
+// posts/index 投稿一覧画面
+.posts.container-fluid {
+  margin-top: 50px;
+
+  .new-post i {
+    font-size: 30px;
+    margin-left: 50px;
+  }
+
+  .sub-field {
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .sort-field {
+      margin-bottom: 10px;
+
+      a {
+        color: $gray;
+      }
+    }
+
+    .search-field {
+      margin-bottom: 15px;
+      text-align: end;
+      z-index: 1;
+
+      input {
+        @extend .search-style;
+      }
+    }
+
+  }
+
+  .row {
+    margin: 0 auto;
+
+    .card {
+      width: 15rem;
+
+      .card-img-top {
+          height: 220px;
+          object-fit: cover;
+      }
+
+      .profile-image-sm {
+        @extend .profile-img-sm-style;
+      }
+
+      .card-body {
+        .date {
+          @extend .position-right-bottm;
+        }
+      }
+    }
+  }
+}
+
+
+// posts/_tag タグ
+.tags {
+
+  a {
+    padding: 0 5px;
+    margin-right: 10px;
+    font-size: 12px;
+    color: $gray;
+    background: $mainColor;
+
+    &:hover {
+      text-decoration: none;
+      color: #949494;
+    }
+  }
+}
+
+

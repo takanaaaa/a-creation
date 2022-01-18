@@ -1,0 +1,13 @@
+// Place all the styles related to the relationships controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "variables";
+
+.follow.container {
+  margin-top: 80px;
+
+   .profile-image-sm {
+    @extend .profile-img-sm-style;
+  }
+}

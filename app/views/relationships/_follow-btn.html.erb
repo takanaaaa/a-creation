@@ -1,0 +1,7 @@
+  <% unless current_user == user %>
+    <% if current_user.following?(user) %>
+      <%= link_to "unfollow", unfollow_path(user), method: :post, remote:true, class: "nav-icon" %>
+    <% else %>
+      <%= link_to "follow", follow_path(user),method: :post, remote:true, class: "nav-icon" %>
+    <% end %>
+  <% end %>

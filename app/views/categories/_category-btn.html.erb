@@ -1,0 +1,9 @@
+  <% if category.category_user?(current_user)%>
+  　<%= link_to category_leave_path(category.id), method: :delete, remote:true do %>
+      <i class="fas fa-check"></i>
+  　<% end %>
+  <% else %>
+    <%= link_to category_join_path(category.id), remote:true do %>
+    　<i class="fas fa-user-plus"></i>
+    <% end %>
+  <% end %>

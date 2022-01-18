@@ -1,0 +1,9 @@
+<% if category_image.favorited_by?(current_user) %>
+  <%= link_to favorite_path(category_image.id), method: :delete, remote:true do %>
+    <i class="fas fa-heart"></i>
+  <% end %>
+<% else %>
+  <%= link_to favorites_path(category_image.id), method: :post, remote:true do %>
+    <i class="far fa-heart"></i>
+  <% end %>
+<% end %>

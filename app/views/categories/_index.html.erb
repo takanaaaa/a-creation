@@ -1,0 +1,13 @@
+<% categories.each do |category| %>
+  <tr>
+    <td onclick='window.location="<%= '../categories/' + category.id.to_s %>"' role="link" class="pointer">
+      <p class="category-text">
+        <span><%= category.name %></span>
+        <%= category.introduction %>
+      </p>
+    </td>
+    <td id="category-btn_<%= category.id %>" class="category-btn">
+      <%= render "categories/category-btn", category: category %>
+    </td>
+  </tr>
+<% end %>

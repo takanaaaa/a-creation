@@ -1,0 +1,80 @@
+
+// color
+$mainColor: #f5f6f7;
+$lightGray: #949494;
+$gray: #555555;
+$blue: #298689;
+$red: #cf626c;
+$white: #fff;
+
+// button-shadow
+$button-shadow_outline: -8px -4px 6px #fff, 6px 4px 8px #dfe4ea;
+$button-shadow_inline: 2px 2px 2px #dfe4ea inset, -2px -2px 2px 0px #fff inset;
+
+// プロフィール画像
+.profile-img-style {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid $lightGray;
+    border-radius: 50%;
+}
+
+// プロフィール画像 小さいver
+.profile-img-sm-style {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border: 1px solid $lightGray;
+  border-radius: 50%;
+}
+
+.userpage-icons {
+    width: 100%;
+    position: fixed;
+    background: $mainColor;
+    z-index: 1;
+    bottom: 0;
+}
+.userpage-icon{
+    width: 90px;
+    height: 90px;
+    padding: 10px;
+    background: $mainColor;
+    font-size: 20px;
+    text-align: center;
+    box-shadow: $button-shadow_outline;
+}
+
+.btn-style {
+    border-radius: 20px;
+    color: $white;
+    background: $gray;
+    border: none;
+}
+
+.search-style {
+    width: 250px;
+    border: 1px solid $lightGray;
+    border-radius: 20px;
+}
+
+#text-hidden-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+#text-hidden-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.position-right-bottm {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+}

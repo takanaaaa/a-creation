@@ -1,0 +1,14 @@
+// Place all the styles related to the CategoryImages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "variables";
+
+.category-image .image-text {
+	display: flex;
+	gap: 15px;
+
+	a {
+		color: $gray;
+	}
+}

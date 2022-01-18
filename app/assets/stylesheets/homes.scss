@@ -1,0 +1,69 @@
+// Place all the styles related to the homes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "variables";
+
+.title {
+  margin: 30px;
+  font-size: 4em;
+  letter-spacing: 5px;
+}
+
+.devise-navbar {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 25px;
+  padding: 0;
+  position: absolute;
+  right: 20px;
+  top: 30px;
+
+  .nav-item {
+    padding: 10px 50px;
+    border-radius: 30px;
+    background: $mainColor;
+    text-decoration: none;
+    box-shadow: $button-shadow_outline;
+    color: $gray;
+
+    &:nth-child(2) {
+      background: $lightGray+a1;
+      color: $white;
+    }
+    &:hover {
+      box-shadow: $button-shadow_inline;
+    }
+  }
+}
+
+.swiper {
+  width: 100%;
+  height: 450px;
+  margin-top: 5em;
+
+  .swiper-wrapper {
+
+    .swiper-slide {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 400px;
+        height: 450px;
+        object-fit: cover;
+        overflow: hidden;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .devise-navbar {
+    position: static;
+    justify-content: center;
+  }
+}
+

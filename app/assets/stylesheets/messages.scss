@@ -1,0 +1,46 @@
+// Place all the styles related to the messages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "variables";
+
+.messages.container {
+  margin-top: 50px;
+
+  .overflow-auto {
+    height: 600px;
+
+    .message-field {
+      display: flex;
+      position: relative;
+      gap: 10px;
+
+      &.my-message {
+        flex-flow: row-reverse;
+      }
+
+      .message-user {
+        text-align: center;
+
+        .profile-image-sm {
+          @extend .profile-img-sm-style;
+        }
+      }
+
+      .message-date {
+        @extend .position-right-bottm;
+
+        &.my-message {
+          left: 5px;
+        }
+      }
+    }
+  }
+
+  .form-control.btn {
+    @extend .btn-style;
+    display: block;
+    width: 250px;
+    margin: 10px auto;
+  }
+}

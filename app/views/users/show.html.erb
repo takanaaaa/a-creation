@@ -1,0 +1,27 @@
+<div class="main-container">
+  <%= attachment_image_tag @user, :home_image, fallback: "no-image.jpg", class: "main-visual image" %>
+  <div class="main-visual"></div>
+  <div class="info">
+    <div class="profile-img">
+      <%= attachment_image_tag @user, :profile_image, fallback: "no-image.jpg", class: "profile-image" %>
+      <% if @user != current_user %>
+        <div id="follow-btn_<%= @user.id %>" class="follow-btn">
+          <%= render "relationships/follow-btn", user: @user %>
+        </div>
+      <% end %>
+    </div>
+    <div class="profile-text">
+      <p>
+        <span><%= @user.name %>ページ</span><br>
+        <%= simple_format @user.profile %>
+      </p>
+    </div>
+  </div>
+</div>
+<%= render "users/nav-icons", user: @user %>
+<div class="posts container-fluid my-posts">
+  <div class="row">
+    <%= render "posts/index", posts: @posts %>
+  </div>
+  <%= paginate @posts %>
+</div>

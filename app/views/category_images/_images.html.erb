@@ -1,0 +1,12 @@
+<% category_images.each do |category_image| %>
+  <div class="category-image">
+    <%= attachment_image_tag category_image, :image, fallback: "no-image.jpg", class: "image" %>
+    <div class="image-text">
+      <%= link_to category_image.user.name, user_path(category_image.user) %>
+      <div id="favorite-btn_<%= category_image.id %>">
+        <%= render "favorites/favorite-btn", category_image: category_image %>
+      </div>
+      <p id="fovorite-image-count_<%= category_image.id %>">いいね数:<%= category_image.favorites.count %></p>
+    </div>
+  </div>
+<% end %>

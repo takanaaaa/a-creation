@@ -1,0 +1,279 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap";
+@import "variables";
+
+* {
+  font-family: 'Open Sans Condensed', sans-serif;
+  box-sizing: border-box;
+  color: $gray;
+}
+
+ body {
+   background: $mainColor;
+ }
+
+// navbarレイアウト
+ header {
+  display: flex;
+
+  .logo {
+    width: 200px;
+    padding: 0 20px;
+
+    h1 {
+      font-size: 2em;
+      line-height: 56px;
+      margin: 0;
+    }
+  }
+
+  .pc-menu {
+    display: none;
+    width: 100%;
+
+    .navbar {
+      transition: all 0.35s ease;
+      margin: auto 0 auto auto;
+
+       .nav-item {
+        display: inline-block;
+        list-style: outside none none;
+        margin: 0 1.2em;
+        overflow: hidden;
+
+        a {
+          padding: 0 .5em;
+          color: $lightGray;
+          position: relative;
+          display: inline-block;
+          letter-spacing: 1px;
+          text-decoration: none;
+          transition: all 0.35s ease;
+
+          &:before,
+          &:after {
+            position: absolute;
+          }
+
+          &:before {
+            right: 100%;
+            display: block;
+            width: 3px;
+            height: 100%;
+            content: "";
+            background-color: $blue;
+          }
+
+          &:after {
+            padding: 0 .5em;
+            color: $gray;
+            position: absolute;
+            right: 100%;
+            top: 0;
+            content: attr(data-hover);
+            white-space: nowrap;
+          }
+        }
+
+        &:hover > a {
+          transform: translateX(100%);
+        }
+      }
+    }
+  }
+
+  .phone-menu {
+    margin-left: auto;
+
+    #open {
+      cursor: pointer;
+      font-size: 30px;
+      padding: 10px;
+
+      &.hide {
+        display: none;
+      }
+    }
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(255, 255, 255, .98);
+    text-align: end;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 2;
+    transition: opacity .6s;
+
+    &.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #close {
+      cursor: pointer;
+      font-size: 30px;
+      padding: 10px 50px;
+    }
+
+    .navbar {
+      flex-flow: column;
+      justify-content: space-between;
+      height: 300px;
+      letter-spacing: 5px;
+
+      .nav-item {
+        list-style: outside none none;
+        overflow: hidden;
+
+        a {
+          padding: 0 0.5em;
+          color: $lightGray;
+          display: inline-block;
+          text-decoration: none;
+          transition: all 0.35s ease;
+
+          &:before,
+          &:after {
+            position: absolute;
+          }
+
+          &:before {
+            right: 100%;
+            display: block;
+            width: 3px;
+            height: 100%;
+            content: "";
+            background-color: $blue;
+          }
+
+          &:after {
+            padding: 0 0.5em;
+            color: $gray;
+            position: absolute;
+            right: 100%;
+            top: 0;
+            content: attr(data-hover);
+            white-space: nowrap;
+          }
+        }
+
+        &:hover > a {
+          transform: translateX(100%);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 720px) {
+  header {
+    .pc-menu {
+      display: flex;
+    }
+
+    .phone-menu {
+      display: none;
+    }
+  }
+}
+
+ footer {
+  height: 100px;
+ }
+
+
+// ログイン・サインアップ画面
+.devise.container {
+  margin-top: 50px;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .form-group {
+    .field {
+      margin-bottom: 45px;
+      border-bottom: 1px solid $lightGray;
+      background: $mainColor;
+
+      .form-control {
+        border: none;
+        text-align: center;
+        background: $mainColor;
+      }
+    }
+
+    .action {
+      text-align: center;
+
+      .devise-btn {
+        box-shadow: $button-shadow_outline;
+        border: none;
+        padding: 5px 70px;
+        border-radius: 30px;
+        margin: 20px 0 10px 0;
+        background: $lightGray+a1;
+        color: $white;
+
+        &:hover {
+          box-shadow: $button-shadow_inline;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  .link {
+    text-align: center;
+
+    a {
+      color: $gray;
+    }
+  }
+}
+
+// ページネーション
+.pagination {
+justify-content: center;
+
+  .page-item {
+
+    .page-link {
+      border: none;
+      background: $mainColor;
+      color: $gray;
+
+      &:focus {
+        border-radius: 50%;
+      }
+    }
+
+    &.active .page-link {
+    background: $white;
+    color: $gray;
+    border-radius: 50%;
+    }
+  }
+}
+
