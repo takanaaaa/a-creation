@@ -7,12 +7,20 @@
 </div>
 <div class="swiper">
   <div class="swiper-wrapper">
-    <% @top_images.each do |image|%>
-      <div class="swiper-slide">
-        <%= link_to user_path(image.user) do %>
-        <%= attachment_image_tag image, :image, fallback: "no-image.jpg" %>
-        <% end %>
-      </div>
+    <% if @top_images.nil? %>
+      <% @top_images.each do |image|%>
+        <div class="swiper-slide">
+          <%= link_to user_path(image.user) do %>
+          <%= attachment_image_tag image, :image, fallback: "no-image.jpg" %>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="swiper-slide"><%= image_tag "no-image.jpg" %></div>
+      <div class="swiper-slide"><%= image_tag "no-image.jpg" %></div>
+      <div class="swiper-slide"><%= image_tag "no-image.jpg" %></div>
+      <div class="swiper-slide"><%= image_tag "no-image.jpg" %></div>
+      <div class="swiper-slide"><%= image_tag "no-image.jpg" %></div>
     <% end %>
   </div>
   <div class="swiper-pagination"></div>
