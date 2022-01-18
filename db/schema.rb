@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_17_150707) do
-
+ActiveRecord::Schema.define(version: 2022_01_18_034956) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id"
