@@ -1,6 +1,6 @@
 <% post_comments.each do |comment| %>
   <tr>
-    <td><%= attachment_image_tag comment.user, :profile_image, fallback: "no-image.jpg", class: "profile_image_sm" %></td>
+    <td><%= attachment_image_tag comment.user, :profile_image, fallback: "no-image.jpg", class: "profile-image-sm" %></td>
     <td class="comment-text">
       <%= link_to comment.user.name, user_path(comment.user) %>
       <%= simple_format comment.comment %>

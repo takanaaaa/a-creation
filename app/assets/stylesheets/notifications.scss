@@ -9,6 +9,10 @@
 
     .table {
         margin-top: 15px;
+        
+        .profile-image-sm {
+            @extend .profile-img-sm-style;
+        }
 
         .notice-text a:nth-child(2) {
             color: $blue;
