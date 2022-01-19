@@ -14,8 +14,8 @@
         <p class="card-text", id="text-hidden-2">
           <%= post.body %>
         </p>
-        <div class="pt-3">
-          <%= link_to user_path(post.user), class: "text-dark" do %>
+        <div class="user-text">
+          <%= link_to user_path(post.user) do %>
             <%= attachment_image_tag post.user, :profile_image, fallback: "no-image.jpg", class: "profile-image-sm" %>
             <%= post.user.name %>
           <% end %>

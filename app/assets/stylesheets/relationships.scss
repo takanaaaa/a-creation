@@ -4,10 +4,6 @@
 
 @import "variables";
 
-.follow.container {
-  margin-top: 80px;
-
-   .profile-image-sm {
-    @extend .profile-img-sm-style;
-  }
-}
+  .profile-image-sm {
+   @extend .profile-img-sm-style;
+ }
