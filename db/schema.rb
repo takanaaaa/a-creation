@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_18_050436) do
+ActiveRecord::Schema.define(version: 2022_01_19_054623) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id"
@@ -94,6 +94,10 @@ ActiveRecord::Schema.define(version: 2022_01_18_050436) do
     t.datetime "updated_at", null: false
     t.boolean "checked", default: false, null: false
     t.integer "visiter_id"
+    t.integer "group_id"
+    t.integer "message_id"
+    t.index ["group_id"], name: "index_notifications_on_group_id"
+    t.index ["message_id"], name: "index_notifications_on_message_id"
     t.index ["post_comments_id"], name: "index_notifications_on_post_comments_id"
     t.index ["post_id"], name: "index_notifications_on_post_id"
     t.index ["visited_id"], name: "index_notifications_on_visited_id"

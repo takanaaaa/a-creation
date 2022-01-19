@@ -5,6 +5,10 @@
 @import "variables";
 
 .comments {
+  .profile-image-sm {
+    @extend .profile-img-sm-style;
+  }
+  
   .comment-text a {
     color: $gray;
   }

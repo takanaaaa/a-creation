@@ -2,7 +2,7 @@
   <tr>
     <td>
       <%= link_to user_path(notification.visiter.id) do %>
-        <%= attachment_image_tag notification.visiter, :profile_image, :fill,100,100, fallback: "no-image.jpg", size: "50x50", class: "profile_image_sm" %>
+        <%= attachment_image_tag notification.visiter, :profile_image, fallback: "no-image.jpg", class: "profile-image-sm" %>
       <% end %>
     </td>
     <td class="notice-text"><%= notification_form(notification) %></td>

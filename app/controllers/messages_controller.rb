@@ -10,6 +10,7 @@ class MessagesController < ApplicationController
     if @messages.count == 1
       redirect_back(fallback_location: root_path)
     end
+    @group.create_notification_message!(current_user, @message.id)
   end
 
   def index
