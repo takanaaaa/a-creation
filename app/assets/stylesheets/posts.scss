@@ -11,7 +11,26 @@
   .row {
     .post-field {
       .card {
-        width: 20rem;
+        width: 25rem;
+        cursor: default;
+
+        .user-text {
+          margin-top: 20px;
+          position: relative;
+          
+          a {
+            color: $gray;
+            
+            &:hover{
+              text-decoration: none;
+              opacity: .5;
+            }
+          }
+          
+          .date {
+            @extend .position-right-bottm 
+          }
+        }
 
         .post-setting {
           a {
@@ -37,7 +56,7 @@
       .overflow-auto {
         width: 100%;
         height: 450px;
-        padding: 30px;
+        padding: 10px;
         margin-bottom: 20px;
         background: $white;
       }
@@ -101,20 +120,40 @@
 
     .card {
       width: 15rem;
+      cursor: default;
 
       .card-img-top {
           height: 220px;
           object-fit: cover;
+          
+          &:hover {
+            opacity: .5;
+          }
       }
 
       .profile-image-sm {
         @extend .profile-img-sm-style;
       }
 
-      .card-body {
-        .date {
-          @extend .position-right-bottm;
+      .user-text {
+        margin-top: 20px;
+        position: relative;
+        
+        a {
+          color: $gray;
+          
+          &:hover{
+            text-decoration: none;
+            opacity: .5;
+          }
         }
+        
+        .date {
+          @extend .position-right-bottm 
+        }
+      }
+      .date {
+        @extend .position-right-bottm;
       }
     }
   }
