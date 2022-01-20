@@ -4,5 +4,7 @@ class HomesController < ApplicationController
       b.favorited_users.size <=> a.favorited_users.size
     end
     @top_images = images.first(5)
+    @posts = Post.first(4)
+    @categories = Category.first(6)
   end
 end

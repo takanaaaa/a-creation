@@ -25,5 +25,15 @@
   </div>
   <div class="swiper-pagination"></div>
 </div>
+<div class="about-field">
+  <div>
+    <div class="db"></div>
+    <%= render "posts/index", posts: @posts %>
+  </div>
+  <div>
+    <div class="db"></div>
+    <%= render "categories/index", categories: @categories %>
+  </div>
+</div>
 
 <%= javascript_include_tag 'swiper' %>
