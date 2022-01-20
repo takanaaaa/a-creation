@@ -4,7 +4,7 @@ class SearchesController < ApplicationController
     @range = params[:range]
     @word = params[:word]
     if @range == 'user'
-      @users = User.where("name LIKE?","%#{@word}%")
+      @users = User.where("name LIKE?","%#{@word}%").page(params[:page]).per(15)
       unless @users.present?
         flash[:notice] = "一致するユーザーがいませんでした"
         @users = User.page(params[:page]).per(15)
@@ -18,7 +18,7 @@ class SearchesController < ApplicationController
         @posts = Post.page(params[:page]).per(12)
       end
     else
-      @categories = Category.where("name LIKE?","%#{@word}%")
+      @categories = Category.where("name LIKE?","%#{@word}%").page(params[:page]).per(15)
       unless @categories.present?
         flash[:notice] = "一致するカテゴリーがありませんでした"
         @categories = Category.page(params[:page]).per(15)
