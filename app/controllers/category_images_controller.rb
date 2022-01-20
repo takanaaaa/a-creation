@@ -1,5 +1,4 @@
 class CategoryImagesController < ApplicationController
-
   def create
     category_image = CategoryImage.new(category_image_params)
     category = Category.find(params[:category_id])
@@ -10,6 +9,7 @@ class CategoryImagesController < ApplicationController
   end
 
   private
+
   def category_image_params
     params.require(:category_image).permit(:image)
   end

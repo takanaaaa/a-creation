@@ -17,20 +17,20 @@ class CategoriesController < ApplicationController
 
   def show
     @category_image = CategoryImage.new
-    @groups = Group.includes(:group_users).where(category_id: @category.id).sort{|a,b|
+    @groups = Group.includes(:group_users).where(category_id: @category.id).sort do |a, b|
       b.group_users.size <=> a.group_users.size
-    }
-    @category_images = CategoryImage.includes(:image_favorited_users).where(category_id: @category.id).sort{|a,b|
-      b.image_favorited_users.size <=> a.image_favorited_users.size
-    }
+    end
+    @category_images =
+      CategoryImage.includes(:favorited_users).where(category_id: @category.id).sort do |a, b|
+        b.favoriters.size <=> a.favorited_users.size
+      end
     @category_images = Kaminari.paginate_array(@category_images).page(params[:page]).per(15)
-
   end
 
   def index
-    @categories = Category.includes(:category_users).sort{|a,b|
+    @categories = Category.includes(:category_users).sort do |a, b|
       b.category_users.size <=> a.category_users.size
-    }
+    end
     @categories = Kaminari.paginate_array(@categories).page(params[:page]).per(12)
   end
 
@@ -58,6 +58,7 @@ class CategoriesController < ApplicationController
   end
 
   private
+
   def category_params
     params.require(:category).permit(:name, :introduction)
   end

@@ -50,6 +50,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
       before do
         visit posts_path
       end
+
       context '表示内容の確認' do
         it 'URLが正しい' do
           expect(current_path).to eq '/posts'
@@ -65,13 +66,12 @@ describe '[STEP2] ユーザログイン後のテスト' do
           expect(page).to have_content my_post.body
           expect(page).to have_content other_post.body
         end
-        it '自分の投稿と他人の投稿のタグが表示される' do
-          # expect(page).to have_content my_post.tags
-          # expect(page).to have_content other_post.tags
-        end
-        it '自分の投稿と他人の投稿のブックマークが表示される' do
-          #
-        end
+        # it '投稿のタグが表示される' do
+        #   expect(page).to have_content my_post.tags
+        #   expect(page).to have_content other_post.tags
+        # end
+        # it '投稿のブックマークが表示される' do
+        # end
         it '新規投稿のリンクが存在する' do
           expect(page).to have_link '', href: new_post_path
         end
@@ -81,17 +81,17 @@ describe '[STEP2] ユーザログイン後のテスト' do
       end
 
       context '投稿一覧リンクのテスト' do
-        it 'ユーザー画像をクリックするとプロフィール画面へ遷移する' do
+        it '投稿画像をクリックすると投稿詳細画面へ遷移する' do
           page.all('a')[11].click
           expect(current_path).to eq '/posts/' + my_post.id.to_s
         end
-        it 'ユーザーの名前をクリックするとプロフィール画面へ遷移する' do
+        it 'ユーザをクリックするとユーザ詳細画面へ遷移する' do
           click_link my_post.user.name
           expect(current_path).to eq '/users/' + user.id.to_s
         end
-        it '新規投稿クリックすると新規投稿画面へ遷移する' do
-          click_link my_post.user.name
-          expect(current_path).to eq '/users/' + user.id.to_s
+        it '新規投稿をクリックすると新規投稿画面へ遷移する' do
+          click_link '', href: new_post_path
+          expect(current_path).to eq '/postss/new'
         end
       end
 
@@ -100,6 +100,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
           visit new_post_path
           fill_in 'post[body]', with: Faker::Lorem.characters(number: 20)
         end
+
         it '自分の新しい投稿が正しく保存される' do
           expect { click_button '投稿' }.to change(user.posts, :count).by(1)
         end
@@ -114,6 +115,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
       before do
         visit post_path(my_post)
       end
+
       context '表示内容の確認' do
         it 'URLが正しい' do
           expect(current_path).to eq '/posts/' + my_post.id.to_s
@@ -140,6 +142,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
         before do
           click_link '削除'
         end
+
         it '正しく削除される' do
           expect(Post.where(id: my_post.id).count).to eq 0
         end
@@ -186,6 +189,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
       before do
         visit edit_post_path(my_post)
       end
+
       context '表示の確認' do
         it 'URLが正しい' do
           expect(current_path).to eq '/posts/' + my_post.id.to_s + '/edit'
@@ -204,6 +208,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
           fill_in 'post[body]', with: Faker::Lorem.characters(number: 20)
           click_button '更新'
         end
+
         it 'bodyが正しく更新される' do
           expect(my_post.reload.body).not_to eq @post_old_body
         end
@@ -222,6 +227,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
       before do
         visit users_path
       end
+
       context '表示内容の確認' do
         it 'URLが正しい' do
           expect(current_path).to eq '/users'
@@ -244,6 +250,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
       before do
         visit user_path(user)
       end
+
       context '表示の確認' do
         it 'URLが正しい' do
           expect(current_path).to eq '/users/' + user.id.to_s
@@ -307,6 +314,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
       before do
         visit edit_user_path(user)
       end
+
       context '表示の確認' do
         it 'URLが正しい' do
           expect(current_path).to eq '/users/' + user.id.to_s + '/edit'
@@ -317,10 +325,10 @@ describe '[STEP2] ユーザログイン後のテスト' do
         it '自己紹介編集フォームに自分の自己紹介文が表示される' do
           expect(page).to have_field 'user[profile]', with: user.profile
         end
-        it '画像編集フォームが表示される' do
+        it 'プロフィール画像編集が表示される' do
           expect(page).to have_field 'user[profile_image]'
         end
-        it '画像編集フォームが表示される' do
+        it 'ホーム画像編集フォームが表示される' do
           expect(page).to have_field 'user[home_image]'
         end
         it 'Update Userボタンが表示される' do
@@ -336,6 +344,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
           fill_in 'user[profile]', with: Faker::Lorem.characters(number: 19)
           click_button '更新'
         end
+
         it 'nameが正しく更新される' do
           expect(user.reload.name).not_to eq @user_old_name
         end
@@ -352,6 +361,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
       before do
         visit user_path(other_user)
       end
+
       context '表示の確認' do
         it 'URLが正しい' do
           expect(current_path).to eq '/users/' + other_user.id.to_s
@@ -363,9 +373,9 @@ describe '[STEP2] ユーザログイン後のテスト' do
           expect(page).to have_content other_user.profile
         end
         it 'followのリンク先が表示される' do
-          expect(page).to have_link '', href: '/follow/'+ other_user.id.to_s
+          expect(page).to have_link '', href: '/follow/' + other_user.id.to_s
         end
-        it 'unfollowのリンク先が表示される'do
+        it 'unfollowのリンク先が表示される' do
         end
         it '投稿一覧に他の人の投稿が表示され、リンクが表示される' do
           expect(page).to have_content other_post.body

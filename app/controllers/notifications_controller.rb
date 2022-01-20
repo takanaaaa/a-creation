@@ -1,5 +1,4 @@
 class NotificationsController < ApplicationController
-
   def index
     @user = User.find(params[:user_id])
     @notifications = current_user.passive_notifications
