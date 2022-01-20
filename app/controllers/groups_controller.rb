@@ -5,7 +5,7 @@ class GroupsController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    @groups =@user.groups.all
+    @groups = @user.groups.all
   end
 
   def new
@@ -58,6 +58,7 @@ class GroupsController < ApplicationController
   end
 
   private
+
   def group_params
     params.require(:group).permit(:name, :introduction)
   end
@@ -76,7 +77,7 @@ class GroupsController < ApplicationController
   def ensure_category_member
     group = Group.find(params[:id])
     unless group.category.users.include?(current_user)
-      flash[:notice] = "カテゴリー登録をしてください" 
+      flash[:notice] = "カテゴリー登録をしてください"
       redirect_to category_path(group.category)
     end
   end

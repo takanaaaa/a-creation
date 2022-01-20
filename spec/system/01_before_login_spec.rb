@@ -5,6 +5,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
     before do
       visit root_path
     end
+
     context '表示内容の確認' do
       it 'URLが正しい' do
         expect(current_path).to eq '/'
@@ -32,6 +33,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
     before do
       visit root_path
     end
+
     context '表示内容の確認' do
       it 'Mypageリンクが表示されない' do
         expect(page).not_to have_link 'Mypage'
@@ -55,6 +57,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
     before do
       visit new_user_registration_path
     end
+
     context '表示内容の確認' do
       it 'URLが正しい' do
         expect(current_path).to eq '/users/sign_up'
@@ -86,6 +89,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
         fill_in 'user[password]', with: 'password'
         fill_in 'user[password_confirmation]', with: 'password'
       end
+
       it '正しく新規登録される' do
         expect { click_button 'Sign up' }.to change(User.all, :count).by(1)
       end
@@ -94,6 +98,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
         expect(current_path).to eq '/users/' + User.last.id.to_s
       end
     end
+
     context '新規登録失敗のテスト' do
       before do
         fill_in 'user[name]', with: ''
@@ -102,6 +107,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
         fill_in 'user[password_confirmation]', with: ''
         click_button 'Sign up'
       end
+
       it '新規登録に失敗し、新規登録画面にリダイレクトされる' do
         expect(current_path).to eq '/users'
       end
@@ -110,9 +116,11 @@ describe '[STEP1] ユーザログイン前のテスト' do
 
   describe 'ユーザログイン' do
     let(:user) { create(:user) }
+
     before do
       visit new_user_session_path
     end
+
     context '表示内容の確認' do
       it 'URLが正しい' do
         expect(current_path).to eq '/users/sign_in'
@@ -140,16 +148,19 @@ describe '[STEP1] ユーザログイン前のテスト' do
         fill_in 'user[password]', with: user.password
         click_button 'Log in'
       end
+
       it 'ログイン後のリダイレクト先が、ログインしたユーザの詳細画面になっている' do
         expect(current_path).to eq '/users/' + user.id.to_s
       end
     end
+
     context 'ログイン失敗のテスト' do
       before do
         fill_in 'user[name]', with: ''
         fill_in 'user[password]', with: ''
         click_button 'Log in'
       end
+
       it 'ログインに失敗し、ログイン画面にリダイレクトされる' do
         expect(current_path).to eq '/users/sign_in'
       end
@@ -158,12 +169,14 @@ describe '[STEP1] ユーザログイン前のテスト' do
 
   describe 'ヘッダーのテスト: ログインしている場合' do
     let(:user) { create(:user) }
+
     before do
       visit new_user_session_path
       fill_in 'user[name]', with: user.name
       fill_in 'user[password]', with: user.password
       click_button 'Log in'
     end
+
     context 'ヘッダーの表示を確認' do
       it 'Mypageリンクが表示される: 左から1番目のリンクが「Mypage」である' do
         mypage_link = find_all('a')[0].native.inner_text
@@ -190,12 +203,14 @@ describe '[STEP1] ユーザログイン前のテスト' do
 
   describe 'ユーザログアウトのテスト' do
     let(:user) { create(:user) }
+
     before do
       visit new_user_session_path
       fill_in 'user[name]', with: user.name
       fill_in 'user[password]', with: user.password
       click_button 'Log in'
     end
+
     context 'ログアウト機能のテスト' do
       it 'ログアウト後のリダイレクト先が、トップになっている' do
         logout_link = find_all('a')[9].native.inner_text

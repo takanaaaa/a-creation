@@ -15,21 +15,21 @@ class Post < ApplicationRecord
   end
 
   def save_tag(sent_tags)
-    current_tags = self.tags.pluck(:name) unless self.tags.nil?
+    current_tags = tags.pluck(:name) unless tags.nil?
     old_tags = current_tags - sent_tags
     new_tags = sent_tags - current_tags
     old_tags.each do |old|
-      self.tags.delete Tag.find_by(name: old)
+      tags.delete Tag.find_by(name: old)
     end
     new_tags.each do |new|
       new_post_tag = Tag.find_or_create_by(name: new)
-      self.tags << new_post_tag
+      tags << new_post_tag
     end
   end
 
   def create_notification_comment!(current_user, comment_id)
     unless user_id == current_user.id
-    save_notification_comment!(current_user, comment_id, user_id)
+      save_notification_comment!(current_user, comment_id, user_id)
     end
   end
 
