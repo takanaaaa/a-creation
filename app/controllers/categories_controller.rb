@@ -17,7 +17,9 @@ class CategoriesController < ApplicationController
 
   def show
     @category_image = CategoryImage.new
-    @groups = Group.where(category_id: @category.id)
+    @groups = Group.includes(:group_users).where(category_id: @category.id).sort{|a,b|
+      b.group_users.size <=> a.group_users.size
+    }
     @category_images = CategoryImage.includes(:image_favorited_users).where(category_id: @category.id).sort{|a,b|
       b.image_favorited_users.size <=> a.image_favorited_users.size
     }
@@ -26,7 +28,10 @@ class CategoriesController < ApplicationController
   end
 
   def index
-    @categories = Category.all
+    @categories = Category.includes(:category_users).sort{|a,b|
+      b.category_users.size <=> a.category_users.size
+    }
+    @categories = Kaminari.paginate_array(@categories).page(params[:page]).per(12)
   end
 
   def edit
