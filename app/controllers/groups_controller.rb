@@ -76,6 +76,7 @@ class GroupsController < ApplicationController
   def ensure_category_member
     group = Group.find(params[:id])
     unless group.category.users.include?(current_user)
+      flash[:notice] = "カテゴリー登録をしてください" 
       redirect_to category_path(group.category)
     end
   end
