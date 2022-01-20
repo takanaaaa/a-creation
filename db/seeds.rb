@@ -88,14 +88,6 @@ CategoryUser.all.each do |category_user|
 end
 CategoryImage.create!(category_image_list)
 
-# 20.times do |n|
-# CategoryImage.create!(
-#   category_id: Faker::Number.between(from: 1, to: 30), 
-#   image: open("./app/assets/images/no-image.jpg"),
-#   user_id: Faker::Number.between(from: 1, to: 50),
-# )
-# end
-
 favorite_list = []
 CategoryImage.all.ids.each do |category_image_id|
   User.all.ids.each do |user_id|
@@ -108,13 +100,6 @@ CategoryImage.all.ids.each do |category_image_id|
   end
 end
 Favorite.create!(favorite_list)
-
-# 20.times do |n|
-# Favorite.create!(
-#   category_image_id: Faker::Number.between(from: 1, to: 20), 
-#   user_id: Faker::Number.between(from: 1, to: 50),
-# )
-# end
 
 60.times do |n|
 CategoryUser.create!(
@@ -133,15 +118,6 @@ CategoryUser.all.each do |category_user|
   }
 end
 Group.create!(group_list)
-
-# 20.times do |n|
-# Group.create!(
-#   name: "グループ名#{n + 1}",
-#   introduction: "グループ紹介#{n + 1}",
-#   category_id: Faker::Number.between(from: 1, to: 30),
-#   owner_id:  Faker::Number.between(from: 1, to: 50)
-# )
-# end
 
 group_user_list = []
 Category.all.each do |category|
