@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_054623) do
   end
 
   create_table "notifications", force: :cascade do |t|
+    t.integer "visiter_id"
     t.integer "visited_id"
     t.integer "post_id"
     t.integer "post_comments_id"
@@ -93,7 +94,6 @@ ActiveRecord::Schema.define(version: 2022_01_19_054623) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "checked", default: false, null: false
-    t.integer "visiter_id"
     t.integer "group_id"
     t.integer "message_id"
     t.index ["group_id"], name: "index_notifications_on_group_id"
