@@ -25,14 +25,54 @@
   </div>
   <div class="swiper-pagination"></div>
 </div>
-<div class="about-field">
-  <div>
-    <div class="db"></div>
-    <%= render "posts/index", posts: @posts %>
+<div class="down-arrow">
+  <%= link_to "#about-field" do %>
+    <p>ABOUT</p>
+    <i class="fas fa-chevron-down text-secondary"></i>
+  <% end %>
+</div>
+<div id="about-field" class="about container-fluid">
+  <div class="box">
+    <div class="bg"></div>
+    <div class="about-text">
+      <h4>POSTS</h4>
+      <p>
+        投稿して発信しよう!<br>
+        text text text text text text text text <br>
+        text text text text text text text text <br>
+        text text text text text text text text <br>
+        text text text text text text text text <br>
+        text text text text text text text text <br>
+        text text text text text text text text <br>
+      </p>
+    </div>
+    <div class="posts container-fluid">
+      <div class="row">
+      <%= render "posts/index", posts: @posts %>
+      </div>
+    </div>
   </div>
-  <div>
-    <div class="db"></div>
-    <%= render "categories/index", categories: @categories %>
+  <div class="box">
+    <div class="bg"></div>
+    <div class="about-text">
+      <h4>CATEGORIES</h4>
+      <p>
+        仲間と情報共有しよう!<br>
+        text text text text text text text text <br>
+        text text text text text text text text <br>
+        text text text text text text text text <br>
+        text text text text text text text text <br>
+        text text text text text text text text <br>
+        text text text text text text text text <br>
+      </p>
+    </div>
+    <div class="categories container-fluid">
+      <table class="table">
+        <tbody>
+          <%= render "categories/index", categories: @categories %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 

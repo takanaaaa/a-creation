@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!, except: [:top]
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :store_current_location, unless: :devise_or_homes_controller?
 
   protected
 
@@ -20,11 +21,11 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_up_path_for(resource)
-    user_path(current_user)
+    stored_location_for(resource) || user_path(current_user)
   end
 
   def after_sign_in_path_for(resource)
-    user_path(current_user)
+    stored_location_for(resource) || user_path(current_user)
   end
 
   def after_sign_out_path_for(resource)
@@ -34,5 +35,13 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email])
     devise_parameter_sanitizer.permit(:sign_in, keys: [:name])
+  end
+  
+  def store_current_location
+    store_location_for(:user, request.url)
+  end
+  
+  def devise_or_homes_controller?
+    devise_controller? || controller_name == 'homes'
   end
 end

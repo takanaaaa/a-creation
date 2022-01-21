@@ -5,9 +5,11 @@
         <%= attachment_image_tag post, :image, fallback: "no-image.jpg",  class: "card-img-top" %>
       <% end %>
       <div class="card-body">
-        <div id="bookmark-btn_<%= post.id %>">
-          <%= render "bookmarks/bookmark-btn", post: post %>
-        </div>
+        <% if action_name != "top" %>
+          <div id="bookmark-btn_<%= post.id %>">
+            <%= render "bookmarks/bookmark-btn", post: post %>
+          </div>
+        <% end %>
         <div class="tags" id="text-hidden-1">
           <%= render "posts/tag", post: post %>
         </div>
