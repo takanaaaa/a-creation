@@ -6,8 +6,10 @@
         <%= category.introduction %>
       </p>
     </td>
-    <td id="category-btn_<%= category.id %>" class="category-btn">
-      <%= render "categories/category-btn", category: category %>
-    </td>
+    <% if action_name != "top" %>
+      <td id="category-btn_<%= category.id %>" class="category-btn">
+        <%= render "categories/category-btn", category: category %>
+      </td>
+    <% end %>
   </tr>
 <% end %>
