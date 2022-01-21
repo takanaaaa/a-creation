@@ -7,7 +7,7 @@
 </div>
 <div class="swiper">
   <div class="swiper-wrapper">
-    <% if @top_images.nil? %>
+    <% if @top_images.present? %>
       <% @top_images.each do |image|%>
         <div class="swiper-slide">
           <%= link_to user_path(image.user) do %>
