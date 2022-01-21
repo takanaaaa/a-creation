@@ -22,7 +22,7 @@ class CategoriesController < ApplicationController
     end
     @category_images =
       CategoryImage.includes(:favorited_users).where(category_id: @category.id).sort do |a, b|
-        b.favoriters.size <=> a.favorited_users.size
+        b.favorited_users.size <=> a.favorited_users.size
       end
     @category_images = Kaminari.paginate_array(@category_images).page(params[:page]).per(15)
   end
