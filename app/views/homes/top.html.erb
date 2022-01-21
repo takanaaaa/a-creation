@@ -59,11 +59,13 @@
         text text text text text text text text <br>
       </p>
     </div>
-    <div class="posts container-fluid">
-      <div class="row">
-      <%= render "posts/index", posts: @posts %>
+    <% if @posts.present? %>
+      <div class="posts container-fluid">
+        <div class="row">
+        <%= render "posts/index", posts: @posts %>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
   <div class="box">
     <div class="bg"></div>
@@ -79,13 +81,15 @@
         text text text text text text text text <br>
       </p>
     </div>
-    <div class="categories container-fluid">
-      <table class="table">
-        <tbody>
-          <%= render "categories/index", categories: @categories %>
-        </tbody>
-      </table>
-    </div>
+    <% if @categories.present? %>
+      <div class="categories container-fluid">
+        <table class="table">
+          <tbody>
+            <%= render "categories/index", categories: @categories %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
   </div>
 </div>
 
