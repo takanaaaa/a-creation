@@ -12,6 +12,10 @@
         <i class="far fa-bookmark"></i>
         <p>Bookmark</p>
       <% end %>
+      <%= link_to user_groups_path(user.id), class: "nav-icon" do %>
+        <i class="fas fa-users"></i>
+        <p>Groups</p>
+      <% end %>
       <%= link_to user_notifications_path(user.id), class: "nav-icon" do %>
         <i class="far fa-clone"></i>
         <% if unchecked_notifications.any? %>
