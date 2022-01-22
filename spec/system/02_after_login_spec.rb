@@ -12,7 +12,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
   end
 
   describe 'ヘッダーのテスト: ログインしている場合' do
-    context 'リンクの内容を確認: ※logoutは『ユーザログアウトのテスト』でテスト済みになります。' do
+    context 'リンクの内容を確認: ※logoutは『ユーザログアウトのテスト』でテスト済み' do
       subject { current_path }
 
       it 'Mypageを押すと、自分のユーザ詳細画面に遷移する' do
@@ -41,8 +41,199 @@ describe '[STEP2] ユーザログイン後のテスト' do
       end
     end
   end
+  
+  describe 'ユーザー画面のテスト' do
+    let!(:my_post) { create(:post, user: user) }
+    let!(:other_post) { create(:post, user: other_user) }
 
-  describe '投稿のテスト' do
+    describe 'ユーザ一覧画面のテスト' do
+      before do
+        visit users_path
+      end
+
+      context '表示内容の確認' do
+        it 'URLが正しい' do
+          expect(current_path).to eq '/users'
+        end
+        it '自分と他人の画像が表示される: fallbackの画像が2つ存在する' do
+          expect(all('img').size).to eq(2)
+        end
+        it '自分と他人の名前がそれぞれ表示される' do
+          expect(page).to have_content user.name
+          expect(page).to have_content other_user.name
+        end
+        it '自分と他人のリンクがそれぞれ表示される' do
+          expect(page).to have_link '', href: user_path(user)
+          expect(page).to have_link '', href: user_path(other_user)
+        end
+      end
+    end
+
+    describe '自分のユーザ詳細画面のテスト' do
+      before do
+        visit user_path(user)
+      end
+
+      context '表示の確認' do
+        it 'URLが正しい' do
+          expect(current_path).to eq '/users/' + user.id.to_s
+        end
+        it '自分の名前が表示される' do
+          expect(page).to have_content user.name
+        end
+        it '自分のプロフィールが表示される' do
+          expect(page).to have_content user.profile
+        end
+        it 'followingのリンク先が表示される' do
+          expect(page).to have_link '', href: user_followings_path(user)
+        end
+        it 'followerのリンク先が表示される' do
+          expect(page).to have_link '', href: user_followers_path(user)
+        end
+        it 'bookmarkのリンク先が表示される' do
+          expect(page).to have_link '', href: user_bookmarks_path(user)
+        end
+        it 'groupsのリンク先が表示される' do
+          expect(page).to have_link '', href: user_groups_path(user)
+        end
+        it 'noticeのリンク先が表示される' do
+          expect(page).to have_link '', href: user_notifications_path(user)
+        end
+        it 'settingのリンク先が表示される' do
+          expect(page).to have_link '', href: edit_user_path(user)
+        end
+        it '投稿一覧に自分の投稿が表示され、リンクが表示される' do
+          expect(page).to have_content my_post.body
+          expect(page).to have_link '', href: post_path(my_post)
+        end
+        it '他人の投稿は表示されない' do
+          expect(page).not_to have_link '', href: post_path(other_post)
+          expect(page).not_to have_content other_post.body
+        end
+      end
+
+      context 'リンクのテスト' do
+        it 'following画面に遷移する' do
+          page.all(".nav-icon")[0].click
+          expect(current_path).to eq '/users/' + user.id.to_s + '/followings'
+        end
+        it 'follower画面に遷移する' do
+          page.all(".nav-icon")[1].click
+          expect(current_path).to eq '/users/' + user.id.to_s + '/followers'
+        end
+        it 'bookmark画面に遷移する' do
+          page.all(".nav-icon")[2].click
+          expect(current_path).to eq '/users/' + user.id.to_s + '/bookmarks'
+        end
+        it 'groups画面に遷移する' do
+          page.all(".nav-icon")[3].click
+          expect(current_path).to eq '/users/' + user.id.to_s + '/groups'
+        end
+        it 'notice画面に遷移する' do
+          page.all(".nav-icon")[4].click
+          expect(current_path).to eq '/users/' + user.id.to_s + '/notifications'
+        end
+        it 'setting画面に遷移する' do
+          page.all(".nav-icon")[5].click
+          expect(current_path).to eq '/users/' + user.id.to_s + '/edit'
+        end
+      end
+    end
+
+    describe '自分のユーザ情報編集画面のテスト' do
+      before do
+        visit edit_user_path(user)
+      end
+
+      context '表示の確認' do
+        it 'URLが正しい' do
+          expect(current_path).to eq '/users/' + user.id.to_s + '/edit'
+        end
+        it '名前編集フォームに自分の名前が表示される' do
+          expect(page).to have_field 'user[name]', with: user.name
+        end
+        it '自己紹介編集フォームに自分の自己紹介文が表示される' do
+          expect(page).to have_field 'user[profile]', with: user.profile
+        end
+        it 'プロフィール画像編集が表示される' do
+          expect(page).to have_field 'user[profile_image]'
+        end
+        it 'ホーム画像編集フォームが表示される' do
+          expect(page).to have_field 'user[home_image]'
+        end
+        it '更新ボタンが表示される' do
+          expect(page).to have_button '更新'
+        end
+      end
+
+      context '更新成功のテスト' do
+        before do
+          @user_old_name = user.name
+          @user_old_profile = user.profile
+          fill_in 'user[name]', with: Faker::Lorem.characters(number: 9)
+          fill_in 'user[profile]', with: Faker::Lorem.characters(number: 19)
+          click_button '更新'
+        end
+
+        it 'nameが正しく更新される' do
+          expect(user.reload.name).not_to eq @user_old_name
+        end
+        it 'profileが正しく更新される' do
+          expect(user.reload.profile).not_to eq @user_old_profile
+        end
+        it 'リダイレクト先が、自分のユーザ詳細画面になっている' do
+          expect(current_path).to eq '/users/' + user.id.to_s
+        end
+      end
+    end
+
+    describe '他の人のユーザ情報画面のテスト' do
+      before do
+        visit user_path(other_user)
+      end
+
+      context '表示の確認' do
+        it 'URLが正しい' do
+          expect(current_path).to eq '/users/' + other_user.id.to_s
+        end
+        it '他の人の名前が表示される' do
+          expect(page).to have_content other_user.name
+        end
+        it '他の人のプロフィールが表示される' do
+          expect(page).to have_content other_user.profile
+        end
+        it 'followのリンク先が表示される' do
+          expect(page).to have_link '', href: '/follow/' + other_user.id.to_s
+        end
+        it 'followingのリンク先が表示される' do
+          expect(page).to have_link '', href: user_followings_path(other_user)
+        end
+        it 'followerのリンク先が表示される' do
+          expect(page).to have_link '', href: user_followers_path(other_user)
+        end
+        it 'groupsのリンク先が表示される' do
+          expect(page).to have_link '', href: user_groups_path(other_user)
+        end
+        it '投稿一覧に他の人の投稿が表示され、リンクが表示される' do
+          expect(page).to have_content other_post.body
+          expect(page).to have_link '', href: post_path(other_post)
+        end
+        it '自分の投稿は表示されない' do
+          expect(page).not_to have_content my_post.body
+          expect(page).not_to have_link '', href: post_path(my_post)
+        end
+      end
+      # context 'フォローのテスト' do
+      #   it 'フォローをする' do
+      #     expect {
+      #       post '/follow/'+ otheruser.id.to_s, xhr: true
+      #     }.to change(user.follower, :count).by(1)
+      #   end
+      # end
+    end
+  end
+
+  describe '投稿画面のテスト' do
     let!(:my_post) { create(:post, user: user) }
     let!(:other_post) { create(:post, user: other_user) }
 
@@ -55,10 +246,10 @@ describe '[STEP2] ユーザログイン後のテスト' do
         it 'URLが正しい' do
           expect(current_path).to eq '/posts'
         end
-        it '自分と他人の投稿画像が表示される: fallbackの画像が2つ存在する' do
+        it '自分と他人の投稿画像が表示される: fallbackの画像が2つ表示される' do
           expect(all('.card-img-top').size).to eq(2)
         end
-        it '自分の投稿と他人の投稿の投稿者のリンク先がそれぞれ正しい' do
+        it '自分の投稿と他人の投稿の投稿者のリンク先がそれぞれ表示される' do
           expect(page).to have_link my_post.user.name, href: user_path(user)
           expect(page).to have_link other_post.user.name, href: user_path(other_user)
         end
@@ -72,7 +263,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
         # end
         # it '投稿のブックマークが表示される' do
         # end
-        it '新規投稿のリンクが存在する' do
+        it '新規投稿のリンクが表示される' do
           expect(page).to have_link '', href: new_post_path
         end
         it 'タグ検索フォームが表示される' do
@@ -80,18 +271,18 @@ describe '[STEP2] ユーザログイン後のテスト' do
         end
       end
 
-      context '投稿一覧リンクのテスト' do
-        it '投稿画像をクリックすると投稿詳細画面へ遷移する' do
-          page.all('a')[11].click
-          expect(current_path).to eq '/posts/' + my_post.id.to_s
-        end
+      context 'リンクのテスト' do
+        # it '投稿画像をクリックすると投稿詳細画面へ遷移する' do
+        #   click_on post.image
+        #   expect(current_path).to eq '/posts/' + my_post.id.to_s
+        # end
         it 'ユーザをクリックするとユーザ詳細画面へ遷移する' do
           click_link my_post.user.name
           expect(current_path).to eq '/users/' + user.id.to_s
         end
         it '新規投稿をクリックすると新規投稿画面へ遷移する' do
           click_link '', href: new_post_path
-          expect(current_path).to eq '/postss/new'
+          expect(current_path).to eq '/posts/new'
         end
       end
 
@@ -218,181 +409,153 @@ describe '[STEP2] ユーザログイン後のテスト' do
       end
     end
   end
-
-  describe 'ユーザー画面のテスト' do
-    let!(:my_post) { create(:post, user: user) }
-    let!(:other_post) { create(:post, user: other_user) }
-
-    describe 'ユーザ一覧画面のテスト' do
+  
+  describe 'カテゴリー画面のテスト' do
+    let!(:category) { create(:category) }
+    
+    describe 'カテゴリー一覧画面のテスト' do
       before do
-        visit users_path
+        visit categories_path
       end
-
-      context '表示内容の確認' do
+      
+      context '表示の確認' do
         it 'URLが正しい' do
-          expect(current_path).to eq '/users'
+          expect(current_path).to eq '/categories'
         end
-        it '自分と他人の画像が表示される: fallbackの画像が2つ存在する' do
-          expect(all('img').size).to eq(2)
+        it '新規作成のリンクが表示される' do
+          expect(page).to have_link '', href: new_category_path
         end
-        it '自分と他人の名前がそれぞれ表示される' do
-          expect(page).to have_content user.name
-          expect(page).to have_content other_user.name
+        it 'カテゴリー名が表示される' do
+          expect(page).to have_content category.name
         end
-        it '自分と他人のリンクがそれぞれ表示される' do
-          expect(page).to have_link '', href: user_path(user)
-          expect(page).to have_link '', href: user_path(other_user)
+        it 'カテゴリー紹介が表示される' do
+          expect(page).to have_content category.introduction
+        end
+        # it 'カテゴリーのリンク先が表示される' do
+        #   expect(page).to have_link '', onclick: "../categories/1"
+        # end
+        it 'カテゴリー登録ボタンが表示される' do
+          expect(page).to have_link '', href: category_join_path(category)
+        end
+        it 'カテゴリー検索フォームが表示される' do
+          expect(page).to have_field 'word'
         end
       end
     end
-
-    describe '自分のユーザ詳細画面のテスト' do
+    
+    describe '登録前のカテゴリー詳細画面のテスト' do
       before do
-        visit user_path(user)
+        visit category_path(category)
       end
-
+      
       context '表示の確認' do
         it 'URLが正しい' do
-          expect(current_path).to eq '/users/' + user.id.to_s
+          expect(current_path).to eq '/categories/' + category.id.to_s
         end
-        it '自分の名前が表示される' do
-          expect(page).to have_content user.name
+        it 'カテゴリー名が表示される' do
+          expect(page).to have_content category.name
         end
-        it '自分のプロフィールが表示される' do
-          expect(page).to have_link '', href: user_path(user)
+        it 'カテゴリー紹介が表示される' do
+          expect(page).to have_content category.introduction
         end
-        it 'followingのリンク先が表示される' do
-          expect(page).to have_link '', href: user_followings_path(user)
-        end
-        it 'followerのリンク先が表示される' do
-          expect(page).to have_link '', href: user_followers_path(user)
-        end
-        it 'bookmarkのリンク先が表示される' do
-          expect(page).to have_link '', href: user_bookmarks_path(user)
-        end
-        it 'noticeのリンク先が表示される' do
-          expect(page).to have_link '', href: notifications_path
-        end
-        it 'settingのリンク先が表示される' do
-          expect(page).to have_link '', href: edit_user_path(user)
-        end
-        it '投稿一覧に自分の投稿が表示され、リンクが表示される' do
-          expect(page).to have_content my_post.body
-          expect(page).to have_link '', href: post_path(my_post)
-        end
-        it '他人の投稿は表示されない' do
-          expect(page).not_to have_link '', href: post_path(other_post)
-          expect(page).not_to have_content other_post.body
-        end
-      end
-
-      context 'リンクのテスト' do
-        it 'following画面に遷移する' do
-          page.all(".mypage-nav-icon")[0].click
-          expect(current_path).to eq '/users/' + user.id.to_s + '/followings'
-        end
-        it 'follower画面に遷移する' do
-          page.all(".mypage-nav-icon")[1].click
-          expect(current_path).to eq '/users/' + user.id.to_s + '/followers'
-        end
-        it 'bookmark画面に遷移する' do
-          page.all(".mypage-nav-icon")[2].click
-          expect(current_path).to eq '/users/' + user.id.to_s + '/bookmarks'
-        end
-        it 'notice画面に遷移する' do
-          page.all(".mypage-nav-icon")[3].click
-          expect(current_path).to eq '/notifications'
-        end
-        it 'setting画面に遷移する' do
-          page.all(".mypage-nav-icon")[4].click
-          expect(current_path).to eq '/users/' + user.id.to_s + '/edit'
+        it 'カテゴリー登録ボタンが表示される' do
+          expect(page).to have_link '', href: category_join_path(category)
         end
       end
     end
-
-    describe '自分のユーザ情報編集画面のテスト' do
+    
+    describe '登録後のカテゴリー詳細画面のテスト' do
+      let!(:category_user) { create(:category_user, user: user, category: category) }
+      
       before do
-        visit edit_user_path(user)
+        visit category_path(category)
       end
-
+      
       context '表示の確認' do
-        it 'URLが正しい' do
-          expect(current_path).to eq '/users/' + user.id.to_s + '/edit'
+        it 'カテゴリー編集画面のリンクが表示される' do
+          expect(page).to have_link '', href: edit_category_path(category)
         end
-        it '名前編集フォームに自分の名前が表示される' do
-          expect(page).to have_field 'user[name]', with: user.name
+        it 'グループ新規作成のリンクが表示される' do
+          expect(page).to have_link '', href: new_category_group_path(category) 
         end
-        it '自己紹介編集フォームに自分の自己紹介文が表示される' do
-          expect(page).to have_field 'user[profile]', with: user.profile
+        it 'カテゴリー画像追加フォームが表示される' do
+          expect(page).to have_field 'category_image[image]'
         end
-        it 'プロフィール画像編集が表示される' do
-          expect(page).to have_field 'user[profile_image]'
-        end
-        it 'ホーム画像編集フォームが表示される' do
-          expect(page).to have_field 'user[home_image]'
-        end
-        it 'Update Userボタンが表示される' do
-          expect(page).to have_button '更新'
-        end
-      end
-
-      context '更新成功のテスト' do
-        before do
-          @user_old_name = user.name
-          @user_old_profile = user.profile
-          fill_in 'user[name]', with: Faker::Lorem.characters(number: 9)
-          fill_in 'user[profile]', with: Faker::Lorem.characters(number: 19)
-          click_button '更新'
-        end
-
-        it 'nameが正しく更新される' do
-          expect(user.reload.name).not_to eq @user_old_name
-        end
-        it 'profileが正しく更新される' do
-          expect(user.reload.profile).not_to eq @user_old_profile
-        end
-        it 'リダイレクト先が、自分のユーザ詳細画面になっている' do
-          expect(current_path).to eq '/users/' + user.id.to_s
+        it 'カテゴリー画像追加ボタンが表示される' do
+          expect(page).to have_button '追加'
         end
       end
     end
-
-    describe '他の人のユーザ情報画面のテスト' do
-      before do
-        visit user_path(other_user)
+  end
+  
+  describe 'グループ画面のテスト' do
+    let!(:category) { create(:category) }
+    let!(:category_user) { create(:category_user, user: user, category: category) }
+    let!(:group) { create(:group, category: category) }
+    
+    describe 'グループ参加前のグループ詳細画面のテスト' do
+       before do
+        visit group_path(group)
       end
-
+      
       context '表示の確認' do
         it 'URLが正しい' do
-          expect(current_path).to eq '/users/' + other_user.id.to_s
+          expect(current_path).to eq '/groups/' + group.id.to_s
         end
-        it '他の人の名前が表示される' do
-          expect(page).to have_content other_user.name
+        it 'グループ名が表示される' do
+          expect(page).to have_content group.name
         end
-        it '他の人のプロフィールが表示される' do
-          expect(page).to have_content other_user.profile
+        it 'グループ紹介が表示される' do
+          expect(page).to have_content group.introduction
         end
-        it 'followのリンク先が表示される' do
-          expect(page).to have_link '', href: '/follow/' + other_user.id.to_s
-        end
-        it 'unfollowのリンク先が表示される' do
-        end
-        it '投稿一覧に他の人の投稿が表示され、リンクが表示される' do
-          expect(page).to have_content other_post.body
-          expect(page).to have_link '', href: post_path(other_post)
-        end
-        it '自分の投稿は表示されない' do
-          expect(page).not_to have_content my_post.body
-          expect(page).not_to have_link '', href: post_path(my_post)
+        it 'グループ参加ボタンが表示される' do
+          expect(page).to have_link '', href: group_join_path(group)
         end
       end
-      # context 'フォローのテスト' do
-      #   it 'フォローをする' do
-      #     expect {
-      #       post '/follow/'+ otheruser.id.to_s, xhr: true
-      #     }.to change(user.follower, :count).by(1)
-      #   end
-      # end
+    end
+    
+    describe 'グループ参加後のグループ詳細画面のテスト' do
+      let!(:group_user) { create(:group_user, user: user, group: group) }
+      
+      before do
+        visit group_path(group)
+      end
+      
+      context '表示の確認' do
+        it 'チャットへボタンが表示される' do
+          expect(page).to have_link '', href: group_messages_path(group)
+        end
+        it 'グループ退出ボタンが表示される' do
+          expect(page).to have_link '', href: group_leave_path(group)
+        end
+        it 'グループメンバーに自分のアカウント名と画像が表示される: fallbackの画像が1つ存在する' do
+          expect(all('img').size).to eq(1)
+          expect(page).to have_link user.name, href: user_path(user)
+        end
+      end
+    end
+  end
+  
+  describe 'チャット画面のテスト' do
+    let!(:category) { create(:category) }
+    let!(:category_user) { create(:category_user, user: user, category: category) }
+    let!(:group) { create(:group, category: category) }
+    let!(:group_user) { create(:group_user, user: user, group: group) }
+    
+    before do
+      visit group_messages_path(group)
+    end
+    
+    context '表示の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/groups/' + group.id.to_s + '/messages'
+      end
+      it 'messageフォームが表示されている' do
+        expect(page).to have_field 'message[content]'
+      end
+      it '送信ボタンが表示される' do
+        expect(page).to have_button '送信'
+      end
     end
   end
 end
