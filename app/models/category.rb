@@ -7,6 +7,7 @@ class Category < ApplicationRecord
   validates :name, presence: true, uniqueness: true, length: { in: 2..20, allow_blank: true }
   validates :introduction, presence: true, length: { in: 2..200, allow_blank: true }
 
+  # カテゴリー登録されているか確かめる
   def category_user?(user)
     category_users.where(user_id: user.id).exists?
   end

@@ -8,6 +8,7 @@ class CategoryImage < ApplicationRecord
 
   validates :image, presence: true
 
+  # いいねされているか確かめる
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end

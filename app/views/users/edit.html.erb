@@ -2,23 +2,23 @@
   <div class="col-md-8 offset-md-2">
     <%= render "layouts/errors", obj: @user %>
     <%= form_with model:@user, local:true do |f| %>
-      <div class="user-edit form-group">
+      <div class="user-setting form-group">
         <%= f.label :名前 %>
         <%= f.text_field :name, class: "form-control" %>
       </div>
-      <div class="user-edit form-group">
+      <div class="user-setting form-group">
         <%= f.label :プロフィール %>
         <%= f.text_area :profile, class: "form-control" %>
       </div>
-      <div class="user-edit form-group item-image">
+      <div class="user-setting form-group item-image">
         <%= f.label :プロフィール画像 %>
         <%= f.attachment_field :profile_image, class: "form-control" %>
       </div>
-      <div class="user-edit form-group">
+      <div class="user-setting form-group">
         <%= f.label :背景画像 %>
         <%= f.attachment_field :home_image, class: "form-control" %>
       </div>
-      <div class="user-edit form-group">
+      <div class="user-setting form-group">
         <%= f.submit "更新" %>
       </div>
     <% end %>
