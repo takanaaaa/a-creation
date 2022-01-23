@@ -4,8 +4,8 @@ class Group < ApplicationRecord
   has_many :messages, dependent: :destroy
   belongs_to :category
 
-  validates :name, presence: true
-  validates :introduction, presence: true
+  validates :name, presence: true, length: { in: 2..20, allow_blank: true }
+  validates :introduction, presence: true, length: { in: 2..100, allow_blank: true }
 
   def group_member?(user)
     group_users.where(user_id: user.id).exists?
@@ -13,7 +13,7 @@ class Group < ApplicationRecord
 
   def create_notification_message!(current_user, message_id)
     member_ids =
-      Message.select(:user_ids).where(group_id: id).where.not(user_id: current_user.id).distinct
+      Message.select(:user_id).where(group_id: id).where.not(user_id: current_user.id).distinct
     member_ids.each do |memder_id|
       save_notification_message!(current_user, message_id, memder_id['user_id'])
     end

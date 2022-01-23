@@ -37,6 +37,7 @@
           </tbody>
         </table>
       </div>
+      <%= render "layouts/errors", obj: @post_comment %>
       <%= form_with model:[@post, @post_comment], remote:true do |f| %>
         <div class="form-group">
           <%= f.text_area :comment, rows: '3', placeholder: "コメントをここに", class: "form-control" %>
