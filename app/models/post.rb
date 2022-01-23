@@ -8,7 +8,7 @@ class Post < ApplicationRecord
 
   attachment :image
 
-  validates :body, presence: true, length: { minimum: 2, allow_blank: true }
+  validates :body, presence: true, length: { in: 2..300, allow_blank: true }
 
   def bookmarked_by?(user)
     bookmarks.where(user_id: user.id).exists?
