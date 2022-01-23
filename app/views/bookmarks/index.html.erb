@@ -1,6 +1,10 @@
 <div class="posts container-fluid">
-  <div class="row", style="margin: 0 auto;">
-    <%= render "posts/index", posts: @bookmark_list %>
-  </div>
+  <% if @bookmark_list.present? %>
+    <div class="row", style="margin: 0 auto;">
+      <%= render "posts/index", posts: @bookmark_list %>
+    </div>
+  <% else %>
+    ブックマークした投稿はありません。
+  <% end %>
   <%= render "users/nav-icons", user: @user %>
 </div>
