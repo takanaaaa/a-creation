@@ -1,11 +1,15 @@
 <div class="users container">
   <div class="row">
     <div class="col-md-8 offset-md-2">
-      <table class="table">
-        <tbody>
-          <%= render "users/index", users: @users %>
-        </tbody>
-      </table>
+      <% if @users.exists? %>
+        <table class="table">
+          <tbody>
+            <%= render "users/index", users: @users %>
+          </tbody>
+        </table>
+      <% else %>
+        フォローしているユーザーはいません。
+      <% end %>
     </div>
   </div>
   <%= render "users/nav-icons", user: @user %>
