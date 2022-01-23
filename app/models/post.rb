@@ -9,11 +9,12 @@ class Post < ApplicationRecord
   attachment :image
 
   validates :body, presence: true, length: { in: 2..300, allow_blank: true }
-
+  
+  #ブックマークされているか確かめる
   def bookmarked_by?(user)
     bookmarks.where(user_id: user.id).exists?
   end
-
+  #タグが新しい場合を保存する
   def save_tag(sent_tags)
     current_tags = tags.pluck(:name) unless tags.nil?
     old_tags = current_tags - sent_tags
@@ -26,7 +27,7 @@ class Post < ApplicationRecord
       tags << new_post_tag
     end
   end
-
+  # コメントされた時にコメント通知を保存する
   def create_notification_comment!(current_user, comment_id)
     unless user_id == current_user.id
       save_notification_comment!(current_user, comment_id, user_id)

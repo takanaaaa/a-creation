@@ -4,6 +4,7 @@
 
 @import "variables";
 
+//messages/index メッセージ一覧画面
 .messages.container {
   margin-top: 50px;
 
@@ -36,7 +37,8 @@
       }
     }
   }
-
+  
+  //メッセージフォーム
   .form-control.btn {
     @extend .btn-style;
     display: block;

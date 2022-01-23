@@ -27,7 +27,7 @@
    background: $mainColor;
  }
 
-// navbarレイアウト
+// navbarのレイアウト
  header {
   display: flex;
 
@@ -41,7 +41,7 @@
       margin: 0;
     }
   }
-
+  // PC画面でのnavbar
   .pc-menu {
     display: none;
     width: 100%;
@@ -96,7 +96,7 @@
       }
     }
   }
-
+  // 小さい画面のnavbar
   .phone-menu {
     margin-left: auto;
 
@@ -110,7 +110,7 @@
       }
     }
   }
-
+  // ハンバーガメニュー内のnav
   .overlay {
     position: fixed;
     top: 0;
@@ -197,6 +197,7 @@
   }
 }
 
+//フッターのレイアウト
  footer {
   height: 100px;
  }
