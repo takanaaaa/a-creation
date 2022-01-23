@@ -45,6 +45,10 @@ describe '[STEP2] ユーザログイン後のテスト' do
   describe 'ユーザー画面のテスト' do
     let!(:my_post) { create(:post, user: user) }
     let!(:other_post) { create(:post, user: other_user) }
+    let!(:my_tag) { create(:tag) }
+    let!(:other_tag) { create(:tag) }
+    let!(:my_tag_map) { create(:tag_map, tag: my_tag, post: my_post) }
+    let!(:other_tag_map) { create(:tag_map, tag: other_tag, post: other_post) }
 
     describe 'ユーザ一覧画面のテスト' do
       before do
@@ -58,13 +62,19 @@ describe '[STEP2] ユーザログイン後のテスト' do
         it '自分と他人の画像が表示される: fallbackの画像が2つ存在する' do
           expect(all('img').size).to eq(2)
         end
-        it '自分と他人の名前がそれぞれ表示される' do
-          expect(page).to have_content user.name
-          expect(page).to have_content other_user.name
+        it '自分と他人の名前(+リンク)がそれぞれ表示される' do
+          expect(page).to have_link user.name, href: user_path(user)
+          expect(page).to have_link other_user.name, href: user_path(other_user)
         end
-        it '自分と他人のリンクがそれぞれ表示される' do
-          expect(page).to have_link '', href: user_path(user)
-          expect(page).to have_link '', href: user_path(other_user)
+        it '自分と他人のプロフィールがそれぞれ表示される' do
+          expect(page).to have_content user.profile
+          expect(page).to have_content other_user.profile
+        end
+        it '他人のfollowボタンが表示される' do
+          expect(page).to have_link '', href: '/follow/' + other_user.id.to_s
+        end
+        it 'ユーザ検索フォームが表示される' do
+          expect(page).to have_field 'word'
         end
       end
     end
@@ -187,7 +197,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
       end
     end
 
-    describe '他の人のユーザ情報画面のテスト' do
+    describe '他の人のユーザ詳細画面のテスト' do
       before do
         visit user_path(other_user)
       end
@@ -202,7 +212,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
         it '他の人のプロフィールが表示される' do
           expect(page).to have_content other_user.profile
         end
-        it 'followのリンク先が表示される' do
+        it 'followボタンが表示される' do
           expect(page).to have_link '', href: '/follow/' + other_user.id.to_s
         end
         it 'followingのリンク先が表示される' do
@@ -231,11 +241,74 @@ describe '[STEP2] ユーザログイン後のテスト' do
       #   end
       # end
     end
+    
+    describe 'ブックマーク一覧画面のテスト' do
+      let!(:bookmark) {create(:bookmark, user: user, post: other_post)}
+      
+      before do
+        visit user_bookmarks_path(user)
+      end
+      
+      context '表示の確認' do
+        it 'URLの確認' do
+          expect(current_path).to eq '/users/' + user.id.to_s + '/bookmarks'
+        end
+        it '他人の投稿画像が表示される: fallbackの画像が1つ表示される' do
+          expect(all('.card-img-top').size).to eq(1)
+        end
+        it '他人の投稿の投稿者とリンク先が表示される' do
+          expect(page).to have_link other_post.user.name, href: user_path(other_user)
+        end
+        it '他人の投稿の本文が表示される' do
+          expect(page).to have_content other_post.body
+        end
+        it 'ブックマークボタンが表示される' do
+          expect(page).to have_link '', href: post_bookmarks_path(other_post)
+        end
+        it 'タグ名とリンクが表示される' do
+          expect(page).to have_content other_tag.name
+          expect(page).to have_link '', href: tag_post_path(other_tag)
+        end
+        it '投稿日が表示される' do
+          have_content(Time.current.strftime('%Y-%m-%d'))
+        end
+      end
+    end
+    
+    describe 'ユーザ検索画面のテスト' do
+      before do
+        visit users_path
+        fill_in 'word', with: other_user.name
+        click_button ''
+      end
+      
+      context 'ユーザ検索結果画面の表示の確認' do
+        it 'URLが正しい' do
+          expect(current_path).to eq '/search'
+        end
+        it '自分の画像が表示される: fallbackの画像が1つ存在する' do
+          expect(all('img').size).to eq(1)
+        end
+        it '自分の名前が表示される' do
+          expect(page).to have_link other_user.name, href: user_path(other_user)
+        end
+        it '自分のプロフィールが表示される' do
+          expect(page).to have_content other_user.profile
+        end
+        it 'followボタンが表示される' do
+          expect(page).to have_link '', href: '/follow/' + other_user.id.to_s
+        end
+      end
+    end
   end
 
   describe '投稿画面のテスト' do
     let!(:my_post) { create(:post, user: user) }
     let!(:other_post) { create(:post, user: other_user) }
+    let!(:my_tag) { create(:tag) }
+    let!(:other_tag) { create(:tag) }
+    let!(:my_tag_map) { create(:tag_map, tag: my_tag, post: my_post) }
+    let!(:other_tag_map) { create(:tag_map, tag: other_tag, post: other_post) }
 
     describe '投稿一覧画面のテスト' do
       before do
@@ -257,14 +330,27 @@ describe '[STEP2] ユーザログイン後のテスト' do
           expect(page).to have_content my_post.body
           expect(page).to have_content other_post.body
         end
-        # it '投稿のタグが表示される' do
-        #   expect(page).to have_content my_post.tags
-        #   expect(page).to have_content other_post.tags
-        # end
-        # it '投稿のブックマークが表示される' do
-        # end
+        it 'ブックマークボタンが表示される' do
+          expect(page).to have_link '', href: post_bookmarks_path(my_post)
+          expect(page).to have_link '', href: post_bookmarks_path(other_post)
+        end
+        it 'タグ名とリンクが表示される' do
+          expect(page).to have_content my_tag.name
+          expect(page).to have_link '', href: tag_post_path(my_tag)
+          expect(page).to have_content other_tag.name
+          expect(page).to have_link '', href: tag_post_path(other_tag)
+        end
+        it '投稿日が表示される' do
+          expect(page).to have_content(Time.current.strftime('%Y-%m-%d'))
+        end
         it '新規投稿のリンクが表示される' do
           expect(page).to have_link '', href: new_post_path
+        end
+        it '新着順ボタンが表示される' do
+          expect(page).to have_link '', href: posts_path(sort: "newArrival") 
+        end
+        it '人気順ボタンが表示される' do
+          expect(page).to have_link '', href: posts_path(sort: "newArrival") 
         end
         it 'タグ検索フォームが表示される' do
           expect(page).to have_field 'word'
@@ -320,6 +406,12 @@ describe '[STEP2] ユーザログイン後のテスト' do
         it '投稿の削除リンクが表示される' do
           expect(page).to have_link '削除', href: post_path(my_post)
         end
+        it 'commentフォームが表示されている' do
+          expect(page).to have_field 'post_comment[comment]'
+        end
+        it '送信ボタンが表示される' do
+          expect(page).to have_button '送信'
+        end
       end
 
       context '編集リンクのテスト' do
@@ -343,15 +435,6 @@ describe '[STEP2] ユーザログイン後のテスト' do
       end
 
       context 'コメントのテスト' do
-        context '表示の確認' do
-          it 'commentフォームが表示されている' do
-            expect(page).to have_field 'post_comment[comment]'
-          end
-          it '送信ボタンが表示される' do
-            expect(page).to have_button '送信'
-          end
-        end
-
         # it 'コメントが正常の投稿されること' do
         #   expect {
         #     fill_in 'post_comment[comment]', with: "コメントテスト"
@@ -375,8 +458,59 @@ describe '[STEP2] ユーザログイン後のテスト' do
         # end
       end
     end
+    
+    describe '他人の投稿詳細画面のテスト' do
+      before do
+        visit post_path(other_post)
+      end
 
-    describe '自分の投稿編集画面のテスト' do
+      context '表示内容の確認' do
+        it 'URLが正しい' do
+          expect(current_path).to eq '/posts/' + other_post.id.to_s
+        end
+        it '投稿のbodyが表示される' do
+          expect(page).to have_content other_post.body
+        end
+        it '投稿の編集リンクが表示される' do
+          expect(page).not_to have_link '編集', href: edit_post_path(other_post)
+        end
+        it '投稿の削除リンクが表示される' do
+          expect(page).not_to have_link '削除', href: post_path(other_post)
+        end
+        it 'commentフォームが表示されている' do
+          expect(page).to have_field 'post_comment[comment]'
+        end
+        it '送信ボタンが表示される' do
+          expect(page).to have_button '送信'
+        end
+      end
+    end
+
+    describe '新規投稿画面のテスト' do
+      before do
+        visit new_post_path
+      end
+
+      context '表示の確認' do
+        it 'URLが正しい' do
+          expect(current_path).to eq '/posts/new'
+        end
+        it '本文編集フォームが表示される' do
+          expect(page).to have_field 'post[body]'
+        end
+        it 'タグ編集フォームが表示される' do
+          expect(page).to have_field 'post[tag_name]'
+        end
+        it '画像編集フォームが表示される' do
+          expect(page).to have_field 'post[image]'
+        end
+        it '投稿ボタンが表示される' do
+          expect(page).to have_button '投稿'
+        end
+      end
+    end
+    
+    describe '投稿編集画面のテスト' do
       before do
         visit edit_post_path(my_post)
       end
@@ -385,8 +519,14 @@ describe '[STEP2] ユーザログイン後のテスト' do
         it 'URLが正しい' do
           expect(current_path).to eq '/posts/' + my_post.id.to_s + '/edit'
         end
-        it 'body編集フォームが表示される' do
+        it '本文編集フォームが表示される' do
           expect(page).to have_field 'post[body]', with: my_post.body
+        end
+        it 'タグ編集フォームが表示される' do
+          expect(page).to have_field 'post[tag_name]', with: my_tag.name
+        end
+        it '画像編集フォームが表示される' do
+          expect(page).to have_field 'post[image]'
         end
         it '更新ボタンが表示される' do
           expect(page).to have_button '更新'
@@ -405,6 +545,39 @@ describe '[STEP2] ユーザログイン後のテスト' do
         end
         it 'リダイレクト先が、更新した投稿の詳細画面になっている' do
           expect(current_path).to eq '/posts/' + my_post.id.to_s
+        end
+      end
+    end
+    
+    describe 'タグ検索画面のテスト' do
+      before do
+        visit posts_path
+        fill_in 'word', with: my_tag.name
+        click_button ''
+      end
+      
+      context 'タグ検索結果画面の表示の確認' do
+        it 'URLが正しい' do
+          expect(current_path).to eq '/search'
+        end
+        it '自分の投稿画像が表示される: fallbackの画像が1つ表示される' do
+          expect(all('.card-img-top').size).to eq(1)
+        end
+        it '自分の名前(+リンク)が表示される' do
+          expect(page).to have_link my_post.user.name, href: user_path(user)
+        end
+        it '自分の投稿と他人の投稿の本文が表示される' do
+          expect(page).to have_content my_post.body
+        end
+        it 'ブックマークボタンが表示される' do
+          expect(page).to have_link '', href: post_bookmarks_path(my_post)
+        end
+        it 'タグ名とリンクが表示される' do
+          expect(page).to have_content my_tag.name
+          expect(page).to have_link '', href: tag_post_path(my_tag)
+        end
+        it '投稿日が表示される' do
+          expect(page).to have_content(Time.current.strftime('%Y-%m-%d'))
         end
       end
     end
@@ -486,6 +659,29 @@ describe '[STEP2] ユーザログイン後のテスト' do
         end
       end
     end
+    
+    describe 'カテゴリー検索画面のテスト' do
+      before do
+        visit categories_path
+        fill_in 'word', with: category.name
+        click_button ''
+      end
+      
+      context 'カテゴリー検索結果画面の表示の確認' do
+        it 'URLが正しい' do
+          expect(current_path).to eq '/search'
+        end
+       it 'カテゴリー名が表示される' do
+          expect(page).to have_content category.name
+        end
+        it 'カテゴリー紹介が表示される' do
+          expect(page).to have_content category.introduction
+        end
+        it 'カテゴリー登録ボタンが表示される' do
+          expect(page).to have_link '', href: category_join_path(category)
+        end
+      end
+    end
   end
   
   describe 'グループ画面のテスト' do
@@ -531,6 +727,29 @@ describe '[STEP2] ユーザログイン後のテスト' do
         it 'グループメンバーに自分のアカウント名と画像が表示される: fallbackの画像が1つ存在する' do
           expect(all('img').size).to eq(1)
           expect(page).to have_link user.name, href: user_path(user)
+        end
+      end
+    end
+    
+    describe 'グループ一覧画面のテスト' do
+      let!(:group_user) { create(:group_user, user: user, group: group) }
+      
+      before do
+        visit user_groups_path(user)
+      end
+      
+      context '表示の確認' do
+        it 'URLが正しい' do
+          expect(current_path).to eq '/users/' + user.id.to_s + '/groups'
+        end
+        it 'カテゴリー名が表示される' do
+          expect(page).to have_content category.name
+        end
+        it 'グループ名が表示される' do
+          expect(page).to have_content group.name
+        end
+        it 'グループ紹介が表示される' do
+          expect(page).to have_content group.introduction
         end
       end
     end
