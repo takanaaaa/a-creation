@@ -6,5 +6,6 @@
   <% else %>
     ブックマークした投稿はありません。
   <% end %>
-  <%= render "users/nav-icons", user: @user %>
+  <%= paginate @bookmark_list %>
 </div>
+<%= render "users/nav-icons", user: @user %>

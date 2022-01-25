@@ -15,7 +15,7 @@
     height: 100%;
 
     &.image {
-      height: 85%;
+      height: 95%;
       position: fixed;
       object-fit: cover;
       opacity: .5;
@@ -66,7 +66,6 @@
       }
     }
   }
-
 }
 
   // ユーザ詳細アイコン
@@ -75,10 +74,11 @@
     @extend .userpage-icons;
     display: flex;
     justify-content: center;
-    gap: 70px;
+    gap: 50px;
     padding: 15px;
     right: 0;
     left: 0;
+    z-index: 4;
 
     .nav-icon {
       @extend .userpage-icon;
@@ -148,6 +148,22 @@
 }
 
 @media screen and (max-width: 720px) {
+    // ユーザ詳細アイコン
+  .nav-icons {
+    gap: 40px;
+    padding: 28px;
+    height: 110px;
+
+    .nav-icon {
+      width: 50px;
+      height: 50px;
+      
+      p {
+        display: none;
+      }
+    }
+  }
+  
   .search-field {
     padding: 20px;
     position: fixed;
