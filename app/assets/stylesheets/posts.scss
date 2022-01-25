@@ -178,4 +178,9 @@
   }
 }
 
-
+@media screen and (max-width: 720px) {
+  .post.container .card {
+      width: 100% !important;
+      margin-bottom: 3em;
+    }
+}
