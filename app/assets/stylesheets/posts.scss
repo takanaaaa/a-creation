@@ -114,8 +114,7 @@
     }
 
   }
-  
-  //投稿部分
+
   .row {
     margin: 0 auto;
 
@@ -131,30 +130,35 @@
             opacity: .5;
           }
       }
-
-      .profile-image-sm {
-        @extend .profile-img-sm-style;
-      }
-
-      .user-text {
-        margin-top: 20px;
-        position: relative;
+      
+      .card-body{
+        .bookmark-btn i {
+          padding: 5px;
+          color: $lightGray;
+          font-size: 25px;
+        }
         
-        a {
-          color: $gray;
+        .user-text {
+          margin-top: 20px;
+          position: relative;
           
-          &:hover{
-            text-decoration: none;
-            opacity: .5;
+            .profile-image-sm {
+              @extend .profile-img-sm-style;
+            }
+          
+          a {
+            color: $gray;
+            
+            &:hover{
+              text-decoration: none;
+              opacity: .5;
+            }
+          }
+          
+          .date {
+            @extend .position-right-bottm 
           }
         }
-        
-        .date {
-          @extend .position-right-bottm 
-        }
-      }
-      .date {
-        @extend .position-right-bottm;
       }
     }
   }

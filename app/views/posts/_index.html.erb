@@ -6,7 +6,7 @@
       <% end %>
       <div class="card-body">
         <% if action_name != "top" %>
-          <div id="bookmark-btn_<%= post.id %>">
+          <div class="bookmark-btn" id="bookmark-btn_<%= post.id %>">
             <%= render "bookmarks/bookmark-btn", post: post %>
           </div>
         <% end %>
