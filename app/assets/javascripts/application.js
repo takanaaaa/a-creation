@@ -16,9 +16,7 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
 
-/*global $*/
 // ハンバーガーメニュー
 {
   const open = document.getElementById('open');
@@ -36,13 +34,4 @@
   });
 }
 
-// チャットメッセージ画面を一番下までスクロール
-window.onload = function() {
-  document.addEventListener("turbolinks:load", () => {
-      function scrollToEnd() {
-          const message = document.getElementById('message');
-          message.scrollTop = message.scrollHeight;
-      }
-      scrollToEnd()
-  });
-};
+
