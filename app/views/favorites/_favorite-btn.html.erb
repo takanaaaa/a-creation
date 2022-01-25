@@ -1,6 +1,7 @@
 <% if category_image.favorited_by?(current_user) %>
   <%= link_to favorite_path(category_image.id), method: :delete, remote:true do %>
-    <i class="fas fa-heart"></i>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_ePsPBX.json"  background="transparent"  speed="1"  style="width: 25px; height: 25px;" autoplay></lottie-player>
   <% end %>
 <% else %>
   <%= link_to favorites_path(category_image.id), method: :post, remote:true do %>
