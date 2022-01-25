@@ -17,9 +17,10 @@
         <p>Groups</p>
       <% end %>
       <%= link_to user_notifications_path(user.id), class: "nav-icon" do %>
-        <i class="far fa-clone"></i>
         <% if unchecked_notifications.any? %>
-          <i class="fa fa-circle" style="color: gold;"></i>
+          <i class="far fa-lightbulb" style="color: gold;"></i>
+        <% else %>
+          <i class="far fa-lightbulb"></i>
         <% end %>
         <p>Notice</p>
       <% end %>
