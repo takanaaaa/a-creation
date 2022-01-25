@@ -20,7 +20,10 @@ class SearchesController < ApplicationController
       @categories = Category.where("name LIKE?", "%#{@word}%").page(params[:page]).per(15)
       if @categories.blank?
         flash[:notice] = "一致するカテゴリーがありませんでした"
-        @categories = Category.page(params[:page]).per(15)
+        @categories = Category.includes(:category_users).sort do |a, b|
+          b.category_users.size <=> a.category_users.size
+        end
+        @categories = Kaminari.paginate_array(@categories).page(params[:page]).per(12)
       end
     end
   end
