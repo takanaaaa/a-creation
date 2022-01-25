@@ -14,3 +14,5 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 
 Rails.application.config.assets.precompile += %w( swiper.js )
+Rails.application.config.assets.precompile += %w( message.js )
+Rails.application.config.assets.precompile += %w( loading.js )
