@@ -1,5 +1,4 @@
 class BookmarksController < ApplicationController
-  
   def create
     @post = Post.find(params[:post_id])
     Bookmark.create(user_id: current_user.id, post_id: @post.id)

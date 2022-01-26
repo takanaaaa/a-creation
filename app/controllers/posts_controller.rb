@@ -63,7 +63,7 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:body, :image)
   end
-  
+
   def ensure_current_user
     post = Post.find(params[:id])
     unless post.user == current_user
