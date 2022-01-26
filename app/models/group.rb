@@ -6,11 +6,12 @@ class Group < ApplicationRecord
 
   validates :name, presence: true, length: { in: 2..20, allow_blank: true }
   validates :introduction, presence: true, length: { in: 2..100, allow_blank: true }
-  
+
   # グループメンバーか確かめる
   def group_member?(user)
     group_users.where(user_id: user.id).exists?
   end
+
   # メッセージが送信された時にメッセージ通知を保存
   def create_notification_message!(current_user, message_id)
     member_ids =

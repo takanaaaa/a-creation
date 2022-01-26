@@ -6,13 +6,13 @@ class ApplicationController < ActionController::Base
   protected
 
   def set_user
-    @user = User.find(params[:id]) 
+    @user = User.find(params[:id])
   end
 
   def set_post
     @post = Post.find(params[:id])
   end
-  
+
   def after_sign_up_path_for(resource)
     stored_location_for(resource) || user_path(current_user)
   end
@@ -29,11 +29,11 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email])
     devise_parameter_sanitizer.permit(:sign_in, keys: [:name])
   end
-  
+
   def store_current_location
     store_location_for(:user, request.url)
   end
-  
+
   def devise_or_homes_controller?
     devise_controller? || controller_name == 'homes'
   end

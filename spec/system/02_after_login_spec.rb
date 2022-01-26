@@ -41,7 +41,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
       end
     end
   end
-  
+
   describe 'ユーザー画面のテスト' do
     let!(:my_post) { create(:post, user: user) }
     let!(:other_post) { create(:post, user: other_user) }
@@ -241,14 +241,14 @@ describe '[STEP2] ユーザログイン後のテスト' do
       #   end
       # end
     end
-    
+
     describe 'ブックマーク一覧画面のテスト' do
-      let!(:bookmark) {create(:bookmark, user: user, post: other_post)}
-      
+      let!(:bookmark) { create(:bookmark, user: user, post: other_post) }
+
       before do
         visit user_bookmarks_path(user)
       end
-      
+
       context '表示の確認' do
         it 'URLの確認' do
           expect(current_path).to eq '/users/' + user.id.to_s + '/bookmarks'
@@ -274,14 +274,14 @@ describe '[STEP2] ユーザログイン後のテスト' do
         end
       end
     end
-    
+
     describe 'ユーザ検索画面のテスト' do
       before do
         visit users_path
         fill_in 'word', with: other_user.name
         click_button ''
       end
-      
+
       context 'ユーザ検索結果画面の表示の確認' do
         it 'URLが正しい' do
           expect(current_path).to eq '/search'
@@ -347,10 +347,10 @@ describe '[STEP2] ユーザログイン後のテスト' do
           expect(page).to have_link '', href: new_post_path
         end
         it '新着順ボタンが表示される' do
-          expect(page).to have_link '', href: posts_path(sort: "newArrival") 
+          expect(page).to have_link '新しい順', href: posts_path(sort: "newArrival")
         end
         it '人気順ボタンが表示される' do
-          expect(page).to have_link '', href: posts_path(sort: "newArrival") 
+          expect(page).to have_link '人気順', href: posts_path(sort: "newArrival")
         end
         it 'タグ検索フォームが表示される' do
           expect(page).to have_field 'word'
@@ -434,31 +434,31 @@ describe '[STEP2] ユーザログイン後のテスト' do
         end
       end
 
-      context 'コメントのテスト' do
-        # it 'コメントが正常の投稿されること' do
-        #   expect {
-        #     fill_in 'post_comment[comment]', with: "コメントテスト"
-        #     click_button '送信'
-        #     visit current_path
-        #   }.to change(PostComment, :count).by(1)
-        # end
+      # context 'コメントのテスト' do
+      # it 'コメントが正常の投稿されること' do
+      #   expect {
+      #     fill_in 'post_comment[comment]', with: "コメントテスト"
+      #     click_button '送信'
+      #     visit current_path
+      #   }.to change(PostComment, :count).by(1)
+      # end
 
-        # context 'コメント送信成功のテスト' do
-        #   before do
-        #   fill_in 'post_comment[comment]', with: Faker::Lorem.characters(number: 20)
-        #   end
-        #   it '新しいコメントが投稿が正しく保存される' do
-        #     expect do
-        #       visit post_post_comments_path(post_id: 1), xhr: true
-        #       end.to change(post.post_comments, :count).by(1)
-        #     end
-        #   it 'コメントが表示されている' do
-        #     expect(page).to have_content post.post_comments
-        #   end
-        # end
-      end
+      # context 'コメント送信成功のテスト' do
+      #   before do
+      #   fill_in 'post_comment[comment]', with: Faker::Lorem.characters(number: 20)
+      #   end
+      #   it '新しいコメントが投稿が正しく保存される' do
+      #     expect do
+      #       visit post_post_comments_path(post_id: 1), xhr: true
+      #       end.to change(post.post_comments, :count).by(1)
+      #     end
+      #   it 'コメントが表示されている' do
+      #     expect(page).to have_content post.post_comments
+      #   end
+      # end
+      # end
     end
-    
+
     describe '他人の投稿詳細画面のテスト' do
       before do
         visit post_path(other_post)
@@ -509,7 +509,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
         end
       end
     end
-    
+
     describe '投稿編集画面のテスト' do
       before do
         visit edit_post_path(my_post)
@@ -548,14 +548,14 @@ describe '[STEP2] ユーザログイン後のテスト' do
         end
       end
     end
-    
+
     describe 'タグ検索画面のテスト' do
       before do
         visit posts_path
         fill_in 'word', with: my_tag.name
         click_button ''
       end
-      
+
       context 'タグ検索結果画面の表示の確認' do
         it 'URLが正しい' do
           expect(current_path).to eq '/search'
@@ -582,15 +582,15 @@ describe '[STEP2] ユーザログイン後のテスト' do
       end
     end
   end
-  
+
   describe 'カテゴリー画面のテスト' do
     let!(:category) { create(:category) }
-    
+
     describe 'カテゴリー一覧画面のテスト' do
       before do
         visit categories_path
       end
-      
+
       context '表示の確認' do
         it 'URLが正しい' do
           expect(current_path).to eq '/categories'
@@ -615,12 +615,12 @@ describe '[STEP2] ユーザログイン後のテスト' do
         end
       end
     end
-    
+
     describe '登録前のカテゴリー詳細画面のテスト' do
       before do
         visit category_path(category)
       end
-      
+
       context '表示の確認' do
         it 'URLが正しい' do
           expect(current_path).to eq '/categories/' + category.id.to_s
@@ -636,20 +636,20 @@ describe '[STEP2] ユーザログイン後のテスト' do
         end
       end
     end
-    
+
     describe '登録後のカテゴリー詳細画面のテスト' do
       let!(:category_user) { create(:category_user, user: user, category: category) }
-      
+
       before do
         visit category_path(category)
       end
-      
+
       context '表示の確認' do
         it 'カテゴリー編集画面のリンクが表示される' do
           expect(page).to have_link '', href: edit_category_path(category)
         end
         it 'グループ新規作成のリンクが表示される' do
-          expect(page).to have_link '', href: new_category_group_path(category) 
+          expect(page).to have_link '', href: new_category_group_path(category)
         end
         it 'カテゴリー画像追加フォームが表示される' do
           expect(page).to have_field 'category_image[image]'
@@ -659,19 +659,19 @@ describe '[STEP2] ユーザログイン後のテスト' do
         end
       end
     end
-    
+
     describe 'カテゴリー検索画面のテスト' do
       before do
         visit categories_path
         fill_in 'word', with: category.name
         click_button ''
       end
-      
+
       context 'カテゴリー検索結果画面の表示の確認' do
         it 'URLが正しい' do
           expect(current_path).to eq '/search'
         end
-       it 'カテゴリー名が表示される' do
+        it 'カテゴリー名が表示される' do
           expect(page).to have_content category.name
         end
         it 'カテゴリー紹介が表示される' do
@@ -683,17 +683,17 @@ describe '[STEP2] ユーザログイン後のテスト' do
       end
     end
   end
-  
+
   describe 'グループ画面のテスト' do
     let!(:category) { create(:category) }
     let!(:category_user) { create(:category_user, user: user, category: category) }
     let!(:group) { create(:group, category: category) }
-    
+
     describe 'グループ参加前のグループ詳細画面のテスト' do
-       before do
+      before do
         visit group_path(group)
       end
-      
+
       context '表示の確認' do
         it 'URLが正しい' do
           expect(current_path).to eq '/groups/' + group.id.to_s
@@ -709,14 +709,14 @@ describe '[STEP2] ユーザログイン後のテスト' do
         end
       end
     end
-    
+
     describe 'グループ参加後のグループ詳細画面のテスト' do
       let!(:group_user) { create(:group_user, user: user, group: group) }
-      
+
       before do
         visit group_path(group)
       end
-      
+
       context '表示の確認' do
         it 'チャットへボタンが表示される' do
           expect(page).to have_link '', href: group_messages_path(group)
@@ -730,14 +730,14 @@ describe '[STEP2] ユーザログイン後のテスト' do
         end
       end
     end
-    
+
     describe 'グループ一覧画面のテスト' do
       let!(:group_user) { create(:group_user, user: user, group: group) }
-      
+
       before do
         visit user_groups_path(user)
       end
-      
+
       context '表示の確認' do
         it 'URLが正しい' do
           expect(current_path).to eq '/users/' + user.id.to_s + '/groups'
@@ -754,17 +754,17 @@ describe '[STEP2] ユーザログイン後のテスト' do
       end
     end
   end
-  
+
   describe 'チャット画面のテスト' do
     let!(:category) { create(:category) }
     let!(:category_user) { create(:category_user, user: user, category: category) }
     let!(:group) { create(:group, category: category) }
     let!(:group_user) { create(:group_user, user: user, group: group) }
-    
+
     before do
       visit group_messages_path(group)
     end
-    
+
     context '表示の確認' do
       it 'URLが正しい' do
         expect(current_path).to eq '/groups/' + group.id.to_s + '/messages'
