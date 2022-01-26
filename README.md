@@ -69,6 +69,12 @@ AIの発展や、高度情報化や近年のコロナウイルスで社会のあ
 ER図<br>
 https://drive.google.com/file/d/1uTLGN13anMGIqGXKnGMsf1peKVj6mQVw/view?usp=sharing<br>
 
+テーブル定義書<br>
+https://docs.google.com/spreadsheets/d/1tc-P2Uq3ZRmJAfllhBvTogWS3JhW0gzuzvtE-BCBY5s/edit?usp=sharing
+
+アプリケーション詳細設計<br>
+https://docs.google.com/spreadsheets/d/1-aaYe3t9k04CC-t4dzH34GEE3FCdzYYDtPUs5dGV0zw/edit?usp=sharing
+
 ## チャレンジ要素一覧
 https://docs.google.com/spreadsheets/d/14Qb9ny-EV9rNA-noKiFcQG_hfoJJJpJrr2lmRFd7R78/edit?usp=sharing
 
