@@ -39,10 +39,12 @@
   }
   
   //メッセージフォーム
-  .form-control.btn {
-    @extend .btn-style;
-    display: block;
-    width: 250px;
-    margin: 10px auto;
+  & > .form-group {
+    .form-control.btn {
+      @extend .btn-style;
+      display: block;
+      width: 250px;
+      margin: 10px auto;
+    }
   }
 }

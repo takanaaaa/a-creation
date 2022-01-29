@@ -57,16 +57,19 @@
   }
   
   //「チャットへ」ボタン
-  .chat-field {
-    text-align: center;
-    margin-bottom: 40px;
-
-    .btn.chat-in {
+  .btn {
+    margin-bottom: 30px;
+    
+    &.chat-out {
+      color: $red;
+    }
+    
+    &.chat-in {
       width: 100%;
       padding: 25px;
       box-shadow: $button-shadow_outline;
       border-radius: 20px;
-
+  
       &:hover {
         box-shadow: $button-shadow_inline;
       }
@@ -98,7 +101,7 @@
   }
 
   // groups/new,edit グループ新規作成・編集
-  .form-control.btn {
+  & > .form-control.btn {
     @extend .btn-style;
     display: block;
     width: 250px;

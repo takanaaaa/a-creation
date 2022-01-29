@@ -15,7 +15,7 @@ class Group < ApplicationRecord
   # メッセージが送信された時にメッセージ通知を保存
   def create_notification_message!(current_user, message_id)
     member_ids =
-      Message.select(:user_id).where(group_id: id).where.not(user_id: current_user.id).distinct
+      GroupUser.select(:user_id).where(group_id: id).where.not(user_id: current_user.id).distinct
     member_ids.each do |memder_id|
       save_notification_message!(current_user, message_id, memder_id['user_id'])
     end

@@ -30,6 +30,8 @@ class GroupsController < ApplicationController
   end
 
   def show
+    @message = Message.new
+    @messages = @group.messages.includes(:user)
   end
 
   def edit

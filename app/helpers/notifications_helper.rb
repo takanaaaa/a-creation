@@ -11,7 +11,7 @@ module NotificationsHelper
       tag.a('▶︎あなたの投稿', href: post_path(notification.post_id)) + "にコメントしました。"
     when "message" then
       tag.a(visiter.name) + "が" +
-      tag.a('▶メッセージ', href: group_messages_path(notification.group_id)) + "を送信しました。" \
+      tag.a('▶メッセージ', href: group_path(notification.group_id)) + "を送信しました。" \
       "(" + tag.a(notification.group.name) + ")"
     end
   end
