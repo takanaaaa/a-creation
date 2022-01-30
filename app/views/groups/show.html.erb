@@ -31,20 +31,16 @@
     </div>
     <div class="col-md-6 offset-md-1">
       <div class="messages container">
-        <% if @messages.present? %>
-          <div id="message" class="overflow-auto">
+        <div id="message" class="overflow-auto">
             <div class="table">
               <%= render "messages/messages", messages: @messages %>
             </div>
-          </div>
-        <% else %>
-          <p>メッセージがありません。</p>
-        <% end %>
+        </div>
         <% if @group.group_member?(current_user)%>
           <div class="form-group">
             <%=form_with model:[@group, @message], remote:true do |f| %>
               <%= f.text_area :content, class: "form-control", rows: "5", cols: "50" %>
-              <%= f.submit "送信", class: "form-control btn" %>
+              <%= f.submit "送信", placeholder: "メッセージを入力してください", class: "form-control btn" %>
             <% end %>
           </div>
         <% end %>

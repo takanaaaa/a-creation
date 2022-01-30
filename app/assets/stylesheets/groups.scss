@@ -101,7 +101,7 @@
   }
 
   // groups/new,edit グループ新規作成・編集
-  & > .form-control.btn {
+  .form-control.btn {
     @extend .btn-style;
     display: block;
     width: 250px;

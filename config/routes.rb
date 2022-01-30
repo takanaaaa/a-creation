@@ -15,11 +15,11 @@ Rails.application.routes.draw do
   end
   resources :categories, except: [:destroy] do
     resources :category_images, only: [:create]
-    resources :groups, except: [:show, :index]
+    resources :groups, except: [:show, :index, :update]
     get 'join' => 'categories#join'
     delete 'leave' => 'categories#leave'
   end
-  resources :groups, only: [:show] do
+  resources :groups, only: [:show, :update] do
     resources :messages, only: [:create]
     get 'join' => 'groups#join'
     delete 'leave' => 'groups#leave'
