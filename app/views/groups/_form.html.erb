@@ -9,6 +9,10 @@
     <%= f.text_area :introduction, rows: "15", class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.submit "作成", class: "form-control btn" %>
+    <% if action_name == "new" %>
+      <%= f.submit "作成", class: "form-control btn"  %>
+    <% else %>
+      <%= f.submit "更新", class: "form-control btn"  %>
+    <% end %>
   </div>
 <% end %>
