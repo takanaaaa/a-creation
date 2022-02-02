@@ -1,7 +1,12 @@
 <div class="group container">
   <div class="row">
     <div class="col-md-5">
-      <h3><%= @group.name %></h3>
+      <h3>
+        <span>
+          <%= link_to @group.category.name, category_path(@group.category) %> > 
+        </span>
+        <%= @group.name %>
+      </h3>
       <p class="group-setting">
         <% if @group.owner_id == current_user.id %>
           <%= link_to "編集", edit_category_group_path(@group.id) %>

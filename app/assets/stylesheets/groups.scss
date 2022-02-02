@@ -32,6 +32,16 @@
   h3 {
     display: inline-block;
     margin-right: 30px;
+    
+    span {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 5px;
+      
+      a {
+        color: $gray;
+      }
+    }
   }
   
   //グループ編集ボタン
