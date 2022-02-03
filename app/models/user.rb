@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :group_users
   has_many :groups, through: :group_users
+  has_many :group_requests, dependent: :destroy
   has_many :messages
   has_many :active_notifications,
     class_name: "Notification", foreign_key: "visiter_id", dependent: :destroy
@@ -57,5 +58,9 @@ class User < ApplicationRecord
       )
       notification.save if notification.valid?
     end
+  end
+  
+  def already_requested?(group)
+    self.group_requests.exists?(group_id: group.id)
   end
 end

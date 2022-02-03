@@ -35,6 +35,7 @@ class GroupsController < ApplicationController
   end
 
   def edit
+    @requests = current_user.group_requests.all
   end
 
   def update

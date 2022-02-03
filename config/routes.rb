@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   end
   resources :groups, only: [:show, :update] do
     resources :messages, only: [:create]
+    resources :group_requests, only: [:group, :destroy]
     get 'join' => 'groups#join'
     delete 'leave' => 'groups#leave'
   end
