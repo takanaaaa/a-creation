@@ -2,4 +2,20 @@
   <div class="col-md-8 offset-md-2">
     <%= render "groups/form", category: @category, group: @group %>
   </div>
+  <table class="table">
+    <tbody>
+      <tr>
+        <% @group.group_users.each do |user| %>
+          <td><%= user.user.name %></td>
+          <% if @group.group_member?(current_user)%>
+            <td><%= user.status_i18n %></td>
+            <td><%= link_to "退出させる", group_leave_path(@group.id), method: :delete, class: "btn leave-btn" %></td>
+          <% else %>
+              <td><%= user.status_i18n %></td>
+              <td><%= link_to "許可する", group_allow_path(@group), class: "btn allow-btn" %></td>
+          <% end %>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
 </div>

@@ -1,0 +1,9 @@
+ja:
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M"
+  enums:
+    group_user:
+      status:
+        apply: "申請中"
+        join: "メンバー"
