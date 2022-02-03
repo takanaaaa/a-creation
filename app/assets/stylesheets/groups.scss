@@ -66,15 +66,23 @@
     margin-bottom: 25px;
   }
   
-  //「チャットへ」ボタン
   .btn {
     margin-bottom: 30px;
     
-    &.chat-out {
+    &.leave-btn {
+      padding: 5px 10px;
+      border: 1px solid;
+      border-radius: 5px;
       color: $red;
+      
+      &:hover {
+        text-decoration: none;
+        color: $white;
+        background: $red;
+      }
     }
     
-    &.chat-in {
+    &.group-in {
       width: 100%;
       padding: 25px;
       box-shadow: $button-shadow_outline;
@@ -86,7 +94,7 @@
     }
   }
   // グループメンバー一覧
-  .group-field {
+  .member-field {
     display: flex;
     gap: 30px;
     text-align: center;
@@ -107,7 +115,6 @@
         text-decoration: none;
       }
     }
-
   }
 
   // groups/new,edit グループ新規作成・編集
@@ -116,5 +123,38 @@
     display: block;
     width: 250px;
     margin: 0 auto;
+  }
+  
+  .table {
+    width: 80%;
+    margin: 0 auto;
+    
+    tr {
+      > td {
+        line-height: 35.5px;
+        
+        &:nth-of-type(1) {
+        width: 30em;
+        }
+        
+        & > .btn {
+          margin: 0;
+          
+          &.allow-btn {
+            padding: 5px 10px;
+            border: 1px solid;
+            border-radius: 5px;
+            margin: 0;
+            color: $blue;
+            
+            &:hover {
+              text-decoration: none;
+              color: $white;
+              background: $blue;
+            }
+          }
+        }
+      }
+    }
   }
 }

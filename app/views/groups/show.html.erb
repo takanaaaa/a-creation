@@ -16,19 +16,23 @@
         <%= simple_format @group.introduction %>
       </div>
       <div>
-        <% if @group.group_member?(current_user)%>
-        　<%= link_to "退出", group_leave_path(@group.id), method: :delete, class: "btn chat-out" %>
+        <% if @group.already_requested?(current_user)%>
+        　<% if @group.group_member?(current_user)%>
+          　<%= link_to "退出", group_leave_path(@group.id), method: :delete, class: "btn leave-btn" %>
+          <% else %>
+          　<%= link_to "申請を取り消す", group_leave_path(@group.id), method: :delete, class: "btn leave-btn" %>
+        　<% end %>
         <% else %>
-          <%= link_to "参加", group_join_path(@group.id), class: "btn chat-in" %>
+          <%= link_to "参加", group_join_path(@group.id), class: "btn group-in" %>
         <% end %>
       </div>
       <p>グループメンバー</p>
-      <div class="group-field">
-        <% @group.users.each do |user| %>
+      <div class="member-field">
+        <% @members.each do |member| %>
           <div class="box">
-            <%= link_to user_path(user) do %>
-              <%= attachment_image_tag user, :profile_image, fallback: "no-image.jpg", class: "profile_image" %>
-              <p><%= link_to user.name, user_path(user), class: "text-dark" %></p>
+            <%= link_to user_path(member.user) do %>
+              <%= attachment_image_tag member.user, :profile_image, fallback: "no-image.jpg", class: "profile_image" %>
+              <p><%= link_to member.user.name, user_path(member.user), class: "text-dark" %></p>
             <% end %>
           </div>
         <% end %>
