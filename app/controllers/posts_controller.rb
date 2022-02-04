@@ -25,10 +25,7 @@ class PostsController < ApplicationController
 
   def index
     if params[:sort] == "popular"
-      @posts = Post.includes(:bookmarked_users).sort do |a, b|
-        b.bookmarked_users.size <=> a.bookmarked_users.size
-      end
-      @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(12)
+      @posts = Post.left_joins(:bookmarks).group(:id).order("count(bookmarks.post_id) desc").page(params[:page]).per(12)
     else
       @posts = Post.order(created_at: :desc).page(params[:page]).per(12)
     end
