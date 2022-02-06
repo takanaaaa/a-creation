@@ -1,9 +1,46 @@
 ja:
-  time:
-    formats:
-      default: "%Y/%m/%d %H:%M"
   enums:
     group_user:
       status:
         apply: "申請中"
         join: "メンバー"
+        
+  devise:
+    confirmations:
+        confirmed: 'アカウントを登録しました。'
+    failure:
+      already_authenticated: 'すでにログインしています。'
+      invalid: "%{authentication_keys} もしくはパスワードが不正です。"
+      not_found_in_database: "%{authentication_keys} もしくはパスワードが不正です。"
+      unauthenticated: 'アカウント登録もしくはログインしてください。'
+    omniauth_callbacks:
+      failure: "%{kind} アカウントによる認証に失敗しました。理由：（%{reason}）"
+      success: "%{kind} アカウントによる認証に成功しました。"
+    registrations:
+      signed_up: 'アカウント登録が完了しました。'
+    sessions:
+      signed_in: 'ログインしました。'
+      signed_out: 'ログアウトしました。'
+      already_signed_out: '既にログアウト済みです。'
+  
+  activerecord:
+    attributes:
+      user:
+        name: 名前
+        profile: プロフィール
+        email: メールアドレス
+        password: パスワード
+        
+    errors:
+        
+      post:
+        body: 本文
+      
+      group:
+        name: グループ名
+        introduction: 紹介文
+        
+      category:
+        name: カテゴリー名
+        introduction: 紹介
+      
