@@ -11,6 +11,7 @@ class Group < ApplicationRecord
   def group_member?(user)
     group_users.where(user_id: user.id, status: "join").exists?
   end
+
   def already_requested?(user)
     group_users.where(user_id: user.id).exists?
   end

@@ -30,7 +30,7 @@ class GroupsController < ApplicationController
   end
 
   def show
-    @members =  GroupUser.where(status: "join")
+    @members = GroupUser.where(status: "join")
     @message = Message.new
     @messages = @group.messages.includes(:user)
   end
@@ -53,7 +53,7 @@ class GroupsController < ApplicationController
       redirect_to group_path(@group)
     end
   end
-  
+
   def allow
     group = Group.find(params[:group_id])
     group_users = GroupUser.where(group_id: group.id)
