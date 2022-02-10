@@ -5,7 +5,10 @@ class GroupsController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    @groups = @user.groups.all
+    # @groups = @user.group_users.where(status: 1).pluck(:group_id)
+    # @apply_groups = @user.group_users.where(status: 0).pluck(:group_id)
+    @groups = @user.groups.left_joins(:group_users).where("group_users.status LIKE?", "1")
+    @apply_groups = @user.groups.left_joins(:group_users).where("group_users.status LIKE?", "0")
   end
 
   def new

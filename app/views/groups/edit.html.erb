@@ -11,8 +11,8 @@
             <td><%= user.status_i18n %></td>
             <td><%= link_to "退出させる", group_leave_path(@group.id), method: :delete, class: "btn leave-btn" %></td>
           <% else %>
-              <td><%= user.status_i18n %></td>
-              <td><%= link_to "許可する", group_allow_path(@group), class: "btn allow-btn" %></td>
+            <td><%= user.status_i18n %></td>
+            <td><%= link_to "許可する", group_allow_path(@group), class: "btn allow-btn" %></td>
           <% end %>
         <% end %>
       </tr>
