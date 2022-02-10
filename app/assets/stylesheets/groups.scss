@@ -125,17 +125,13 @@
     margin: 0 auto;
   }
   
-  .table {
-    width: 80%;
-    margin: 0 auto;
+  .overflow-auto {
+    height: 700px;
+    margin-bottom: 50px;
     
-    tr {
+    .table tr {
       > td {
         line-height: 35.5px;
-        
-        &:nth-of-type(1) {
-        width: 30em;
-        }
         
         & > .btn {
           margin: 0;
