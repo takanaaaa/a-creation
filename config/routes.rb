@@ -22,8 +22,8 @@ Rails.application.routes.draw do
   resources :groups, only: [:show, :update] do
     resources :messages, only: [:create]
     get 'join' => 'groups#join'
-    get 'allow' => 'groups#allow'
-    delete 'leave' => 'groups#leave'
+    get 'allow/:id' => 'groups#allow', as: 'allow'
+    delete 'leave/:id' => 'groups#leave', as: 'leave'
   end
   resources :tags
   get 'search' => 'searches#search'
