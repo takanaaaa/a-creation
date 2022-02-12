@@ -18,9 +18,9 @@
       <div>
         <% if @group.already_requested?(current_user)%>
         　<% if @group.group_member?(current_user)%>
-          　<%= link_to "退出", group_leave_path(@group.id), method: :delete, class: "btn leave-btn" %>
+          　<%= link_to "退出", group_leave_path(group_id: @group, id: current_user), method: :delete, class: "btn leave-btn" %>
           <% else %>
-          　<%= link_to "申請を取り消す", group_leave_path(@group.id), method: :delete, class: "btn leave-btn" %>
+          　<%= link_to "申請を取り消す", group_leave_path(group_id: @group, id: current_user), method: :delete, class: "btn leave-btn" %>
         　<% end %>
         <% else %>
           <%= link_to "参加", group_join_path(@group.id), class: "btn group-in" %>

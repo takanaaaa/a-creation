@@ -5,10 +5,8 @@ class GroupsController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    # @groups = @user.group_users.where(status: 1).pluck(:group_id)
-    # @apply_groups = @user.group_users.where(status: 0).pluck(:group_id)
     @groups = @user.groups.left_joins(:group_users).where("group_users.status LIKE?", "1")
-    @apply_groups = @user.groups.left_joins(:group_users).where("group_users.status LIKE?", "0")
+    @apply_groups = Group.left_joins(:group_users).where("group_users.status LIKE?", "0")
   end
 
   def new
@@ -22,10 +20,10 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     @group.owner_id = current_user.id
-    @group.users << current_user
     @category = Category.find(params[:category_id])
     @group.category_id = @category.id
     if @group.save
+      @group.group_users.create(user: current_user, status: 1)
       redirect_to group_path(@group), notice: "グループを作成しました。"
     else
       render :new
@@ -59,17 +57,17 @@ class GroupsController < ApplicationController
 
   def allow
     group = Group.find(params[:group_id])
-    group_users = GroupUser.where(group_id: group.id)
-    group_users.each do |group_user|
-      group_user.update(status: 1)
-    end
+    user = User.find(params[:id])
+    group_user = GroupUser.where(user_id: user.id, group_id: group.id)
+    group_user.update(status: 1)
     redirect_back(fallback_location: root_path)
   end
 
   def leave
-    @group = Group.find(params[:group_id])
-    GroupUser.find_by(user_id: current_user.id, group_id: @group.id).destroy
-    redirect_to category_path(@group.category.id)
+    group = Group.find(params[:group_id])
+    user = User.find(params[:id])
+    GroupUser.find_by(user_id: user.id, group_id: group.id).destroy
+    redirect_back(fallback_location: root_path)
   end
 
   private
