@@ -6,13 +6,13 @@
     <tbody>
       <% @group.group_users.each do |user| %>
         <tr>
-          <td><%= user.user.name %></td>
-          <% if @group.group_member?(user)%>
+          <td><%= link_to user.user.name, user_path(user.user) %></td>
+          <% if @group.group_member?(user.user)%>
             <td><%= user.status_i18n %></td>
-            <td><%= link_to "退出させる", group_leave_path(group_id: @group, id: user), method: :delete, class: "btn leave-btn" %></td>
+            <td><%= link_to "退出させる", group_leave_path(group_id: @group, id: user.user), method: :delete, class: "btn leave-btn" %></td>
           <% else %>
             <td><%= user.status_i18n %></td>
-            <td><%= link_to "許可する", group_allow_path(group_id: @group, id: user), class: "btn allow-btn" %></td>
+            <td><%= link_to "許可する", group_allow_path(group_id: @group, id: user.user), class: "btn allow-btn" %></td>
           <% end %>
         </tr>
       <% end %>

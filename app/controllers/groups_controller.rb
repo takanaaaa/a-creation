@@ -4,9 +4,9 @@ class GroupsController < ApplicationController
   before_action :ensure_category_member, only: [:show, :edit]
 
   def index
-    @user = User.find(params[:user_id])
-    @groups = @user.groups.left_joins(:group_users).where("group_users.status LIKE?", "1")
-    @apply_groups = Group.left_joins(:group_users).where("group_users.status LIKE?", "0")
+    @groups = current_user.group_users.where(status: "join")
+    p @groups
+    @apply_groups = current_user.group_users.where(status: "apply")
   end
 
   def new
