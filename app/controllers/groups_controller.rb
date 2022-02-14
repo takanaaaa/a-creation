@@ -4,9 +4,7 @@ class GroupsController < ApplicationController
   before_action :ensure_category_member, only: [:show, :edit]
 
   def index
-    @groups = current_user.group_users.where(status: "join")
-    p @groups
-    @apply_groups = current_user.group_users.where(status: "apply")
+    @groups = current_user.groups
   end
 
   def new
@@ -31,7 +29,7 @@ class GroupsController < ApplicationController
   end
 
   def show
-    @members = GroupUser.where(status: "join")
+    @members = GroupUser.where(group_id: @group.id, status: "join")
     @message = Message.new
     @messages = @group.messages.includes(:user)
   end
