@@ -1,21 +1,11 @@
 <div class="group container">
   <div class="row">
-    <div class="group-field col-md-6">
-      <h5>参加中グループ</h5>
+    <div class="group-field col-md-10 offset-1">
+      <h5>グループ一覧</h5>
       <div class="overflow-auto">
         <table class="table">
           <tbody>
             <%= render "groups/index", groups: @groups %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="group-field col-md-6">
-      <h5>申請中グループ</h5>
-      <div class="overflow-auto">
-        <table class="table">
-          <tbody>
-            <%= render "groups/index", groups: @apply_groups %>
           </tbody>
         </table>
       </div>
