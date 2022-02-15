@@ -125,29 +125,28 @@
     margin: 0 auto;
   }
   
-  .overflow-auto {
-    height: 700px;
-    margin-bottom: 50px;
-    
-    .table tr {
-      > td {
-        line-height: 35.5px;
+  .table tr {
+    > td {
+      line-height: 35.5px;
+      
+      a {
+        color: $gray;
+      }
+      
+      & > .btn {
+        margin: 0;
         
-        & > .btn {
+        &.allow-btn {
+          padding: 5px 10px;
+          border: 1px solid;
+          border-radius: 5px;
           margin: 0;
+          color: $blue;
           
-          &.allow-btn {
-            padding: 5px 10px;
-            border: 1px solid;
-            border-radius: 5px;
-            margin: 0;
-            color: $blue;
-            
-            &:hover {
-              text-decoration: none;
-              color: $white;
-              background: $blue;
-            }
+          &:hover {
+            text-decoration: none;
+            color: $white;
+            background: $blue;
           }
         }
       }
