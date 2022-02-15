@@ -2,13 +2,11 @@
   <div class="row">
     <div class="group-field col-md-10 offset-1">
       <h5>グループ一覧</h5>
-      <div class="overflow-auto">
-        <table class="table">
-          <tbody>
-            <%= render "groups/index", groups: @groups %>
-          </tbody>
-        </table>
-      </div>
+      <table class="table">
+        <tbody>
+          <%= render "groups/index", groups: @groups %>
+        </tbody>
+      </table>
     </div>
   </div>
   <%= render "users/nav-icons", user: current_user %>
